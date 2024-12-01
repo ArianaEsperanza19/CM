@@ -25,7 +25,7 @@ if(@$_GET){
 		//echo "La pagina que buscas no existe";
 	}
 }else{
-	header("Location: ?controller=Paneles&action=principal");
+	header("Location: ?controller=Paneles&action=index");
 }
 //require_once 'views/layout/footer.php';
 ?>
