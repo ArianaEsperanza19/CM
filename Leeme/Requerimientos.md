@@ -2,13 +2,13 @@
 
 ---
 ## Base de Datos
-- [ ] Crear base de datos
-- [ ] Crear tablas
-- [ ] Crear relaciones
+- [x] Crear base de datos
+- [x] Crear tablas
+- [x] Crear relaciones
 - [ ] Dar usuarios y contraseñas
 
 ## Titulares Crud
-- [ ] Ingresar nuevo cliente
+- [x] Ingresar nuevo cliente
 - [ ] Listar Clientes
 - [ ] Editar Cliente
 - [ ] Eliminar Cliente

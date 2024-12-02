@@ -1,4 +1,5 @@
-USE bahv4pjuf5svbwvj9hok;
+CREATE DATABASE AsistenteSeguros;
+USE AsistenteSeguros;
 CREATE TABLE Titulares(
     id_cliente INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50),
@@ -16,9 +17,10 @@ CREATE TABLE Titulares(
     telefono VARCHAR(20),
     email VARCHAR(50),
     empresa VARCHAR(50),
-    declaracion_fiscales BOOLEAN,
-    notas VARCHAR(200),
-    actualizado BOOLEAN
+    estatus_migratorio BOOLEAN,
+    declaracion_fiscal BOOLEAN,
+    actualizado BOOLEAN,
+    notas VARCHAR(200)
 );
 
 CREATE TABLE Datos_Seguro(

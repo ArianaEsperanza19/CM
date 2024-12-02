@@ -1,6 +1,6 @@
 <?php
 $rootDir = dirname(dirname(__DIR__));
-require_once $rootDir.'/Login-Register-Logout/DB/DB.php';
+require_once $rootDir.'/CustomersManager/Config/DB.php';
 class DatosManager{
 
     protected $id;
@@ -86,48 +86,62 @@ class DatosManager{
         }
         return $sentencia;
     }
-    public function Registrar($datos){
+    public function Registrar($datos) {
     /**
-     * Registra un nuevo usuario en la base de datos.
+     * Registra un nuevo titular en la base de datos.
      * Este método verifica si todos los campos de la tabla se han rellenado correctamente
-     * y, si es así, registra un nuevo usuario en la base de datos.
+     * y, si es así, registra un nuevo titular en la base de datos.
      * Devuelve la sentencia preparada ejecutada.
      * 
      * @param array $datos Arreglo con los datos a registrar.
-     * @return PDOStatement La sentencia preparada ejecutada.
+     * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
      */
-        #Construir la sentencia
-        $tabla = $this->tabla;
-        //Autenticar
-        require_once 'Herramientas/Auth.php';
-        $auth = new Auth();
-        $role = $auth->Nombre_Apellido($datos['role']);
-        $nombre = $auth->Nombre_Apellido($datos['name']);
-        $apellido = $auth->Nombre_Apellido($datos['surname']);
-        $email = $auth->Email($datos['email']);
-        $pass = $auth->Autenticar_Registro_Contrasenna($datos['password']);
-        if($role && $nombre && $apellido && $email && $pass){
-        #Cifrar
-        $pass = $this->Cifrar($datos['password']);
-        
-        #Asignar valores
-        $this->DB = DB::Connect();
-        $sql = "INSERT INTO $tabla (role, name, surname, nick, email, password, image, created_at, updated_at) VALUES (:role, :name, :surname, :nick, :email, :password, :image, CURDATE(), CURDATE())";
-        $stmt = $this->DB->prepare($sql);
-        $stmt->bindParam(':role', $datos['role']);
-        $stmt->bindParam(':name', $datos['name']);
-        $stmt->bindParam(':surname', $datos['surname']);
-        $stmt->bindParam(':nick', $datos['nick']);
-        $stmt->bindParam(':email', $datos['email']);
-        $stmt->bindParam(':password', $pass);
-        $stmt->bindParam(':image', $datos['image']);
-        $stmt->execute();
-        return $stmt;
-        }else{
-            return false;
-        }
+    
+    // Verificar que todos los campos obligatorios estén presentes
+    if (empty($datos['nombre']) || empty($datos['primer_apellido']) || empty($datos['ssn']) || empty($datos['fecha_nacimiento']) || empty($datos['direccion']) || empty($datos['ciudad']) || empty($datos['estado']) || empty($datos['codigo_postal']) || empty($datos['telefono']) || empty($datos['email'])) {
+        return false;
     }
-    public function Eliminar(){
+
+    // Asignar valores
+    $tabla = $this->tabla;
+    $this->DB = DB::Connect();
+
+    // Construir la sentencia SQL
+    $sql = "INSERT INTO $tabla (nombre, segundo_nombre, primer_apellido, segundo_apellido, SSN, alien_number, genero, fecha_nacimiento, direccion, ciudad, estado, codigo_postal, telefono, email, empresa, notas, actualizado) 
+            VALUES (:nombre, :segundo_nombre, :primer_apellido, :segundo_apellido, :SSN, :alien_number, :genero, :fecha_nacimiento, :direccion, :ciudad, :estado, :codigo_postal, :telefono, :email, :empresa, :notas, :actualizado)";
+    
+    $stmt = $this->DB->prepare($sql);
+
+    // Vincular los parámetros con los datos
+    $stmt->bindParam(':nombre', $datos['nombre']);
+    $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
+    $stmt->bindParam(':primer_apellido', $datos['primer_apellido']);
+    $stmt->bindParam(':segundo_apellido', $datos['segundo_apellido']);
+    $stmt->bindParam(':SSN', $datos['ssn']);
+    $stmt->bindParam(':alien_number', $datos['alien_number']);
+    $stmt->bindParam(':genero', $datos['genero']);
+    $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
+    $stmt->bindParam(':direccion', $datos['direccion']);
+    $stmt->bindParam(':ciudad', $datos['ciudad']);
+    $stmt->bindParam(':estado', $datos['estado']);
+    $stmt->bindParam(':codigo_postal', $datos['codigo_postal']);
+    $stmt->bindParam(':telefono', $datos['telefono']);
+    $stmt->bindParam(':email', $datos['email']);
+    $stmt->bindParam(':empresa', $datos['empresa']);
+    //$stmt->bindParam(':declaracion_fiscal', $datos['declaracion_fiscal'], PDO::PARAM_BOOL);
+    //$stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
+    $stmt->bindParam(':notas', $datos['notas']);
+    $stmt->bindParam(':actualizado', $datos['actualizado']);
+    
+    // Ejecutar la sentencia
+    if ($stmt->execute()) {
+        return $stmt;
+    } else {
+        return false;
+    }
+}
+
+        public function Eliminar(){
     /**
      * Elimina un registro de la base de datos.
      * Este método elimina un registro de la base de datos con base en el ID.
