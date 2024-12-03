@@ -1,7 +1,7 @@
 <?php
-require_once 'Sesiones.php';
-session_start();
 require_once 'autoload.php';
+session_start();
+require_once 'Sesiones.php';
 
 #Comprobar si se llama un controlador por la url
 if(@$_GET){

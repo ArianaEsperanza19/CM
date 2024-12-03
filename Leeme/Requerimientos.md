@@ -9,7 +9,8 @@
 
 ## Titulares Crud
 - [x] Ingresar nuevo cliente
-- [ ] Listar Clientes
+- [ ] Ingresar dependientes y conyugue
+- [x] Listar Clientes
 - [ ] Editar Cliente
 - [ ] Eliminar Cliente
 

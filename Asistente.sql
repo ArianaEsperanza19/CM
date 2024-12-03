@@ -33,6 +33,7 @@ CREATE TABLE Datos_Seguro(
 );
 
 CREATE TABLE Conyugues_Dependientes(
+    id_miembro_grupo INT AUTO_INCREMENT,
     id_cliente INT,
     nombre VARCHAR(50),
     segundo_nombre VARCHAR(50),
@@ -43,7 +44,7 @@ CREATE TABLE Conyugues_Dependientes(
     fecha_nacimiento DATE,
     estatus_migratorio BOOLEAN,
     pareja BOOLEAN,
-    PRIMARY KEY (id_cliente),
+    PRIMARY KEY (id_miembro_grupo),
     FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
 );
 

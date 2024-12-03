@@ -64,6 +64,12 @@ class DatosManager{
         }
         return $sentencia;
     }
+    public function Ultimo_Registro(){
+        $sql = "SELECT * FROM $this->tabla ORDER BY id_cliente DESC LIMIT 1";
+        $sentencia = $this->DB->prepare($sql);
+        $sentencia->execute();
+        return $sentencia->fetch();
+    }
     public function Restaurar(){
     /*
     Restaura la tabla truncándola.
