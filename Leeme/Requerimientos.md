@@ -9,10 +9,10 @@
 
 ## Titulares Crud
 - [x] Ingresar nuevo cliente
-- [ ] Ingresar dependientes y conyugue
 - [x] Listar Clientes
 - [ ] Editar Cliente
 - [ ] Eliminar Cliente
+- [ ] Al eliminar Cliente, borrar los miembros de su grupo
 
 ## Datos Bancarios del Cliente
 - [ ] Ingresar nueva cuenta (números de cuenta, tipo de cuenta)
@@ -20,10 +20,12 @@
 - [ ] Editar Cuenta
 
 ## Cónyuges y dependientes
-- [ ] Ingresar nuevo cónyuge
-- [ ] Ingresar un dependiente
-- [ ] Listar grupo de un Titula 
+- [x] Ingresar nuevo cónyuge
+- [x] Ingresar un dependiente
+- [ ] Agregar multiples dependientes
+- [x] Listar grupo de un Titula 
 - [ ] Editar grupo
+- [ ] Asegurarse de que solo se puede tener un conyugue al mismo tiempo
 
 ## Datos del Seguro
 - [ ] Ingresar nuevo seguro y sus números
@@ -38,14 +40,14 @@
 
 ## Interfaz gráfica
 ### Panel de control
-- [ ] Listar Clientes
+- [x] Listar Clientes
 - [ ] Editar Cliente
 - [ ] Eliminar Cliente
 - [ ] Buscar Cliente
 ### Panel del Titular
 - [ ] Cuentas
-- [ ] Ver información del titular
-- [ ] Mostrar grupo
+- [x] Ver información del titular
+- [x] Mostrar grupo
 - [ ] Editar grupo
 - [ ] Eliminar miembros
 - [ ] Ver información del seguro

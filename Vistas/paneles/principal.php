@@ -11,7 +11,8 @@ $DB = new DatosManager(tabla: 'Titulares');
 $titulares = $DB->Conseguir_Todos();
 if($titulares){
 foreach($titulares as $titular){
-echo "<br>".$titular['id_cliente']." - ".$titular['nombre']." ".$titular['primer_apellido'];
+echo "<br>".$titular['id_cliente']." - ".$titular['nombre']." ".$titular['primer_apellido'].
+" <a href='?controller=Paneles&action=info&cliente=".$titular['id_cliente']."'>mas</a>";
 }
 }else{
 header('Location: ?controller=Paneles&action=principal');

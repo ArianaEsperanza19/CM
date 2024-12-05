@@ -16,4 +16,12 @@ class PanelesController
     public function formularioDepende() {
         require_once 'Vistas/subpaneles/formularioDepende.php';
     }
+    public function info() {
+    if (isset($_GET['cliente'])) {
+        global $cliente;
+        $cliente = $_GET['cliente'];
+        require_once 'Vistas/subpaneles/info.php';
+    }
+}
+
 }
