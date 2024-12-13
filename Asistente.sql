@@ -28,6 +28,7 @@ CREATE TABLE Datos_Seguro(
     policy_number VARCHAR(20),
     member_number VARCHAR(20),
     group_number VARCHAR(20),
+    plan_seguro VARCHAR(20),
     PRIMARY KEY (id_cliente), 
     FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
 );
@@ -42,6 +43,7 @@ CREATE TABLE Conyugues_Dependientes(
     alien_number VARCHAR(20), 
     genero VARCHAR(10),
     fecha_nacimiento DATE,
+    en_poliza VARCHAR(20),
     estatus_migratorio BOOLEAN,
     pareja BOOLEAN,
     PRIMARY KEY (id_miembro_grupo),

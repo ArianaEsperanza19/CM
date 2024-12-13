@@ -13,6 +13,7 @@
 - [ ] Editar Cliente
 - [ ] Eliminar Cliente
 - [ ] Al eliminar Cliente, borrar los miembros de su grupo
+- [ ] Mensaje de advertencia al eliminar un cliente
 
 ## Datos Bancarios del Cliente
 - [ ] Ingresar nueva cuenta (números de cuenta, tipo de cuenta)
@@ -22,7 +23,7 @@
 ## Cónyuges y dependientes
 - [x] Ingresar nuevo cónyuge
 - [x] Ingresar un dependiente
-- [ ] Agregar multiples dependientes
+- [x] Agregar multiples dependientes
 - [x] Listar grupo de un Titula 
 - [ ] Editar grupo
 - [ ] Asegurarse de que solo se puede tener un conyugue al mismo tiempo

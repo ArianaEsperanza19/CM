@@ -2,10 +2,21 @@
 echo "Soy el formulario para conyugues";
 if($_GET['id_cliente']){
     $id_titular = $_GET['id_cliente'];
+    if($_GET['depende'] == 1){
+    $redireccion = "?controller=Cliente&action=Agregar_Conyugue&id_cliente=$id_titular&depende=1";
+    }
+    else{
+    $redireccion = "?controller=Cliente&action=Agregar_Conyugue&id_cliente=$id_titular&depende=0";
+    }
 }
 ?>
 <h2>Formulario de Registro</h2> 
-<form action="<?php echo "?controller=Cliente&action=Agregar_Conyugue&id_cliente=$id_titular" ?>" method="POST"> 
+<form action="<?php echo $redireccion ?>" method="POST">
+    <label for="seguro">¿Solicita la cobertura? </label>
+    <select id="seguro" name="seguro">
+    <option value="si">Si</option> 
+    <option value="no">No</option> 
+    </select><br>  
     <label for="nombre">Nombre:</label><br> 
     <input type="text" id="nombre" name="nombre" maxlength="50" required><br> 
     <label for="segundo_nombre">Segundo Nombre:</label><br> 

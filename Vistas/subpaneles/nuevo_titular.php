@@ -48,6 +48,9 @@ echo "Soy el formulario para un nuevo cliente";
     <option value="0" selected>No</option> 
     <option value="1">Sí</option> 
     </select><br>
-    <label for="dependientes">¿Cuantos dependientes tiene? </label>
-    <input type="number" id="dependientes" name="dependientes"><br>
+    <label for="dependientes">¿Dependientes?</label>
+    <select id="dependientes" name="dependientes">
+    <option value="0" selected>No</option>
+    <option value="1">Sí</option> 
+    </select><br>
     <button type="submit">Enviar</button> </form>

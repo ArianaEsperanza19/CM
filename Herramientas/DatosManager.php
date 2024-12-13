@@ -104,9 +104,9 @@ class DatosManager{
      */
     
     // Verificar que todos los campos obligatorios estén presentes
-    if (empty($datos['nombre']) || empty($datos['primer_apellido']) || empty($datos['ssn']) || empty($datos['fecha_nacimiento']) || empty($datos['direccion']) || empty($datos['ciudad']) || empty($datos['estado']) || empty($datos['codigo_postal']) || empty($datos['telefono']) || empty($datos['email'])) {
-        return false;
-    }
+   // if (empty($datos['nombre']) || empty($datos['primer_apellido']) || empty($datos['ssn']) || empty($datos['fecha_nacimiento']) || empty($datos['direccion']) || empty($datos['ciudad']) || empty($datos['estado']) || empty($datos['codigo_postal']) || empty($datos['telefono']) || empty($datos['email'])) {
+    //    return false;
+    //}
 
     // Asignar valores
     $tabla = $this->tabla;

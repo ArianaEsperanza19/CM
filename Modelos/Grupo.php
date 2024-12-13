@@ -18,11 +18,11 @@ class Grupo {
          * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
          */
         // Verificar si la sesión está iniciada y la variable 'cliente' está definida
-
         
         // Construir la sentencia SQL
         $sql = "INSERT INTO Conyugues_Dependientes (
                     id_cliente, 
+                    en_poliza,
                     nombre, 
                     segundo_nombre, 
                     apellido, 
@@ -33,7 +33,8 @@ class Grupo {
                     estatus_migratorio, 
                     pareja
                 ) VALUES (
-                    :id_cliente, 
+                    :id_cliente,
+                    :en_poliza, 
                     :nombre, 
                     :segundo_nombre, 
                     :apellido, 
@@ -49,9 +50,10 @@ class Grupo {
 
         // Vincular los parámetros con los datos
         $stmt->bindParam(':id_cliente', $id_cliente);
+        $stmt->bindParam(':en_poliza', $datos['seguro']);
         $stmt->bindParam(':nombre', $datos['nombre']);
         $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
-        $stmt->bindParam(':apellido', $datos['apellido']);
+        $stmt->bindParam(':apellido', $datos['primer_apellido']);
         $stmt->bindParam(':SSN', $datos['SSN']);
         $stmt->bindParam(':alien_number', $datos['alien_number']);
         $stmt->bindParam(':genero', $datos['genero']);

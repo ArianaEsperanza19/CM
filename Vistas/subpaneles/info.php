@@ -50,6 +50,7 @@
     echo "<p><b>Fecha de Nacimiento:</b> $dato[fecha_nacimiento]</p>";
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
+    echo "<p><b>Cobertura:</b> $dato[en_poliza]</p>";
     }
 
     $dependientes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND pareja = 0");
@@ -64,6 +65,7 @@
     echo "<p><b>Fecha de Nacimiento:</b> $dato[fecha_nacimiento]</p>";
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
-
+    echo "<p><b>Cobertura:</b> $dato[en_poliza]</p>";
+    echo "<hr>";
 }
 ?>
