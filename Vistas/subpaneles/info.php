@@ -3,7 +3,9 @@
     $cliente = $_GET['cliente'];
     $DB = new DatosManager(tabla: 'Titulares');
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
-    echo "<h1>Informacion del Titular</h1>";
+    echo "<h1>Informacion del Titular</h1>
+    <a href='?controller=Cliente&action=Eliminar&cliente=$cliente'>Eliminar</a>
+    <hr>";
     foreach ($titular as $dato) {
     echo "<p><b>Nombre:</b> $dato[nombre]</p>";
     echo "<p><b>Segundo nombre:</b> $dato[segundo_nombre]</p>";

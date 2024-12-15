@@ -79,6 +79,14 @@ class ClienteController
 
     }
     public function Eliminar() {
+        echo "eliminar un cliente";
+        if($_GET['cliente']){
+        $DB = new DatosManager(tabla: 'Titulares');
+        require_once 'Modelos/Grupo.php';
+        $registro = new Grupo($DB);
+        $sentencia = $registro->eliminar_todos($_GET['cliente']);
+        header('Location: ?controller=Paneles&action=principal');
+    }
 
     }
     public function Buscar() {

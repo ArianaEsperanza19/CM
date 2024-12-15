@@ -68,4 +68,22 @@ class Grupo {
             return false;
         }
     }
+
+
+
+    public function eliminar_todos($id_cliente) {
+    /**
+     * Elimina todos los registros asociados a un cliente en la base de datos.
+     * Este método elimina todos los titulares pertenecientes al cliente con el 
+     * ID proporcionado.
+     * 
+     * @param int $id_cliente El ID del cliente cuyos registros se eliminarán.
+     * @return PDOStatement La sentencia preparada ejecutada.
+     */
+        $sql = "DELETE FROM Titulares WHERE id_cliente = :id_cliente";
+        $stmt = $this->DB->prepare($sql);
+        $stmt->bindParam(':id_cliente', $id_cliente);
+        $stmt->execute();
+        return $stmt;
+    }
 }
