@@ -22,6 +22,26 @@ class PanelesController
         $cliente = $_GET['cliente'];
         require_once 'Vistas/subpaneles/info.php';
     }
-}
+    }
 
-}
+    public function editar() {
+        if(isset($_GET['cliente'])){
+            global $cliente; 
+            $cliente = $_GET['cliente'];
+            if(isset($_GET['depende'])){
+            global $depende;
+            $depende = true;
+            require_once 'Vistas/subpaneles/formularioDepende.php';
+            }
+            if(isset($_GET['conyugue'])){
+            global $conyugue;
+            $conyugue = true;
+            require_once 'Vistas/subpaneles/formularioConyugal.php';
+            }
+        }
+        if(isset($_GET['cliente_titular'])){
+            global $editar_titular;
+            $editar_titular = $_GET['cliente_titular'];
+            require_once 'Vistas/subpaneles/nuevo_titular.php';
+        }}}
+

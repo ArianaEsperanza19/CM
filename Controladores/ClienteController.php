@@ -11,7 +11,6 @@ class ClienteController
         //echo "Soy el formulario para un nuevo cliente";
         if(isset($_POST)) {
             
-            $_SESSION['registro'] = true;
             $datos = new DatosManager(tabla : 'Titulares');
             $sentencia = $datos->Registrar($_POST);
             print_r($sentencia);
@@ -44,6 +43,7 @@ class ClienteController
             }}
     }
     public function Agregar_Conyugue() {
+        # Verificar si se puede usar sin datosmanager
         if(isset($_POST)) {
         if($_GET['id_cliente']){
             $id_cliente = $_GET['id_cliente'];
@@ -76,8 +76,20 @@ class ClienteController
         header('Location: ?controller=Paneles&action=formularioDepende'."&id_cliente=$id_cliente");
     }}}
     public function Editar() {
-
-    }
+        if(isset($_POST)){
+            echo "datos recibidos";
+            if($_GET['cliente']){
+            $id = $_GET['cliente'];
+            require_once 'Modelos/Grupo.php';
+            $registro = new Grupo();
+            $centinela = false;
+            if(isset($_GET['conyugue']) == 1 || isset($_GET['depende']) == 1){
+                $centinela = true;
+            }
+            $sentencia = $registro->editar($_POST,$id,$centinela);
+            header('Location: ?controller=Paneles&action=principal');
+        }
+    }}
     public function Eliminar() {
         echo "eliminar un cliente";
         if($_GET['cliente']){

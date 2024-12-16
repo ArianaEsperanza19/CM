@@ -11,8 +11,8 @@
 - [x] Ingresar nuevo cliente
 - [x] Listar Clientes
 - [ ] Editar Cliente
-- [ ] Eliminar Cliente
-- [ ] Al eliminar Cliente, borrar los miembros de su grupo
+- [x] Eliminar Cliente
+- [x] Al eliminar Cliente, borrar los miembros de su grupo
 - [ ] Mensaje de advertencia al eliminar un cliente
 
 ## Datos Bancarios del Cliente
@@ -50,5 +50,5 @@
 - [x] Ver información del titular
 - [x] Mostrar grupo
 - [ ] Editar grupo
-- [ ] Eliminar miembros
+- [ ] Eliminar miembros por separado
 - [ ] Ver información del seguro

@@ -5,8 +5,11 @@
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
     echo "<h1>Informacion del Titular</h1>
     <a href='?controller=Cliente&action=Eliminar&cliente=$cliente'>Eliminar</a>
+    <a href='?controller=Cliente&action=Editar&cliente=$cliente'>Editar</a>
     <hr>";
     foreach ($titular as $dato) {
+    $id = $dato['id_cliente'];
+    echo "<a href='?controller=Paneles&action=editar&cliente_titular=$id'>Editar</a>";
     echo "<p><b>Nombre:</b> $dato[nombre]</p>";
     echo "<p><b>Segundo nombre:</b> $dato[segundo_nombre]</p>";
     echo "<p><b>Apellido:</b> $dato[primer_apellido]</p>";
@@ -45,6 +48,8 @@
     $conyugue = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND pareja = 1");
     echo "<h1>Informacion del Conyugue</h1>";
     foreach ($conyugue as $dato) {
+    $id=$dato['id_miembro_grupo'];
+    echo "<a href='?controller=Paneles&action=editar&cliente=$id&conyugue=1'>Editar</a>";
     echo "<p><b>Nombre:</b> $dato[nombre]</p>";
     echo "<p><b>Segundo nombre:</b> $dato[segundo_nombre]</p>";
     echo "<p><b>Apellido:</b> $dato[apellido]</p>";
@@ -60,6 +65,8 @@
     echo "<hr>";
     echo "<h1>Informacion de Dependientes</h1>";
     foreach ($dependientes as $dato) {
+    $id=$dato['id_miembro_grupo'];
+    echo "<a href='?controller=Paneles&action=editar&cliente=$id&depende=1'>Editar</a>";
     echo "<p><b>Nombre:</b> $dato[nombre]</p>";
     echo "<p><b>Segundo nombre:</b> $dato[segundo_nombre]</p>";
     echo "<p><b>Apellido:</b> $dato[apellido]</p>";
