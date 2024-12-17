@@ -1,10 +1,12 @@
 <?php 
 echo "Soy el formulario para dependientes";
 if($_GET['id_cliente']){
+    # id del titular para registrarle un nuevo dependiente.
     $id_titular = $_GET['id_cliente'];
     $redirect = "?controller=Cliente&action=Agregar_Depende&id_cliente=$id_titular";
 }
 if(isset($depende) == 1){
+    # id del dependiente para editar
     $id = $_GET['cliente'];
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
     $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND pareja = 0");

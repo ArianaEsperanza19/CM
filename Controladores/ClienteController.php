@@ -64,15 +64,15 @@ class ClienteController
 
     public function Agregar_Depende(){
         echo "Soy el formulario para Dependientes";
-        if(isset($_POST) && $_SESSION['dependientes'] > 0){ {
+        if(isset($_POST)){ {
         if($_GET['id_cliente']){
             $id_cliente = $_GET['id_cliente'];
         }
         var_dump($_POST);
-        $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
         require_once 'Modelos/Grupo.php';
-        $registro = new Grupo($DB);
+        $registro = new Grupo();
         $sentencia = $registro->registrar($_POST, $id_cliente);
+        var_dump($sentencia);
         header('Location: ?controller=Paneles&action=formularioDepende'."&id_cliente=$id_cliente");
     }}}
     public function Editar() {

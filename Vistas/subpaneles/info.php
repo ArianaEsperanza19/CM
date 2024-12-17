@@ -50,6 +50,8 @@
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
     $conyugue = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND pareja = 1");
     echo "<h1>Informacion del Conyugue</h1>";
+    if ($conyugue->rowCount() > 0) {
+    // La consulta ha encontrado algo
     foreach ($conyugue as $dato) {
     $id=$dato['id_miembro_grupo'];
     echo "<a href='?controller=Paneles&action=editar&cliente=$id&conyugue=1'>Editar</a>";
@@ -61,9 +63,14 @@
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
     echo "<p><b>Cobertura:</b> $dato[en_poliza]</p>";
-    echo "<a href='?controller=Cliente&action=Eliminar&cliente=$id&conyugue=1&titular=$cliente'>Eliminar</a>";
+    echo "<a href='?controller=Cliente&action=Eliminar&cliente=$id&conyugue=1&titular=$cliente'>Eliminar</a><br>";
     echo "<hr>";
     }
+} else {
+    // La consulta no ha encontrado nada
+    echo "<a href='?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente'>Agregar +</a>";
+}
+
 
     # Dependientes
     $dependientes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND pareja = 0");
@@ -80,7 +87,8 @@
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
     echo "<p><b>Cobertura:</b> $dato[en_poliza]</p>";
-    echo "<a href='?controller=Cliente&action=Eliminar&cliente=$id&depende=1&titular=$cliente'>Eliminar</a>";
+    echo "<a href='?controller=Cliente&action=Eliminar&cliente=$id&depende=1&titular=$cliente'>Eliminar</a><br>";
+    echo "<a href='?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente&depende=0'>Agregar +</a>";
     echo "<hr>";
 }
 ?>

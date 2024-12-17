@@ -4,7 +4,7 @@ if($_GET['id_cliente']){
     # id del titular
     $id = $_GET['id_cliente'];
     # Si tiene dependientes
-    if($_GET['depende'] == 1){
+    if(isset($_GET['depende']) == 1){
     $redireccion = "?controller=Cliente&action=Agregar_Conyugue&id_cliente=$id&depende=1";
     }
     # No tiene dependientes
