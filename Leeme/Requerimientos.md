@@ -10,7 +10,7 @@
 ## Titulares Crud
 - [x] Ingresar nuevo cliente
 - [x] Listar Clientes
-- [ ] Editar Cliente
+- [x] Editar Cliente
 - [x] Eliminar Cliente
 - [x] Al eliminar Cliente, borrar los miembros de su grupo
 - [ ] Mensaje de advertencia al eliminar un cliente

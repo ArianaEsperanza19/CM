@@ -43,5 +43,15 @@ class PanelesController
             global $editar_titular;
             $editar_titular = $_GET['cliente_titular'];
             require_once 'Vistas/subpaneles/nuevo_titular.php';
-        }}}
+        }}
+    public function advertencia(){
+        if($_GET['cliente']){
+        global $cliente;
+        $cliente = $_GET['cliente'];
+        require_once 'Vistas/subpaneles/Advertencia.php';
+        }else{
+            echo "No se ha enviado un cliente";
+        }
+    }
+    }
 
