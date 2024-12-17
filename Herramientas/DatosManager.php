@@ -147,7 +147,7 @@ class DatosManager{
     }
 }
 
-        public function Eliminar(){
+    public function Eliminar(){
     /**
      * Elimina un registro de la base de datos.
      * Este método elimina un registro de la base de datos con base en el ID.

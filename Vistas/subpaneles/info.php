@@ -45,6 +45,8 @@
     }
     echo "<hr>";
     }
+
+    # Conyugue
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
     $conyugue = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND pareja = 1");
     echo "<h1>Informacion del Conyugue</h1>";
@@ -59,10 +61,12 @@
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
     echo "<p><b>Cobertura:</b> $dato[en_poliza]</p>";
+    echo "<a href='?controller=Cliente&action=Eliminar&cliente=$id&conyugue=1&titular=$cliente'>Eliminar</a>";
+    echo "<hr>";
     }
 
+    # Dependientes
     $dependientes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND pareja = 0");
-
     echo "<hr>";
     echo "<h1>Informacion de Dependientes</h1>";
     foreach ($dependientes as $dato) {
@@ -76,6 +80,7 @@
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
     echo "<p><b>Cobertura:</b> $dato[en_poliza]</p>";
+    echo "<a href='?controller=Cliente&action=Eliminar&cliente=$id&depende=1&titular=$cliente'>Eliminar</a>";
     echo "<hr>";
 }
 ?>

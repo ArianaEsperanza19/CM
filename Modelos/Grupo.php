@@ -86,7 +86,27 @@ class Grupo {
         return $stmt;
     }
 
-    public function editar($datos, $id_cliente, $centinela){
+    public function eliminar_uno($id){
+        $stmt = $this->DB->prepare("DELETE FROM Conyugues_Dependientes WHERE id_miembro_grupo = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt;   
+    }
+    
+    public function editar($datos, $id_cliente, $centinela)
+    {
+    /**
+     * Edita la información de un cónyuge o dependiente en la base de datos.
+     * Este método verifica si la variable 'centinela' es verdadera, si es así,
+     * actualiza la información del cónyuge o dependiente en la base de datos.
+     * Si no es así, se asume que se va a editar la información del titular.
+     * 
+     * @param array $datos Arreglo con los datos a editar.
+     * @param int $id_cliente El ID del cliente cuyos registros se editarán.
+     * @param bool $centinela Variable que indica si se va a editar la información
+     *                        de un cónyuge o dependiente o la del titular.
+     * @return PDOStatement La sentencia preparada ejecutada.
+     */
         if($centinela){
             $sql = "UPDATE Conyugues_Dependientes SET
                     en_poliza = :en_poliza,
@@ -103,7 +123,7 @@ class Grupo {
 
             $stmt = $this->DB->prepare($sql);
 
-// Vincular los parámetros con los datos
+            // Vincular los parámetros con los datos
             $stmt->bindParam(':en_poliza', $datos['seguro']);
             $stmt->bindParam(':nombre', $datos['nombre']);
             $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
@@ -162,8 +182,8 @@ class Grupo {
         $stmt->bindParam(':telefono', $datos['telefono']);
         $stmt->bindParam(':email', $datos['email']);
         $stmt->bindParam(':empresa', $datos['empresa']);
-    //$stmt->bindParam(':declaracion_fiscal', $datos['declaracion_fiscal'], PDO::PARAM_BOOL);
-    //$stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
+        //$stmt->bindParam(':declaracion_fiscal', $datos['declaracion_fiscal'], PDO::PARAM_BOOL);
+        //$stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
         $stmt->bindParam(':notas', $datos['notas']);
         $stmt->bindParam(':actualizado', $datos['actualizado']);
     

@@ -91,11 +91,31 @@ class ClienteController
         }
     }}
     public function Eliminar() {
-        echo "eliminar un cliente";
-        if($_GET['cliente']){
-        $DB = new DatosManager(tabla: 'Titulares');
+        echo "Eliminar";
+        if(isset($_GET['cliente'])){
+        $titular = $_GET['titular'];
+        $id = $_GET['cliente'];
         require_once 'Modelos/Grupo.php';
-        $registro = new Grupo($DB);
+        if(isset($_GET['depende']) == 1){
+            $grupo = new Grupo();
+            $sentecia = $grupo->eliminar_uno($id);
+            if($sentecia){
+                header('Location: ?controller=Paneles&action=info&cliente='.$titular);
+            }else{
+                echo "Error al eliminar";
+            }
+        }
+        if(isset($_GET['conyugue']) == 1){
+            $grupo = new Grupo();
+            $sentecia = $grupo->eliminar_uno($id);
+            //ERROR redirecciona a panel principal
+            if($sentecia){
+                header('Location: ?controller=Paneles&action=info&cliente='.$titular);
+            }else{
+                echo "Error al eliminar";
+            }
+        }
+        $registro = new Grupo();
         $sentencia = $registro->eliminar_todos($_GET['cliente']);
         header('Location: ?controller=Paneles&action=principal');
     }
