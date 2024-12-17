@@ -61,9 +61,11 @@ if(isset($conyugue) == 1){
     if($genero == 'F'){
     echo "
         <option value='F' selected>Femenino</option>
+        <option value='M'>Masculino</option>
     ";}else{
     echo "
-        <option value='M'>Masculino</option>
+        <option value='M' selected>Masculino</option>
+        <option value='F'>Femenino</option>
     ";
     }
     echo "
