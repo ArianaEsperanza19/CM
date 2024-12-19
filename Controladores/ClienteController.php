@@ -80,14 +80,22 @@ class ClienteController
             echo "datos recibidos";
             if($_GET['cliente']){
             $id = $_GET['cliente'];
-            require_once 'Modelos/Grupo.php';
-            $registro = new Grupo();
-            $centinela = false;
             if(isset($_GET['conyugue']) == 1 || isset($_GET['depende']) == 1){
-                $centinela = true;
+                # Editar conyugue o dependiente
+                require_once 'Modelos/Grupo.php';
+                $registro = new Grupo();
+                $sentencia = $registro->editar($_POST,$id);
+                $titular = $registro->info_titular($id);
+                header('Location: ?controller=Paneles&action=info&cliente='.$titular);
+                
+            }else{
+            # Editar titular
+            require_once 'Herramientas/DatosManager.php';
+            $DB = new DatosManager(tabla: 'Titulares');
+            $sentencia = $DB->Editar($_POST, $id);
+            header('Location: ?controller=Paneles&action=info&cliente='.$id);
             }
-            $sentencia = $registro->editar($_POST,$id,$centinela);
-            header('Location: ?controller=Paneles&action=principal');
+            //header('Location: ?controller=Paneles&action=principal');
         }
     }}
     public function Eliminar() {

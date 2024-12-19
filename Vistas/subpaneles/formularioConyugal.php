@@ -39,9 +39,11 @@ if(isset($conyugue) == 1){
     <select id='seguro' name='seguro'>
     ";
     if($seguro == 'si'){
-        echo "<option value='si'>Si</option>";
+         echo "<option value='si' selected>Si</option>";   
+        echo "<option value='no'>No</option>";
     }
     if($seguro == 'no'){
+        echo "<option value='no' selected>No</option>";
         echo "<option value='no'>No</option>";
     }
     echo "

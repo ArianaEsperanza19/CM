@@ -18,7 +18,6 @@ class Grupo {
          * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
          */
         // Verificar si la sesión está iniciada y la variable 'cliente' está definida
-        var_dump($datos); 
         // Construir la sentencia SQL
         $sql = "INSERT INTO Conyugues_Dependientes (
                     id_cliente, 
@@ -54,7 +53,7 @@ class Grupo {
         $stmt->bindParam(':nombre', $datos['nombre']);
         $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
         $stmt->bindParam(':apellido', $datos['apellidos']);
-        $stmt->bindParam(':SSN', $datos['SSN']);
+        $stmt->bindParam(':SSN', $datos['ssn']);
         $stmt->bindParam(':alien_number', $datos['alien_number']);
         $stmt->bindParam(':genero', $datos['genero']);
         $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
@@ -93,7 +92,7 @@ class Grupo {
         return $stmt;   
     }
     
-    public function editar($datos, $id_cliente, $centinela)
+    public function editar($datos, $id_cliente)
     {
     /**
      * Edita la información de un cónyuge o dependiente en la base de datos.
@@ -107,7 +106,6 @@ class Grupo {
      *                        de un cónyuge o dependiente o la del titular.
      * @return PDOStatement La sentencia preparada ejecutada.
      */
-        if($centinela){
             $sql = "UPDATE Conyugues_Dependientes SET
                     en_poliza = :en_poliza,
                     nombre = :nombre,
@@ -128,7 +126,7 @@ class Grupo {
             $stmt->bindParam(':nombre', $datos['nombre']);
             $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
             $stmt->bindParam(':apellido', $datos['apellidos']);
-            $stmt->bindParam(':SSN', $datos['SSN']);
+            $stmt->bindParam(':SSN', $datos['ssn']);
             $stmt->bindParam(':alien_number', $datos['alien_number']);
             $stmt->bindParam(':genero', $datos['genero']);
             $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
@@ -138,62 +136,14 @@ class Grupo {
             // Ejecutar la sentencia
             if ($stmt->execute()) {
                 return $stmt;
+            }else{
+                return false;
             }
-        }else{
-        
-
-            // Si es la informacion del titular
-        $sql = "UPDATE Titulares 
-            SET 
-            nombre = :nombre, 
-            segundo_nombre = :segundo_nombre, 
-            primer_apellido = :primer_apellido, 
-            segundo_apellido = :segundo_apellido, 
-            SSN = :SSN, 
-            alien_number = :alien_number, 
-            genero = :genero, 
-            fecha_nacimiento = :fecha_nacimiento, 
-            direccion = :direccion, 
-            ciudad = :ciudad, 
-            estado = :estado, 
-            codigo_postal = :codigo_postal, 
-            telefono = :telefono, 
-            email = :email, 
-            empresa = :empresa, 
-            notas = :notas, 
-            actualizado = :actualizado 
-        WHERE id_cliente = $id_cliente";
-
-        $stmt = $this->DB->prepare($sql);
-
-        // Vincular los parámetros con los datos
-        $stmt->bindParam(':nombre', $datos['nombre']);
-        $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
-        $stmt->bindParam(':primer_apellido', $datos['primer_apellido']);
-        $stmt->bindParam(':segundo_apellido', $datos['segundo_apellido']);
-        $stmt->bindParam(':SSN', $datos['ssn']);
-        $stmt->bindParam(':alien_number', $datos['alien_number']);
-        $stmt->bindParam(':genero', $datos['genero']);
-        $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
-        $stmt->bindParam(':direccion', $datos['direccion']);
-        $stmt->bindParam(':ciudad', $datos['ciudad']);
-        $stmt->bindParam(':estado', $datos['estado']);
-        $stmt->bindParam(':codigo_postal', $datos['codigo_postal']);
-        $stmt->bindParam(':telefono', $datos['telefono']);
-        $stmt->bindParam(':email', $datos['email']);
-        $stmt->bindParam(':empresa', $datos['empresa']);
-        //$stmt->bindParam(':declaracion_fiscal', $datos['declaracion_fiscal'], PDO::PARAM_BOOL);
-        //$stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
-        $stmt->bindParam(':notas', $datos['notas']);
-        $stmt->bindParam(':actualizado', $datos['actualizado']);
-    
-        // Ejecutar la sentencia
-        if ($stmt->execute()) {
-        return $stmt;
-        } else {
-        return false;
         }
 
+        public function info_titular($id){
+            $stmt = $this->DB->prepare("SELECT id_cliente FROM Conyugues_Dependientes WHERE id_miembro_grupo = :id");
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetchColumn();
         }
-    }
-}
+        }

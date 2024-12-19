@@ -102,11 +102,7 @@ class DatosManager{
      * @param array $datos Arreglo con los datos a registrar.
      * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
      */
-    
-    // Verificar que todos los campos obligatorios estén presentes
-   // if (empty($datos['nombre']) || empty($datos['primer_apellido']) || empty($datos['ssn']) || empty($datos['fecha_nacimiento']) || empty($datos['direccion']) || empty($datos['ciudad']) || empty($datos['estado']) || empty($datos['codigo_postal']) || empty($datos['telefono']) || empty($datos['email'])) {
-    //    return false;
-    //}
+
 
     // Asignar valores
     $tabla = $this->tabla;
@@ -161,40 +157,63 @@ class DatosManager{
         $stmt->execute();
         return $stmt;
     }
-    public function Editar($datos){
-    /**
-     * Edita un registro de la base de datos.
-     * Este método edita un registro de la base de datos con base en el ID.
-     * Si el registro se edito correctamente, devuelve la sentencia preparada ejecutada.
-     * @param array $datos Arreglo con los datos a editar.
-     * @return PDOStatement La sentencia preparada ejecutada.
-     */
-        $table = $this->tabla;
-        $id = $this->id;
-        $sql = "
-        UPDATE $table SET 
-        role = :role, 
-        name = :name, 
-        surname = :surname, 
-        nick = :nick, 
-        email = :email, 
-        password = :password, 
-        updated_at = CURDATE() 
-        WHERE id = :id";
-        $stmt = $this->DB->prepare($sql);
-        $stmt->bindParam(':role', $datos['role']);
-        $stmt->bindParam(':name', $datos['name']);
-        $stmt->bindParam(':surname', $datos['surname']);
-        $stmt->bindParam(':nick', $datos['nick']);
-        $stmt->bindParam(':email', $datos['email']);
-        $stmt->bindParam(':password', $datos['password']);
-        #$stmt->bindParam(':image', $datos['image']);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        return $stmt;
-
-
+public function Editar($datos, $id) {
+    if (empty($datos) || empty($id)) {
+        throw new Exception('Parámetros inválidos');
     }
+
+    $tabla = $this->tabla;
+    $this->DB = DB::Connect();
+
+    // Construir la sentencia SQL
+    $sql = "UPDATE $tabla SET 
+            nombre = :nombre,
+            segundo_nombre = :segundo_nombre,
+            primer_apellido = :primer_apellido,
+            segundo_nombre = :segundo_nombre,
+            segundo_apellido = :segundo_apellido,
+            SSN = :SSN,
+            alien_number = :alien_number,
+            fecha_nacimiento = :fecha_nacimiento,
+            direccion = :direccion,
+            ciudad = :ciudad,
+            estado = :estado,
+            codigo_postal = :codigo_postal,
+            telefono = :telefono,
+            email = :email,
+            notas = :notas,
+            actualizado = :actualizado
+            WHERE id_cliente = :id_cliente";
+
+    $stmt = $this->DB->prepare($sql);
+
+    // Vincular los parámetros con los datos
+    $stmt->bindParam(':id_cliente', $id);
+    $stmt->bindParam(':nombre', $datos['nombre']);
+    $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
+    $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
+    $stmt->bindParam(':primer_apellido', $datos['primer_apellido']);
+    $stmt->bindParam(':segundo_apellido', $datos['segundo_apellido']);
+    $stmt->bindParam(':SSN', $datos['ssn']);
+    $stmt->bindParam(':alien_number', $datos['alien_number']);
+    $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
+    $stmt->bindParam(':direccion', $datos['direccion']);
+    $stmt->bindParam(':ciudad', $datos['ciudad']);
+    $stmt->bindParam(':estado', $datos['estado']);
+    $stmt->bindParam(':codigo_postal', $datos['codigo_postal']);
+    $stmt->bindParam(':telefono', $datos['telefono']);
+    $stmt->bindParam(':email', $datos['email']);
+    $stmt->bindParam(':notas', $datos['notas']);
+    $stmt->bindParam(':actualizado', $datos['actualizado']);
+
+    // Ejecutar la sentencia
+    if ($stmt->execute()) {
+        return $stmt;
+    } else {
+        return false;
+    }
+}   
+     
     public function Cifrar($datos){
     /**
      * Cifra un string con password_hash.
