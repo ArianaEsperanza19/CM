@@ -121,6 +121,48 @@ class ClienteController
     }
 
     }
+    public function registrar_info_seguro(){
+        if(isset($_POST)){
+        require_once 'Modelos/Seguros.php';
+        $registro = new Seguros();
+        if(isset($_GET['cliente'])){
+        $id = $_GET['cliente'];
+        $sentencia = $registro->actualizar($_POST, $id);
+        if($sentencia){
+            header('Location: ?controller=Paneles&action=segurosInfo&cliente='.$id);
+        }else{
+            echo "Error al actualizar";
+        }
+        }else{
+        $sentencia = $registro->registrar($_POST);
+        if($sentencia){
+            header('Location: ?controller=Paneles&action=seguroInfo&cliente='.$id);
+        }else{
+            echo "Error al registrar";
+        }
+        var_dump($sentencia);
+        }
+
+    }}
+    public function registrar_info_banco(){
+        if(isset($_POST)){
+        require_once 'Modelos/Cuentas.php';
+        $registro = new Cuentas();
+        if(isset($_GET['cliente'])){
+        $id = $_GET['cliente'];
+        $sentencia = $registro->actualizar($_POST, $id);
+        if($sentencia){
+            header('Location: ?controller=Paneles&action=bancoinfo&cliente='.$id);
+        }else{
+            echo "Error al actualizar";
+        }
+        }else{
+        $sentencia = $registro->registrar($_POST);
+        if($sentencia){
+            header('Location: ?controller=Paneles&action=bancoInfo&cliente='.$id);
+        }
+        }}}
+        
     public function Buscar() {
         
     }

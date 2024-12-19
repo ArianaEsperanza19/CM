@@ -3,10 +3,11 @@
     $cliente = $_GET['cliente'];
     $DB = new DatosManager(tabla: 'Titulares');
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
-    //<a href='?controller=Cliente&action=Eliminar&cliente=$cliente'>Eliminar Poliza</a>
     $_SESSION['eliminar'] = true;
     echo "<h1>Informacion del Titular</h1>
     <a href='?controller=Paneles&action=advertencia&cliente=$cliente'>Eliminar poliza</a>
+    <a href='?controller=Paneles&action=segurosInfo&cliente=$cliente'>Informacion de Seguros</a>
+    <a href='?controller=Paneles&action=bancoInfo&cliente=$cliente'>Informacion Bancaria</a>
     <hr>";
     foreach ($titular as $dato) {
     $id = $dato['id_cliente'];
@@ -88,7 +89,7 @@
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
     echo "<p><b>Cobertura:</b> $dato[en_poliza]</p>";
     echo "<a href='?controller=Cliente&action=Eliminar&cliente=$id&depende=1&titular=$cliente'>Eliminar</a><br>";
-    echo "<a href='?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente&depende=0'>Agregar +</a>";
     echo "<hr>";
 }
+    echo "<a href='?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente&depende=0'>Agregar +</a>";
 ?>

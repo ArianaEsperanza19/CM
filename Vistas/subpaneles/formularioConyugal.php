@@ -14,6 +14,7 @@ if($_GET['id_cliente']){
 }
 # Editar conyugue
 if(isset($conyugue) == 1){
+    # Editar conyugue
     require_once 'Herramientas/DatosManager.php';
     $id = $_GET['cliente'];
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
@@ -80,6 +81,7 @@ if(isset($conyugue) == 1){
 </form>
 ";
 }else{
+    # Agregar conyugue
     echo "
     <h2>Formulario de Registro</h2>
     <form action='$redireccion' method='POST'>

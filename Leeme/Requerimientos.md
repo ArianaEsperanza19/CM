@@ -13,27 +13,27 @@
 - [x] Editar Cliente
 - [x] Eliminar Cliente
 - [x] Al eliminar Cliente, borrar los miembros de su grupo
-- [ ] Mensaje de advertencia al eliminar un cliente
+- [x] Mensaje de advertencia al eliminar un cliente
 
 ## Datos Bancarios del Cliente
-- [ ] Ingresar nueva cuenta (números de cuenta, tipo de cuenta)
+- [x] Ingresar nueva cuenta (números de cuenta, tipo de cuenta)
 - [ ] Listar Cuentas
-- [ ] Editar Cuenta
+- [x] Editar Cuenta
 
 ## Cónyuges y dependientes
 - [x] Ingresar nuevo cónyuge
 - [x] Ingresar un dependiente
 - [x] Agregar multiples dependientes
 - [x] Listar grupo de un Titula 
-- [ ] Editar grupo
-- [ ] Asegurarse de que solo se puede tener un conyugue al mismo tiempo
+- [x] Editar grupo
+- [x] Asegurarse de que solo se puede tener un conyugue al mismo tiempo
 
 ## Datos del Seguro
-- [ ] Ingresar nuevo seguro y sus números
-- [ ] Ver números de póliza, miembros y grupos
-- [ ] Editar seguro
+- [x] Ingresar nuevo seguro y sus números
+- [x] Ver números de póliza, miembros y grupos
+- [x] Editar seguro
 - [ ] Eliminar seguro
-- [ ] Editar números
+- [x] Editar números
 
 ## Login del usuario
 - [ ] Login
@@ -42,13 +42,13 @@
 ## Interfaz gráfica
 ### Panel de control
 - [x] Listar Clientes
-- [ ] Editar Cliente
-- [ ] Eliminar Cliente
+- [x] Editar Cliente
+- [x] Eliminar Cliente
 - [ ] Buscar Cliente
 ### Panel del Titular
 - [ ] Cuentas
 - [x] Ver información del titular
 - [x] Mostrar grupo
-- [ ] Editar grupo
-- [ ] Eliminar miembros por separado
-- [ ] Ver información del seguro
+- [x] Editar grupo
+- [x] Eliminar miembros por separado
+- [x] Ver información del seguro
