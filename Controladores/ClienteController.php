@@ -13,15 +13,9 @@ class ClienteController
             
             $datos = new DatosManager(tabla : 'Titulares');
             $sentencia = $datos->Registrar($_POST);
-            print_r($sentencia);
             $cliente_id = $datos->Ultimo_Registro();
             $cliente_id = $cliente_id['id_cliente'];
             if($sentencia){
-            echo "Matrimonio";
-            echo $_POST['matrimonio'];
-            echo "Dependientes";
-            echo $_POST['dependientes'];
-            
             
             if($_POST['matrimonio'] == 1 && $_POST['dependientes'] == 0){
                 header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=0");
@@ -51,7 +45,7 @@ class ClienteController
         $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
         require_once 'Modelos/Grupo.php';
         $registro = new Grupo($DB);
-        $sentencia = $registro->registrar($_POST, $id_cliente);
+        $registro->registrar($_POST, $id_cliente);
         if($_GET['depende'] == 1){
             
             header('Location: ?controller=Paneles&action=formularioDepende'."&id_cliente=$id_cliente");
@@ -63,22 +57,18 @@ class ClienteController
     }}
 
     public function Agregar_Depende(){
-        echo "Soy el formulario para Dependientes";
         if(isset($_POST)){ {
         if($_GET['id_cliente']){
             $id_cliente = $_GET['id_cliente'];
         }
-        var_dump($_POST);
         require_once 'Modelos/Grupo.php';
         $registro = new Grupo();
-        $sentencia = $registro->registrar($_POST, $id_cliente);
-        var_dump($sentencia);
+        $registro->registrar($_POST, $id_cliente);
         header('Location: ?controller=Paneles&action=formularioDepende'."&id_cliente=$id_cliente");
     }}}
     public function Editar() {
         if(isset($_POST)){
-            echo "datos recibidos";
-            if($_GET['cliente']){
+            if(isset($_GET['cliente'])){
             $id = $_GET['cliente'];
             if(isset($_GET['conyugue']) == 1 || isset($_GET['depende']) == 1){
                 # Editar conyugue o dependiente
@@ -93,13 +83,17 @@ class ClienteController
             require_once 'Herramientas/DatosManager.php';
             $DB = new DatosManager(tabla: 'Titulares');
             $sentencia = $DB->Editar($_POST, $id);
+            if($sentencia){
             header('Location: ?controller=Paneles&action=info&cliente='.$id);
+            }else{
+                # ERROR
+                echo "Error al editar";
+            }
             }
             //header('Location: ?controller=Paneles&action=principal');
         }
     }}
     public function Eliminar() {
-        echo "Eliminar";
         if(isset($_GET['cliente'])){
         $titular = $_GET['titular'];
         $id = $_GET['cliente'];
@@ -110,7 +104,7 @@ class ClienteController
             if($sentecia){
                 header('Location: ?controller=Paneles&action=info&cliente='.$titular);
             }else{
-                echo "Error al eliminar";
+                die("Error al eliminar");
             }
         }
         if(isset($_GET['conyugue']) == 1){
@@ -120,21 +114,25 @@ class ClienteController
             if($sentecia){
                 header('Location: ?controller=Paneles&action=info&cliente='.$titular);
             }else{
-                echo "Error al eliminar";
+                die("Error al eliminar");
             }
         }
         $registro = new Grupo();
         $sentencia = $registro->eliminar_todos($_GET['cliente']);
+        if($sentencia){
         header('Location: ?controller=Paneles&action=principal');
+        }else{
+            echo "Error al eliminar";
+        }
     }
 
     }
     public function registrar_info_seguro(){
         if(isset($_POST)){
+        $id = $_GET['cliente'];
         require_once 'Modelos/Seguros.php';
         $registro = new Seguros();
-        if(isset($_GET['cliente'])){
-        $id = $_GET['cliente'];
+        if(isset($_GET['editar']) && $_GET['editar'] == 1){
         $sentencia = $registro->actualizar($_POST, $id);
         if($sentencia){
             header('Location: ?controller=Paneles&action=segurosInfo&cliente='.$id);
@@ -142,22 +140,21 @@ class ClienteController
             echo "Error al actualizar";
         }
         }else{
-        $sentencia = $registro->registrar($_POST);
+        $sentencia = $registro->registrar($_POST, $id);
         if($sentencia){
             header('Location: ?controller=Paneles&action=seguroInfo&cliente='.$id);
         }else{
             echo "Error al registrar";
         }
-        var_dump($sentencia);
         }
 
     }}
     public function registrar_info_banco(){
         if(isset($_POST)){
+        $id = $_GET['cliente'];
         require_once 'Modelos/Cuentas.php';
         $registro = new Cuentas();
-        if(isset($_GET['cliente'])){
-        $id = $_GET['cliente'];
+        if(isset($_GET['editar']) && $_GET['editar'] == 1){
         $sentencia = $registro->actualizar($_POST, $id);
         if($sentencia){
             header('Location: ?controller=Paneles&action=bancoinfo&cliente='.$id);
@@ -165,14 +162,30 @@ class ClienteController
             echo "Error al actualizar";
         }
         }else{
-        $sentencia = $registro->registrar($_POST);
+        $sentencia = $registro->registrar($_POST, $id);
         if($sentencia){
             header('Location: ?controller=Paneles&action=bancoInfo&cliente='.$id);
         }
         }}}
         
-    public function Buscar() {
+    public function buscar() {
         
+        if(isset($_POST['busqueda'])) {
+            echo $_POST['busqueda'];
+            require_once 'Herramientas/DatosManager.php';
+            $DB = new DatosManager(tabla: 'Titulares');
+            global $sentencia;
+            $sentencia = $DB->Conseguir_Registro("WHERE nombre LIKE '%".$_POST['busqueda']."%' OR primer_apellido LIKE '%".$_POST['busqueda']."%' OR segundo_apellido LIKE '%".$_POST['busqueda']."%'");
+            if($sentencia->rowCount() != 0){
+            require_once 'Vistas/paneles/busqueda.php';
+            }else{
+            $_SESSION['flash'] = "No se encontraron resultados";
+            require_once 'Vistas/paneles/principal.php';
+            }
+            
+        }else{
+            header('Location: ?controller=Paneles&action=principal');
+        }
     }
 
 }

@@ -24,7 +24,7 @@
 - [x] Ingresar nuevo cónyuge
 - [x] Ingresar un dependiente
 - [x] Agregar multiples dependientes
-- [x] Listar grupo de un Titula 
+- [x] Listar grupo de un Titular 
 - [x] Editar grupo
 - [x] Asegurarse de que solo se puede tener un conyugue al mismo tiempo
 
@@ -46,7 +46,7 @@
 - [x] Eliminar Cliente
 - [ ] Buscar Cliente
 ### Panel del Titular
-- [ ] Cuentas
+- [x] Cuentas
 - [x] Ver información del titular
 - [x] Mostrar grupo
 - [x] Editar grupo

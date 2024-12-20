@@ -68,13 +68,13 @@ class PanelesController
     }
     public function bancoInfo(){
         if(isset($_GET['cliente'])){
+        global $cliente;
+        $cliente = $_GET['cliente'];
         if(isset($_GET['banco']) == 1){
         $_SESSION['banco'] = true;
         require_once 'Vistas/subpaneles/formularioBanco.php';
         }
         if(!isset($_GET['banco']) || isset($_GET['banco']) != 1){
-        global $cliente;
-        $cliente = $_GET['cliente'];
         require_once 'Vistas/subpaneles/bancoInfo.php';
 
         }

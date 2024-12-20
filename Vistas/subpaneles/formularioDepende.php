@@ -1,5 +1,4 @@
 <?php 
-echo "Soy el formulario para dependientes";
 if($_GET['id_cliente']){
     # id del titular para registrarle un nuevo dependiente.
     $id_titular = $_GET['id_cliente'];
@@ -22,7 +21,7 @@ if(isset($depende) == 1){
     }
 
     $redirect = "?controller=Cliente&action=Editar&cliente=$id&depende=1";
-    echo "<h2>Formulario de Registro</h2>
+    echo "<h2>Formulario de Dependientes</h2>
     <form action='$redirect' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
     <select id='seguro' name='seguro'>";
@@ -70,7 +69,7 @@ if(isset($depende) == 1){
 ";
 }else{
     echo"
-    <h2>Formulario de Registro</h2>
+    <h2>Formulario de Dependientes</h2>
     <form action='$redirect' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
     <select id='seguro' name='seguro'>

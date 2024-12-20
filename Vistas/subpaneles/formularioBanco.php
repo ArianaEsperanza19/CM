@@ -3,10 +3,9 @@ if(isset($_SESSION['banco']) == 1){
     # Editar cuentas de banco
     unset($_SESSION['banco']);
     require_once 'Herramientas/DatosManager.php';
-    $id_titular = isset($_GET['cliente']);
-    $redireccion = "?controller=Cliente&action=registrar_info_banco&cliente=$id_titular";
+    $redireccion = "?controller=Cliente&action=registrar_info_banco&cliente=$cliente&editar=1";
     $DB = new DatosManager(tabla: 'Cuentas');
-    $sentecia = $DB->Conseguir_Registro("WHERE id_cliente = $id_titular");
+    $sentecia = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
     foreach ($sentecia as $dato) {
         $numero_cliente = $dato['numero_cuenta'];
         $tipo_cuenta = $dato['tipo_cuenta'];
@@ -22,6 +21,7 @@ if(isset($_SESSION['banco']) == 1){
 </form>"; 
 }else{
     # Agregar cuentas de banco
+    $redireccion = "?controller=Cliente&action=registrar_info_banco&cliente=$cliente&editar=0";
     echo "
     <form action='$redireccion' method='POST'>
     <label for='numero_cuenta'>Número de cuenta:</label><br>

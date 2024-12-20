@@ -11,13 +11,14 @@ class Cuentas {
         }
     }
 
-    public function registrar($datos) {
+    public function registrar($datos, $id) {
         if (empty($datos) || empty($id)) {
             throw new Exception('Parámetros inválidos');
         }
 
-        $sql = "INSERT INTO Cuentas (numero_cuenta, tipo_cuenta) VALUES (:numero_cuenta, :tipo_cuenta)";
+        $sql = "INSERT INTO Cuentas (id_cliente, numero_cuenta, tipo_cuenta) VALUES (:id_cliente,:numero_cuenta, :tipo_cuenta)";
         $stmt = $this->DB->prepare($sql);
+        $stmt->bindParam(':id_cliente', $id);
         $stmt->bindParam(':numero_cuenta', $datos['numero_cuenta']);
         $stmt->bindParam(':tipo_cuenta', $datos['tipo_cuenta']);
 

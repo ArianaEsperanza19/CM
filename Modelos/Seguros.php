@@ -11,13 +11,14 @@ class Seguros {
         }
     }
 
-    public function registrar($datos) {
+    public function registrar($datos, $id) {
         if (empty($datos) || empty($id)) {
             throw new Exception('Parámetros inválidos');
         }
 
-        $sql = "INSERT INTO Datos_Seguro (policy_number, member_number, group_number) VALUES (:policy_number, :member_number, :group_number)";
+        $sql = "INSERT INTO Datos_Seguro ( id_cliente, policy_number, member_number, group_number) VALUES (:id_cliente, :policy_number, :member_number, :group_number)";
         $stmt = $this->DB->prepare($sql);
+        $stmt->bindParam(':id_cliente', $id);
         $stmt->bindParam(':policy_number', $datos['policy_number']);
         $stmt->bindParam(':member_number', $datos['member_number']);
         $stmt->bindParam(':group_number', $datos['group_number']);

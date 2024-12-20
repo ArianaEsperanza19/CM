@@ -1,8 +1,10 @@
 <?php
 require_once 'Barras/Header.php';
 require_once 'Barras/Barra_buscador.php';
-if($_SESSION['cliente']){
-require_once 'Barras/Navegador.php';
+if(isset($_SESSION['flash']) != 'vacio'){
+    $mensaje = $_SESSION['flash'];
+    unset($_SESSION['flash']);
+    echo "<p>$mensaje</p>";
 }
 # Si no hay clientes, mostrar el panel de nuevo titular
 echo "<a href='?controller=Paneles&action=nuevo_titular'>Nuevo Cliente</a>";

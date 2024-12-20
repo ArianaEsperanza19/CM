@@ -1,5 +1,4 @@
 <?php
-echo "Soy el formulario para conyugues";
 if($_GET['id_cliente']){
     # id del titular
     $id = $_GET['id_cliente'];
@@ -33,7 +32,7 @@ if(isset($conyugue) == 1){
     # id del conyugue a editar
     $redireccion = "?controller=Cliente&action=Editar&cliente=$id&conyugue=1";
     echo "
-    <h2>Formulario de Registro</h2>
+    <h2>Formulario del Conyugue</h2>
     <form action='$redireccion' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
     <select id='seguro' name='seguro'>
@@ -85,7 +84,7 @@ if(isset($conyugue) == 1){
 }else{
     # Agregar conyugue
     echo "
-    <h2>Formulario de Registro</h2>
+    <h2>Formulario del Conyugue</h2>
     <form action='$redireccion' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
     <select id='seguro' name='seguro'>

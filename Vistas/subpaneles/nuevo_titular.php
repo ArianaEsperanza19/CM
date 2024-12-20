@@ -1,5 +1,4 @@
 <?php
-echo "Soy el formulario para un nuevo cliente";
 if(isset($editar_titular)){
     $id = $editar_titular;
     $DB = new DatosManager(tabla: 'Titulares');
