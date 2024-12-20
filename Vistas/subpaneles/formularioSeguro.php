@@ -11,7 +11,7 @@ if(isset($_SESSION['seguro']) == 1){
         $policy_number = $dato['policy_number'];
         $member_number = $dato['member_number'];
         $group_number = $dato['group_number'];
-        //$plan_seguro = $dato['plan_seguro'];   
+        $plan_seguro = $dato['plan_seguro'];   
     }
     echo "
     <h1>Editar informacion de Seguro</h1>
@@ -24,6 +24,8 @@ if(isset($_SESSION['seguro']) == 1){
     
     <label for='group_number'>Número de grupo:</label><br>
     <input value='$group_number' type='text' id='group_number' name='group_number'><br>
+    <label for='plan_seguro'>Plan de seguro:</label><br>
+    <input value='$plan_seguro' type='text' id='plan_seguro' name='plan_seguro'><br>
     
     <input type='submit' value='Guardar'>
     </form>
@@ -42,13 +44,12 @@ if(isset($_SESSION['seguro']) == 1){
     
     <label for='group_number'>Número de grupo:</label><br>
     <input type='text' id='group_number' name='group_number'><br>
+    <label for='plan_seguro'>Plan de seguro:</label><br>
+    <input type='text' id='plan_seguro' name='plan_seguro'><br>
     
     
     <input type='submit' value='Guardar'>
     </form>
     ";
-    /*
-    <label for='plan_seguro'>Plan de seguro:</label><br>
-    <input type='text' id='plan_seguro' name='plan_seguro'><br>
-    */
+    
 }

@@ -16,12 +16,13 @@ class Seguros {
             throw new Exception('Parámetros inválidos');
         }
 
-        $sql = "INSERT INTO Datos_Seguro ( id_cliente, policy_number, member_number, group_number) VALUES (:id_cliente, :policy_number, :member_number, :group_number)";
+        $sql = "INSERT INTO Datos_Seguro ( id_cliente, policy_number, member_number, group_number, plan_seguro) VALUES (:id_cliente, :policy_number, :member_number, :group_number, :plan_seguro)";
         $stmt = $this->DB->prepare($sql);
         $stmt->bindParam(':id_cliente', $id);
         $stmt->bindParam(':policy_number', $datos['policy_number']);
         $stmt->bindParam(':member_number', $datos['member_number']);
         $stmt->bindParam(':group_number', $datos['group_number']);
+        $stmt->bindParam(':plan_seguro', $datos['plan_seguro']);
 
         try {
             $stmt->execute();
@@ -39,13 +40,15 @@ class Seguros {
         $sql = "UPDATE Datos_Seguro SET 
                 policy_number = :policy_number, 
                 member_number = :member_number, 
-                group_number = :group_number 
+                group_number = :group_number,
+                plan_seguro = :plan_seguro 
                 WHERE id_cliente = :id_cliente";
         $stmt = $this->DB->prepare($sql);
         $stmt->bindParam(':id_cliente', $id);
         $stmt->bindParam(':policy_number', $datos['policy_number']);
         $stmt->bindParam(':member_number', $datos['member_number']);
         $stmt->bindParam(':group_number', $datos['group_number']);
+        $stmt->bindParam(':plan_seguro', $datos['plan_seguro']);
     
         try {
             $stmt->execute();
