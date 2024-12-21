@@ -1,6 +1,8 @@
 <?php
-
     $cliente = $_GET['cliente'];
+    if(isset($_GET['token'])){
+        # Intentos de deshabilitar el boton de retroceso
+    }
     $DB = new DatosManager(tabla: 'Titulares');
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
     $_SESSION['eliminar'] = true;

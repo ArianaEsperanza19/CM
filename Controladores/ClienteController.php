@@ -76,7 +76,10 @@ class ClienteController
                 $registro = new Grupo();
                 $sentencia = $registro->editar($_POST,$id);
                 $titular = $registro->info_titular($id);
-                header('Location: ?controller=Paneles&action=info&cliente='.$titular);
+                if($sentencia && $titular){
+                $token = md5(uniqid());
+                header("Location: ?controller=Paneles&action=info&cliente=$titular&token=$token");
+                }
                 
             }else{
             # Editar titular
@@ -84,7 +87,7 @@ class ClienteController
             $DB = new DatosManager(tabla: 'Titulares');
             $sentencia = $DB->Editar($_POST, $id);
             if($sentencia){
-            header('Location: ?controller=Paneles&action=info&cliente='.$id);
+            header("Location: ?controller=Paneles&action=info&cliente=$id");
             }else{
                 # ERROR
                 echo "Error al editar";
@@ -136,6 +139,8 @@ class ClienteController
         if(isset($_GET['editar']) && $_GET['editar'] == 1){
         $sentencia = $registro->actualizar($_POST, $id);
         if($sentencia){
+            # Centinela que vigila si se ha editado la informacion
+            $_SESSION['editar'] = true;
             header('Location: ?controller=Paneles&action=InfoSeguros&cliente='.$id);
         }else{
             echo "Error al actualizar";
@@ -159,6 +164,8 @@ class ClienteController
         if(isset($_GET['editar']) && $_GET['editar'] == 1){
         $sentencia = $registro->actualizar($_POST, $id);
         if($sentencia){
+            # Centinela que vigila si se ha editado la informacion
+            $_SESSION['editar'] = true;
             header('Location: ?controller=Paneles&action=InfoBanco&cliente='.$id);
         }else{
             echo "Error al actualizar";

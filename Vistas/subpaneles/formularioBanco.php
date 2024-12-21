@@ -1,5 +1,10 @@
 <?php
 ob_clean(); 
+# Si se acaba de editar algo, redirecciona
+if(isset($_SESSION['editar'])){
+    unset($_SESSION['editar']);
+    header('Location: ?controller=Paneles&action=InfoBanco&cliente='.$cliente);
+}
 $cliente = isset($_GET['cliente']) ? $_GET['cliente'] : false;
 echo "<a href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
 if(isset($_SESSION['banco']) == 1){

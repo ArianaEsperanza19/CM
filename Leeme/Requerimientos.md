@@ -6,6 +6,8 @@
 - [x] Crear tablas
 - [x] Crear relaciones
 - [ ] Dar usuarios y contraseñas
+- [ ] Crear interfaz para conectar a la base de datos
+- [ ] Que detecte si no se ha conectado a ninguna base de datos y exige conectarse a una
 
 ## Titulares Crud
 - [x] Ingresar nuevo cliente
@@ -52,3 +54,5 @@
 - [x] Editar grupo
 - [x] Eliminar miembros por separado
 - [x] Ver información del seguro
+### Detalles
+- [ ] Asegurarse de que al retroceder despues de una edicion, desaparezca la informacion en el formulario.

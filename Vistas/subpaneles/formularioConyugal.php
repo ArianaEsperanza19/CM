@@ -1,5 +1,5 @@
 <?php
-if($_GET['id_cliente']){
+if(isset($_GET['id_cliente'])){
     # id del titular
     $id = $_GET['id_cliente'];
     # Si tiene dependientes
@@ -19,7 +19,6 @@ if(isset($conyugue) == 1){
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
     $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND pareja = 1");
     foreach ($datos as $dato) {
-        var_dump($dato);
         $nombre = $dato['nombre'];
         $segundo_nombre = $dato['segundo_nombre'];
         $apellido = $dato['apellido'];

@@ -1,10 +1,13 @@
-
 <?php
-$cliente = isset($_GET['cliente']) ? $_GET['cliente'] : false;
+# Si se acaba de editar algo, redirecciona
+if(isset($_SESSION['editar'])){
+    unset($_SESSION['editar']);
+    header('Location: ?controller=Paneles&action=InfoSeguros&cliente='.$cliente);
+}
 echo "<a href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
-if(isset($_SESSION['seguro']) == 1){
+if(isset($_SESSION['seguro_centinela']) == 1){
     # Donde se puede editar seguro
-    unset($_SESSION['seguro']);
+    unset($_SESSION['seguro_centinela']);
     $id_titular = isset($_GET['cliente']);
     $redirect = "?controller=Cliente&action=registrar_editar_seguro&cliente=$id_titular&editar=1";
     $DB = new DatosManager(tabla: 'Datos_Seguro');
