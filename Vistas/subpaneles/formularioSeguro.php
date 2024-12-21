@@ -4,7 +4,7 @@ if(isset($_SESSION['seguro']) == 1){
     # Donde se puede editar seguro
     unset($_SESSION['seguro']);
     $id_titular = isset($_GET['cliente']);
-    $redirect = "?controller=Cliente&action=registrar_info_seguro&cliente=$id_titular&editar=1";
+    $redirect = "?controller=Cliente&action=registrar_editar_seguro&cliente=$id_titular&editar=1";
     $DB = new DatosManager(tabla: 'Datos_Seguro');
     $sentencia = $DB->Conseguir_Registro("WHERE id_cliente = $id_titular");
     foreach ($sentencia as $dato) {
@@ -32,7 +32,7 @@ if(isset($_SESSION['seguro']) == 1){
     ";
 }else{
     # Agregar seguro
-    $redirect='?controller=Cliente&action=registrar_info_seguro&cliente='.$_GET['cliente'].'&editar=0';   
+    $redirect='?controller=Cliente&action=registrar_editar_seguro&cliente='.$_GET['cliente'].'&editar=0';   
     echo "
     <h1>Informacion de Seguro</h1>
     <form action='$redirect' method='POST'>

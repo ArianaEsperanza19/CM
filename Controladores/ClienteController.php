@@ -132,6 +132,7 @@ class ClienteController
         $id = $_GET['cliente'];
         require_once 'Modelos/Seguros.php';
         $registro = new Seguros();
+        # Editar
         if(isset($_GET['editar']) && $_GET['editar'] == 1){
         $sentencia = $registro->actualizar($_POST, $id);
         if($sentencia){
@@ -154,6 +155,7 @@ class ClienteController
         $id = $_GET['cliente'];
         require_once 'Modelos/Cuentas.php';
         $registro = new Cuentas();
+        # Editar
         if(isset($_GET['editar']) && $_GET['editar'] == 1){
         $sentencia = $registro->actualizar($_POST, $id);
         if($sentencia){

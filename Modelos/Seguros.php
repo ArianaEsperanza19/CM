@@ -52,7 +52,23 @@ class Seguros {
     
         try {
             $stmt->execute();
-            return true;
+            return $stmt;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function eliminar($id) {
+        if (empty($id)) {
+            throw new Exception('Parámetros inválidos');
+        }
+    
+        $sql = "DELETE FROM Datos_Seguro WHERE id_cliente = :id_cliente";
+        $stmt = $this->DB->prepare($sql);
+        $stmt->bindParam(':id_cliente', $id);
+    
+        try {
+            $stmt->execute();
+            return $stmt;
         } catch (PDOException $e) {
             return $e->getMessage();
         }
