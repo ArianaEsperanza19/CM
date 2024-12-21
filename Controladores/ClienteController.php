@@ -136,14 +136,14 @@ class ClienteController
         if(isset($_GET['editar']) && $_GET['editar'] == 1){
         $sentencia = $registro->actualizar($_POST, $id);
         if($sentencia){
-            header('Location: ?controller=Paneles&action=segurosInfo&cliente='.$id);
+            header('Location: ?controller=Paneles&action=InfoSeguros&cliente='.$id);
         }else{
             echo "Error al actualizar";
         }
         }else{
         $sentencia = $registro->registrar($_POST, $id);
         if($sentencia){
-            header('Location: ?controller=Paneles&action=segurosInfo&cliente='.$id);
+            header('Location: ?controller=Paneles&action=InfoSeguros&cliente='.$id);
         }else{
             echo "Error al registrar";
         }
@@ -159,14 +159,14 @@ class ClienteController
         if(isset($_GET['editar']) && $_GET['editar'] == 1){
         $sentencia = $registro->actualizar($_POST, $id);
         if($sentencia){
-            header('Location: ?controller=Paneles&action=bancoinfo&cliente='.$id);
+            header('Location: ?controller=Paneles&action=InfoBanco&cliente='.$id);
         }else{
             echo "Error al actualizar";
         }
         }else{
         $sentencia = $registro->registrar($_POST, $id);
         if($sentencia){
-            header('Location: ?controller=Paneles&action=bancoInfo&cliente='.$id);
+            header('Location: ?controller=Paneles&action=InfoBanco&cliente='.$id);
         }
         }}}
         

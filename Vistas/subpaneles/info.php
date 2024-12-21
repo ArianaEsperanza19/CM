@@ -6,8 +6,8 @@
     $_SESSION['eliminar'] = true;
     echo "<a href='?controller=Paneles&action=principal'>Inicio</a><h1>Informacion del Titular</h1>
     <a href='?controller=Paneles&action=advertencia&cliente=$cliente'>Eliminar poliza</a>
-    <a href='?controller=Paneles&action=segurosInfo&cliente=$cliente'>Informacion de Seguros</a>
-    <a href='?controller=Paneles&action=bancoInfo&cliente=$cliente'>Informacion Bancaria</a>
+    <a href='?controller=Paneles&action=InfoSeguros&cliente=$cliente'>Informacion de Seguros</a>
+    <a href='?controller=Paneles&action=InfoBanco&cliente=$cliente'>Informacion Bancaria</a>
     <hr>";
     foreach ($titular as $dato) {
     $id = $dato['id_cliente'];

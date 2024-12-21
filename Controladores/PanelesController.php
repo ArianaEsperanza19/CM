@@ -51,7 +51,7 @@ class PanelesController
             echo "No se ha enviado un cliente";
         }
     }
-    public function segurosInfo(){
+    public function InfoSeguros(){
         if(isset($_GET['cliente'])){
         if(isset($_GET['seguro']) == 1){
         $_SESSION['seguro'] = true;
@@ -60,13 +60,13 @@ class PanelesController
         if(!isset($_GET['seguro']) || isset($_GET['seguro']) != 1){
         global $cliente;
         $cliente = $_GET['cliente'];
-        require_once 'Vistas/subpaneles/segurosInfo.php'; 
+        require_once 'Vistas/subpaneles/InfoSeguros.php'; 
         }
         }else{
             echo "No se ha enviado un cliente";
         }
     }
-    public function bancoInfo(){
+    public function InfoBanco(){
         if(isset($_GET['cliente'])){
         global $cliente;
         $cliente = $_GET['cliente'];
@@ -75,7 +75,7 @@ class PanelesController
         require_once 'Vistas/subpaneles/formularioBanco.php';
         }
         if(!isset($_GET['banco']) || isset($_GET['banco']) != 1){
-        require_once 'Vistas/subpaneles/bancoInfo.php';
+        require_once 'Vistas/subpaneles/InfoBanco.php';
 
         }
         }else{
