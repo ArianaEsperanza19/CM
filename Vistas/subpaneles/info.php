@@ -4,7 +4,7 @@
     $DB = new DatosManager(tabla: 'Titulares');
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
     $_SESSION['eliminar'] = true;
-    echo "<h1>Informacion del Titular</h1>
+    echo "<a href='?controller=Paneles&action=principal'>Inicio</a><h1>Informacion del Titular</h1>
     <a href='?controller=Paneles&action=advertencia&cliente=$cliente'>Eliminar poliza</a>
     <a href='?controller=Paneles&action=segurosInfo&cliente=$cliente'>Informacion de Seguros</a>
     <a href='?controller=Paneles&action=bancoInfo&cliente=$cliente'>Informacion Bancaria</a>

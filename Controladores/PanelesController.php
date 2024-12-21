@@ -1,6 +1,6 @@
 <?php
 #session_start();
-require_once 'Herramientas/DatosManager.php';
+require_once 'Modelos/DatosManager.php';
 class PanelesController 
 {
     public function principal() {

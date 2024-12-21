@@ -8,7 +8,7 @@ if(isset($_SESSION['flash']) != 'vacio'){
 }
 # Si no hay clientes, mostrar el panel de nuevo titular
 echo "<a href='?controller=Paneles&action=nuevo_titular'>Nuevo Cliente</a>";
-require_once 'Herramientas/DatosManager.php';
+require_once 'Modelos/DatosManager.php';
 $DB = new DatosManager(tabla: 'Titulares');
 $titulares = $DB->Conseguir_Todos();
 if($titulares){

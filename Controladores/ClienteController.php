@@ -1,5 +1,5 @@
 <?php
-require_once 'Herramientas/DatosManager.php';
+require_once 'Modelos/DatosManager.php';
 
 class ClienteController 
 {
@@ -80,7 +80,7 @@ class ClienteController
                 
             }else{
             # Editar titular
-            require_once 'Herramientas/DatosManager.php';
+            require_once 'Modelos/DatosManager.php';
             $DB = new DatosManager(tabla: 'Titulares');
             $sentencia = $DB->Editar($_POST, $id);
             if($sentencia){
@@ -171,8 +171,7 @@ class ClienteController
     public function buscar() {
         
         if(isset($_POST['busqueda'])) {
-            echo $_POST['busqueda'];
-            require_once 'Herramientas/DatosManager.php';
+            require_once 'Modelos/DatosManager.php';
             $DB = new DatosManager(tabla: 'Titulares');
             global $sentencia;
             $sentencia = $DB->Conseguir_Registro("WHERE nombre LIKE '%".$_POST['busqueda']."%' OR primer_apellido LIKE '%".$_POST['busqueda']."%' OR segundo_apellido LIKE '%".$_POST['busqueda']."%'");

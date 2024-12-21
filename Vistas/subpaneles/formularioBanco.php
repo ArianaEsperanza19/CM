@@ -2,7 +2,7 @@
 if(isset($_SESSION['banco']) == 1){
     # Editar cuentas de banco
     unset($_SESSION['banco']);
-    require_once 'Herramientas/DatosManager.php';
+    require_once 'Modelos/DatosManager.php';
     $redireccion = "?controller=Cliente&action=registrar_info_banco&cliente=$cliente&editar=1";
     $DB = new DatosManager(tabla: 'Cuentas');
     $sentecia = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");

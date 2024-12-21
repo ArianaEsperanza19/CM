@@ -44,7 +44,7 @@
 - [x] Listar Clientes
 - [x] Editar Cliente
 - [x] Eliminar Cliente
-- [ ] Buscar Cliente
+- [x] Buscar Cliente
 ### Panel del Titular
 - [x] Cuentas
 - [x] Ver información del titular

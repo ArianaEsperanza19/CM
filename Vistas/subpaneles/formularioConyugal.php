@@ -14,7 +14,7 @@ if($_GET['id_cliente']){
 # Editar conyugue
 if(isset($conyugue) == 1){
     # Editar conyugue
-    require_once 'Herramientas/DatosManager.php';
+    require_once 'Modelos/DatosManager.php';
     $id = $_GET['cliente'];
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
     $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND pareja = 1");
