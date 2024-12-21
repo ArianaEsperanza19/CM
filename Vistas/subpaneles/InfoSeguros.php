@@ -13,7 +13,8 @@ if(isset($_GET['cliente'])){
         echo "<p><b>numero de miembro: </b> $dato[member_number]</p>";
         echo "<p><b>numero de grupo: </b> $dato[group_number]</p>";
         echo "<p><b>Plan: </b> $dato[plan_seguro]</p>";
-        echo "<a href='?controller=Paneles&action=InfoSeguros&cliente=$cliente&seguro=1'>Editar</a>";
+        echo "<a href='?controller=Paneles&action=InfoSeguros&cliente=$cliente&seguro=1'>Editar</a> ";
+        echo "<a href='?controller=Cliente&action=eliminar_seguro&cliente=$cliente'>Eliminar</a>";
         echo "<hr>";
     }   
     }else{

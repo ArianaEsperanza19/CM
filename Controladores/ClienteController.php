@@ -169,7 +169,32 @@ class ClienteController
             header('Location: ?controller=Paneles&action=InfoBanco&cliente='.$id);
         }
         }}}
-        
+    
+    public function eliminar_seguro(){
+            if(isset($_GET)){
+            $id = $_GET['cliente'];
+            require_once 'Modelos/Seguros.php';
+            $registro = new Seguros();
+            $sentencia = $registro->eliminar($id);
+            if($sentencia){
+                header('Location: ?controller=Paneles&action=info&cliente='.$id);
+            }else{
+                echo "Error al eliminar";
+            }
+        }}
+    
+    public function eliminar_banco(){
+            if(isset($_GET)){
+            $id = $_GET['cliente'];
+            require_once 'Modelos/Cuentas.php';
+            $registro = new Cuentas();
+            $sentencia = $registro->eliminar($id);
+            if($sentencia){
+                header('Location: ?controller=Paneles&action=info&cliente='.$id);
+            }else{
+                echo "Error al eliminar";
+            }
+    }}
     public function buscar() {
         
         if(isset($_POST['busqueda'])) {

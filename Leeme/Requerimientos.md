@@ -17,7 +17,7 @@
 
 ## Datos Bancarios del Cliente
 - [x] Ingresar nueva cuenta (números de cuenta, tipo de cuenta)
-- [ ] Listar Cuentas
+- [x] Listar Cuentas
 - [x] Editar Cuenta
 
 ## Cónyuges y dependientes
@@ -32,7 +32,7 @@
 - [x] Ingresar nuevo seguro y sus números
 - [x] Ver números de póliza, miembros y grupos
 - [x] Editar seguro
-- [ ] Eliminar seguro
+- [x] Eliminar seguro
 - [x] Editar números
 
 ## Login del usuario
