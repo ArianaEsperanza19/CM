@@ -1,5 +1,11 @@
 <?php 
-if($_GET['id_cliente']){
+    # Centinela que vigila si se ha editado la informacion
+    if(isset($_SESSION['editar']) && isset($_GET['titular'])){
+    unset($_SESSION['editar']);
+    header('Location: ?controller=Paneles&action=info&cliente='.$_GET['titular']);
+    }
+    
+if(isset($_GET['id_cliente'])){
     # id del titular para registrarle un nuevo dependiente.
     $id_titular = $_GET['id_cliente'];
     $redirect = "?controller=Cliente&action=Agregar_Depende&id_cliente=$id_titular";

@@ -1,7 +1,7 @@
 <?php
     $cliente = $_GET['cliente'];
     if(isset($_GET['token'])){
-        # Intentos de deshabilitar el boton de retroceso
+        $_SESSION['editar'] = true;
     }
     $DB = new DatosManager(tabla: 'Titulares');
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
@@ -57,7 +57,7 @@
     // La consulta ha encontrado algo
     foreach ($conyugue as $dato) {
     $id=$dato['id_miembro_grupo'];
-    echo "<a href='?controller=Paneles&action=editar&cliente=$id&conyugue=1'>Editar</a>";
+    echo "<a href='?controller=Paneles&action=editar&cliente=$id&conyugue=1&titular=$cliente'>Editar</a>";
     echo "<p><b>Nombre:</b> $dato[nombre]</p>";
     echo "<p><b>Segundo nombre:</b> $dato[segundo_nombre]</p>";
     echo "<p><b>Apellido:</b> $dato[apellido]</p>";
@@ -81,7 +81,7 @@
     echo "<h1>Informacion de Dependientes</h1>";
     foreach ($dependientes as $dato) {
     $id=$dato['id_miembro_grupo'];
-    echo "<a href='?controller=Paneles&action=editar&cliente=$id&depende=1'>Editar</a>";
+    echo "<a href='?controller=Paneles&action=editar&cliente=$id&depende=1&titular=$cliente'>Editar</a>";
     echo "<p><b>Nombre:</b> $dato[nombre]</p>";
     echo "<p><b>Segundo nombre:</b> $dato[segundo_nombre]</p>";
     echo "<p><b>Apellido:</b> $dato[apellido]</p>";
