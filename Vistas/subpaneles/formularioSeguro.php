@@ -1,5 +1,7 @@
 
 <?php
+$cliente = isset($_GET['cliente']) ? $_GET['cliente'] : false;
+echo "<a href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
 if(isset($_SESSION['seguro']) == 1){
     # Donde se puede editar seguro
     unset($_SESSION['seguro']);

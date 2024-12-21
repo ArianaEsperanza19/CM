@@ -127,7 +127,7 @@ class ClienteController
     }
 
     }
-    public function registrar_info_seguro(){
+    public function registrar_editar_seguro(){
         if(isset($_POST)){
         $id = $_GET['cliente'];
         require_once 'Modelos/Seguros.php';
@@ -143,14 +143,14 @@ class ClienteController
         }else{
         $sentencia = $registro->registrar($_POST, $id);
         if($sentencia){
-            header('Location: ?controller=Paneles&action=seguroInfo&cliente='.$id);
+            header('Location: ?controller=Paneles&action=segurosInfo&cliente='.$id);
         }else{
             echo "Error al registrar";
         }
         }
 
     }}
-    public function registrar_info_banco(){
+    public function registrar_editar_banco(){
         if(isset($_POST)){
         $id = $_GET['cliente'];
         require_once 'Modelos/Cuentas.php';

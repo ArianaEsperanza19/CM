@@ -1,4 +1,6 @@
 <?php
+$cliente = isset($_GET['cliente']) ? $_GET['cliente'] : false;
+echo "<a href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
 echo "<h1>Informacion Bancaria</h1>";
 if(isset($_GET['cliente'])){
     $cliente = $_GET['cliente'];

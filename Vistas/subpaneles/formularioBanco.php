@@ -1,9 +1,12 @@
 <?php
+ob_clean(); 
+$cliente = isset($_GET['cliente']) ? $_GET['cliente'] : false;
+echo "<a href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
 if(isset($_SESSION['banco']) == 1){
     # Editar cuentas de banco
     unset($_SESSION['banco']);
     require_once 'Modelos/DatosManager.php';
-    $redireccion = "?controller=Cliente&action=registrar_info_banco&cliente=$cliente&editar=1";
+    $redireccion = "?controller=Cliente&action=registrar_editar_banco&cliente=$cliente&editar=1";
     $DB = new DatosManager(tabla: 'Cuentas');
     $sentecia = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
     foreach ($sentecia as $dato) {
@@ -21,8 +24,9 @@ if(isset($_SESSION['banco']) == 1){
 </form>"; 
 }else{
     # Agregar cuentas de banco
-    $redireccion = "?controller=Cliente&action=registrar_info_banco&cliente=$cliente&editar=0";
+    $redireccion = "?controller=Cliente&action=registrar_editar_banco&cliente=$cliente&editar=0";
     echo "
+    <h1>Ingresa tu Informacion Bancaria</h1>
     <form action='$redireccion' method='POST'>
     <label for='numero_cuenta'>Número de cuenta:</label><br>
     <input type='text' id='numero_cuenta' name='numero_cuenta'><br><br>

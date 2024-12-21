@@ -4,6 +4,8 @@ if(isset($_GET['cliente'])){
     $db = new DatosManager(tabla: 'Datos_Seguro');
     $seguros = $db->conseguir_registro("where id_cliente = $cliente");
     if($seguros->rowCount() > 0){
+    $cliente = isset($_GET['cliente']) ? $_GET['cliente'] : false;
+    echo "<a href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
     echo "<h1>Informacion del seguro</h1>";
     foreach ($seguros as $dato) {
         echo "<hr>";
