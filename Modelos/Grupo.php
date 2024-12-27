@@ -95,16 +95,13 @@ class Grupo {
     public function editar($datos, $id_cliente)
     {
     /**
-     * Edita la información de un cónyuge o dependiente en la base de datos.
-     * Este método verifica si la variable 'centinela' es verdadera, si es así,
-     * actualiza la información del cónyuge o dependiente en la base de datos.
-     * Si no es así, se asume que se va a editar la información del titular.
+     * Edita un registro en la base de datos.
+     * Este método actualiza un registro ya existente en la base de datos
+     * con los datos proporcionados.
      * 
-     * @param array $datos Arreglo con los datos a editar.
-     * @param int $id_cliente El ID del cliente cuyos registros se editarán.
-     * @param bool $centinela Variable que indica si se va a editar la información
-     *                        de un cónyuge o dependiente o la del titular.
-     * @return PDOStatement La sentencia preparada ejecutada.
+     * @param array $datos Arreglo con los datos a actualizar, conseguidos directamente por post.
+     * @param int $id_cliente El ID del registro a editar.
+     * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
      */
             $sql = "UPDATE Conyugues_Dependientes SET
                     en_poliza = :en_poliza,

@@ -51,7 +51,7 @@ class ClienteController
             header('Location: ?controller=Paneles&action=formularioDepende'."&id_cliente=$id_cliente");
         }
         if($_GET['depende'] == 0){
-            header('Location: ?controller=Paneles&action=principal');
+            header("Location: ?controller=Paneles&action=info&cliente=$id_cliente");
         }
         
     }}
@@ -77,6 +77,7 @@ class ClienteController
                 $sentencia = $registro->editar($_POST,$id);
                 $titular = $registro->info_titular($id);
                 if($sentencia && $titular){
+                # El token es necesario para impedir que el usuario pueda retroceder al formulario
                 $token = md5(uniqid());
                 header("Location: ?controller=Paneles&action=info&cliente=$titular&token=$token");
                 }

@@ -1,0 +1,14 @@
+#advertencia {
+    width: 20%; 
+    margin: auto; 
+    padding: 10px;
+    border: 1px solid blue; 
+    text-align: center;
+}
+
+.boton {
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+    margin-bottom: 2px;
+}
