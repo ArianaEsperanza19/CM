@@ -55,4 +55,4 @@
 - [x] Eliminar miembros por separado
 - [x] Ver información del seguro
 ### Detalles
-- [ ] Asegurarse de que al retroceder despues de una edicion, desaparezca la informacion en el formulario.
+- [x] Asegurarse de que al retroceder despues de una edicion, desaparezca la informacion en el formulario.

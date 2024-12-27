@@ -7,9 +7,9 @@ if(isset($_SESSION['editar'])){
 }
 $cliente = isset($_GET['cliente']) ? $_GET['cliente'] : false;
 echo "<a href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
-if(isset($_SESSION['banco']) == 1){
+if(isset($_SESSION['banco_centinela']) == 1){
     # Editar cuentas de banco
-    unset($_SESSION['banco']);
+    unset($_SESSION['banco_centinela']);
     require_once 'Modelos/DatosManager.php';
     $redireccion = "?controller=Cliente&action=registrar_editar_banco&cliente=$cliente&editar=1";
     $DB = new DatosManager(tabla: 'Cuentas');

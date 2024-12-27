@@ -14,6 +14,6 @@ if(isset($_GET['cliente'])){
         echo "<a href='?controller=Cliente&action=eliminar_banco&cliente=$cliente'>Eliminar</a>";
     }
     }else{
-        require_once 'Vistas/subpaneles/formularioBanco.php';
+        require_once 'Vistas/Formularios/formularioBanco.php';
     }
 }

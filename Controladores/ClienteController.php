@@ -212,7 +212,7 @@ class ClienteController
             if($sentencia->rowCount() != 0){
             require_once 'Vistas/paneles/busqueda.php';
             }else{
-            $_SESSION['flash'] = "No se encontraron resultados";
+            $_SESSION['flash'] = "No se encontraron coincidencias en la base de datos";
             require_once 'Vistas/paneles/principal.php';
             }
             

@@ -18,7 +18,7 @@ if(isset($_GET['cliente'])){
         echo "<hr>";
     }   
     }else{
-        require_once 'Vistas/subpaneles/formularioSeguro.php';
+        require_once 'Vistas/Formularios/formularioSeguro.php';
     }
         
 }
