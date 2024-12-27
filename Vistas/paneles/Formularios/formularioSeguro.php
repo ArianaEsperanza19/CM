@@ -1,10 +1,11 @@
 <?php
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioBancoSeguro.css\">";
+echo "<div id='contenedor'><a class='boton' href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
 # Si se acaba de editar algo, redirecciona
 if(isset($_SESSION['editar'])){
     unset($_SESSION['editar']);
     header('Location: ?controller=Paneles&action=InfoSeguros&cliente='.$cliente);
 }
-echo "<a href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
 if(isset($_SESSION['seguro_centinela']) == 1){
     # Donde se puede editar seguro
     unset($_SESSION['seguro_centinela']);
@@ -19,7 +20,8 @@ if(isset($_SESSION['seguro_centinela']) == 1){
         $plan_seguro = $dato['plan_seguro'];   
     }
     echo "
-    <h1>Editar informacion de Seguro</h1>
+    <div id='datos'>
+    <h1>Editar informacion del Seguro</h1>
     <form action='$redirect' method='POST'>
     <label for='policy_number'>Número de póliza:</label><br>
     <input value='$policy_number' type='text' id='policy_number' name='policy_number'><br>
@@ -32,14 +34,15 @@ if(isset($_SESSION['seguro_centinela']) == 1){
     <label for='plan_seguro'>Plan de seguro:</label><br>
     <input value='$plan_seguro' type='text' id='plan_seguro' name='plan_seguro'><br>
     
-    <input type='submit' value='Guardar'>
-    </form>
+    <input style='margin-top: 10px;' type='submit' value='Guardar'>
+    </form><div></div>
     ";
 }else{
     # Agregar seguro
     $redirect='?controller=Cliente&action=registrar_editar_seguro&cliente='.$_GET['cliente'].'&editar=0';   
     echo "
-    <h1>Informacion de Seguro</h1>
+    <div id='datos'>
+    <h1>Informacion de Seguro </h1>
     <form action='$redirect' method='POST'>
     <label for='policy_number'>Número de póliza:</label><br>
     <input type='text' id='policy_number' name='policy_number'><br>
@@ -52,9 +55,8 @@ if(isset($_SESSION['seguro_centinela']) == 1){
     <label for='plan_seguro'>Plan de seguro:</label><br>
     <input type='text' id='plan_seguro' name='plan_seguro'><br>
     
-    
-    <input type='submit' value='Guardar'>
-    </form>
+    <input style='margin-top: 10px;' type='submit' value='Guardar'>
+    </form></div></div>
     ";
     
 }

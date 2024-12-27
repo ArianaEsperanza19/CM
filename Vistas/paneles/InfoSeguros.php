@@ -19,7 +19,7 @@ if(isset($_GET['cliente'])){
         echo "</div></div>";
     }   
     }else{
-        require_once 'Vistas/Formularios/formularioSeguro.php';
+        require_once 'Vistas/paneles/Formularios/formularioSeguro.php';
     }
         
 }

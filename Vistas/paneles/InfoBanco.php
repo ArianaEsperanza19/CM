@@ -17,6 +17,6 @@ if(isset($_GET['cliente'])){
     }
     echo "</div></div>";
     }else{
-        require_once 'Vistas/Formularios/formularioBanco.php';
+        require_once 'Vistas/paneles/Formularios/formularioBanco.php';
     }
 }

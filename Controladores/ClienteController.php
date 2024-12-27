@@ -87,8 +87,9 @@ class ClienteController
             require_once 'Modelos/DatosManager.php';
             $DB = new DatosManager(tabla: 'Titulares');
             $sentencia = $DB->Editar($_POST, $id);
+            $token = md5(uniqid());
             if($sentencia){
-            header("Location: ?controller=Paneles&action=info&cliente=$id");
+        header("Location: ?controller=Paneles&action=info&cliente=$id&token=$token");
             }else{
                 # ERROR
                 echo "Error al editar";

@@ -1,6 +1,12 @@
 <?php
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioTitular.css\">";
+echo "<div id='contenedor'><a class='boton' href='?controller=Paneles&action=principal'>Cancelar</a>";
 if(isset($editar_titular)){
     $id = $editar_titular;
+    if(isset($_SESSION['editar'])){
+    unset($_SESSION['editar']);
+    header('Location: ?controller=Paneles&action=info&cliente='.$id);
+    }
     $DB = new DatosManager(tabla: 'Titulares');
     $datos = $DB->Conseguir_Registro("WHERE id_cliente = $id;");
     foreach ($datos as $dato) {
@@ -21,10 +27,10 @@ if(isset($editar_titular)){
         $empresa = $dato["empresa"];
         $actualizado = $dato["actualizado"];
         $notas = $dato["notas"];
-        echo $genero;
     }
     $redirect = "?controller=Cliente&action=Editar&cliente=$id";
     echo "
+    <div id='datos'>
     <h2>Formulario de Registro de Titulares</h2>
     <form action='$redirect' method='POST'>
     <label for='nombre'>Nombre:</label><br>
@@ -75,9 +81,10 @@ if(isset($editar_titular)){
     echo "</select><br>
     <button type='submit'>Enviar</button>
 </form>
-    ";
+</div>";
 }else{
     echo "
+    <div id='datos'>
     <h2>Formulario de Registro de Titulares</h2>
     <form action='?controller=Cliente&action=Crear' method='POST'>
     <label for='nombre'>Nombre:</label><br>
@@ -132,7 +139,8 @@ if(isset($editar_titular)){
     </select><br>
     <button type='submit'>Enviar</button>
 </form>
-    
+</div>
+</div>
     ";
 }
 ?>
