@@ -9,7 +9,6 @@
     margin-left: 58%;
 }
 #datos{
-    background-color: blanchedalmond;
     border: solid 1px rgb(43, 46, 226);
     width: 30%;
     display: block;
@@ -19,6 +18,9 @@
     margin-top: 8px;
     
 }
+#datos a{
+    margin-left: 0%;
+}
 .boton{
     text-decoration: none;
     color: white;
@@ -26,17 +28,4 @@
     background-color: rgb(43, 46, 226);
     align-items: left;
     margin-top: 10px;
-    border-radius: 10%;
-}
-
-
-@media (max-width: 750px) {
-    #datos {
-        width: 60%;
-        margin-left: 20%;;
-    }
-    .boton {
-        margin-left: auto;
-        margin-right: auto;
-    }
 }

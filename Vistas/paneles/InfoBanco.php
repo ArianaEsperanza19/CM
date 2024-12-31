@@ -12,6 +12,7 @@ if(isset($_GET['cliente'])){
     foreach ($cuentas as $dato) {
         echo "<p><b>Numero de cuenta: </b> $dato[numero_cuenta]</p>";
         echo "<p><b>Tipo de cuenta: </b> $dato[tipo_cuenta]</p>";
+        echo "<br>";
         echo "<a href='?controller=Paneles&action=InfoBanco&cliente=$cliente&banco=1'>Editar</a> ";
         echo "<a href='?controller=Cliente&action=eliminar_banco&cliente=$cliente'>Eliminar</a>";
     }

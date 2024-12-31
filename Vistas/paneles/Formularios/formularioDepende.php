@@ -1,15 +1,25 @@
 <?php 
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/conyugueDependiente.css\">";
     # Centinela que vigila si se ha editado la informacion
     if(isset($_SESSION['editar']) && isset($_GET['titular'])){
     unset($_SESSION['editar']);
     header('Location: ?controller=Paneles&action=info&cliente='.$_GET['titular']);
     }
-    
-if(isset($_GET['id_cliente'])){
-    # id del titular para registrarle un nuevo dependiente.
+
+    # Titular de un nuevo dependiente
+    if(isset($_GET['titular'])){
+    $id = $_GET['titular'];
+    echo "<div id='contenedor'>
+    <a class='boton' href='?controller=Paneles&action=info&cliente=$id'>Volver</a>";
+    }
+    # Id del dependiente para editar
+    if(isset($_GET['id_cliente'])){
+    # id del titular para registrarle un NUEVO dependiente.
     $id_titular = $_GET['id_cliente'];
+    echo "<div id='contenedor'>
+    <a class='boton' href='?controller=Paneles&action=info&cliente=$id_titular'>Volver</a>";
     $redirect = "?controller=Cliente&action=Agregar_Depende&id_cliente=$id_titular";
-}
+    }
 if(isset($depende) == 1){
     # id del dependiente para editar
     $id = $_GET['cliente'];
@@ -27,6 +37,7 @@ if(isset($depende) == 1){
     }
 
     $redirect = "?controller=Cliente&action=Editar&cliente=$id&depende=1";
+    echo "<div id='datos'>";
     echo "<h2>Formulario de Dependientes</h2>
     <form action='$redirect' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
@@ -70,11 +81,15 @@ if(isset($depende) == 1){
     </select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
-    <button type='submit'>Enviar</button>
+    <button class='boton' type='submit'>Enviar</button>
     </form>
+    </div>
+    </div>
 ";
 }else{
+    # Formulario para registrar un dependiente
     echo"
+    <div id='datos'>
     <h2>Formulario de Dependientes</h2>
     <form action='$redirect' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
@@ -102,9 +117,11 @@ if(isset($depende) == 1){
         <option value='1'>Si</option>
     </select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
-    <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
-    <button type='submit'>Enviar</button>
+    <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'><br>
+    <button class='boton' type='submit'>Enviar</button>
+    <a href='?controller=Paneles&action=principal'>Listo</a>
     </form>
-    <a href='?controller=Paneles&action=principal'>Listo</a>";
+    </div>
+    </div>";
 }
 ?>

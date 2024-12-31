@@ -1,4 +1,5 @@
 <?php
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/conyugueDependiente.css\">";
     # Centinela que vigila si se ha editado la informacion
     if(isset($_SESSION['editar']) && isset($_GET['titular'])){
     unset($_SESSION['editar']);
@@ -7,6 +8,8 @@
 if(isset($_GET['id_cliente'])){
     # id del titular
     $id = $_GET['id_cliente'];
+    echo "<div id='contenedor'>
+    <a class='boton' href='?controller=Paneles&action=info&cliente=$id'>Volver</a>";
     # Si tiene dependientes
     if(isset($_GET['depende']) == 1){
     $redireccion = "?controller=Cliente&action=Agregar_Conyugue&id_cliente=$id&depende=1";
@@ -21,6 +24,9 @@ if(isset($conyugue) == 1){
     # Editar conyugue
     require_once 'Modelos/DatosManager.php';
     $id = $_GET['cliente'];
+    $titular = isset($_GET['titular']) ? $_GET['titular'] : false;
+    echo "<div id='contenedor'>
+    <a class='boton' href='?controller=Paneles&action=info&cliente=$titular'>Volver</a>";
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
     $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND pareja = 1");
     foreach ($datos as $dato) {
@@ -36,13 +42,14 @@ if(isset($conyugue) == 1){
     # id del conyugue a editar
     $redireccion = "?controller=Cliente&action=Editar&cliente=$id&conyugue=1";
     echo "
+    <div id='datos'>
     <h2>Formulario del Conyugue</h2>
     <form action='$redireccion' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
     <select id='seguro' name='seguro'>
     ";
     if($seguro == 'si'){
-         echo "<option value='si' selected>Si</option>";   
+        echo "<option value='si' selected>Si</option>";   
         echo "<option value='no'>No</option>";
     }
     if($seguro == 'no'){
@@ -83,11 +90,12 @@ if(isset($conyugue) == 1){
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
     <button type='submit'>Enviar</button>
-</form>
+</form></div></div>
 ";
 }else{
     # Agregar conyugue
     echo "
+    <div id='datos'>
     <h2>Formulario del Conyugue</h2>
     <form action='$redireccion' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
@@ -117,7 +125,7 @@ if(isset($conyugue) == 1){
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
     <button type='submit'>Enviar</button>
-</form>
+</form></div></div>
 ";
 }
 

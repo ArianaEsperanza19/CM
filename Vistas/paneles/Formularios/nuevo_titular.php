@@ -1,6 +1,6 @@
 <?php
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioTitular.css\">";
-echo "<div id='contenedor'><a class='boton' href='?controller=Paneles&action=principal'>Cancelar</a>";
+echo "<div id='contenedor'><a href='?controller=Paneles&action=principal'>Cancelar</a>";
 if(isset($editar_titular)){
     $id = $editar_titular;
     if(isset($_SESSION['editar'])){
@@ -79,7 +79,7 @@ if(isset($editar_titular)){
     if($actualizado == "0"){ echo "<option value='0' selected>No</option>";}
     if($actualizado == "1"){ echo "<option value='1'>Sí</option>";}
     echo "</select><br>
-    <button type='submit'>Enviar</button>
+    <button class='boton' type='submit'>Enviar</button>
 </form>
 </div>";
 }else{
@@ -137,7 +137,7 @@ if(isset($editar_titular)){
         <option value='0' selected>No</option>
         <option value='1'>Sí</option>
     </select><br>
-    <button type='submit'>Enviar</button>
+    <button class='boton' type='submit'>Enviar</button>
 </form>
 </div>
 </div>

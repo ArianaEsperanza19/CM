@@ -1,5 +1,5 @@
 <head>
-  <link rel="stylesheet" type="text/css" href="Vistas/css/info.css">
+  <link rel="stylesheet" type="text/css" href="Vistas/css/index.css">
 </head>
 <?php
 require_once 'Barras/Header.php';

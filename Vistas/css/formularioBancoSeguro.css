@@ -1,10 +1,14 @@
-#contenedor{
+.contenedor {
     margin-top: 30px;
 }
-#datos{
 
-    border: solid 1px blue;
-    width: 30%;
+#contenedorSeguro {
+    margin-top: 40px;
+}
+
+.datos {
+    border: solid 1px rgb(43, 46, 226);
+    width: 40%;
     display: block;
     padding-left: 2%;
     padding-right: 1%;
@@ -12,11 +16,58 @@
     margin: auto;
     margin-top: 10px;
 }
-.boton{
+
+.boton {
+    width: 50px;
     text-decoration: none;
     color: white;
     padding: 10px;
-    background-color: blue;
+    background-color: rgb(43, 46, 226);
     margin-left: 60%;
-    margin-top: 10px;
+    margin-top: 8px;
+}
+
+#volverSeguro{
+    position: absolute;
+    top: -10px;
+    right: 40%;
+}
+
+@media (max-width: 750px) {
+    .contenedor {
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    .datos {
+        width: 70%;
+        padding-left: 2%;
+        padding-right: 1%;
+        padding-bottom: 2%;
+        margin: auto;
+    }
+
+    .boton {
+        margin-left: 55%;
+        margin-top: 10px;
+    }
+
+    #volverBanco {
+        padding-top: 15px;
+        position: relative;
+        top: -1;
+        margin-left: 60%;
+        margin-top: 15px;
+    }
+
+    #volverSeguro {
+        top: -12px;
+        left: 35px;
+    }
+
+    #contenedorBanco{
+        margin-top: 9px;
+    }
+
+
 }
