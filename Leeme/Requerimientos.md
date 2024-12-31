@@ -54,5 +54,8 @@
 - [x] Editar grupo
 - [x] Eliminar miembros por separado
 - [x] Ver información del seguro
+- [ ] Ingresar, borrar o cambiar imagenes
+- [ ] Ingresar, borrar o editar registro
+
 ### Detalles
 - [x] Asegurarse de que al retroceder despues de una edicion, desaparezca la informacion en el formulario.

@@ -57,3 +57,19 @@ CREATE TABLE Cuentas(
     PRIMARY KEY (id_cliente),
     FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
 );
+
+CREATE TABLE Registros (
+    id_registro INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT,
+    fecha DATE,
+    descripcion VARCHAR(50),
+    FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
+);
+
+CREATE TABLE Imagenes (
+    id_img INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT,
+    imagen LONGBLOB,
+    FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
+);
+

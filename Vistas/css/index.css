@@ -70,4 +70,8 @@
         margin-left: 41%;
         display: block;
     }
+
+    #titularesBox{
+        width: 80%;
+    }
 }
