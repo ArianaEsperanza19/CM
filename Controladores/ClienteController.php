@@ -204,7 +204,7 @@ class ClienteController
                 echo "Error al eliminar";
             }
     }}
-/*
+
     public function agregarImg() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once 'Modelos/IMGmanager.php';
@@ -213,9 +213,8 @@ class ClienteController
         'nombre' => $_POST['nombre']
     ];
     
-    $modelo = new IMGmanager("Vistas/img/"); // Asegúrate de que estás usando la clase correcta
+    $modelo = new IMGmanager("Vistas/img/"); // Verifica la url
     $imagen = $modelo->uploadImage($_FILES['imagen']);
-
     if ($imagen) {
         require_once 'Modelos/Grupo.php';
         $DB = new Grupo();
@@ -228,7 +227,7 @@ class ClienteController
     }
 }
 
-    }*/
+    }
 
     public function eliminarImg() {
         
