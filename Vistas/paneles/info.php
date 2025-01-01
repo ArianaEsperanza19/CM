@@ -91,7 +91,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     }
 } else {
     // La consulta no ha encontrado nada
-    echo "<a class='boton' href='?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente'>Agregar +</a>";
+    echo "<a class='boton' href='?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente'>Agregar +</a><br><br>";
 }
 
 
@@ -102,6 +102,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     foreach ($dependientes as $dato) {
     $id=$dato['id_miembro_grupo'];
     echo "<a class='boton' href='?controller=Paneles&action=editar&cliente=$id&depende=1&titular=$cliente'>Editar</a>";
+    echo "<div class='miembro'>";
     echo "<p><b>Nombre:</b> $dato[nombre]</p>";
     echo "<p><b>Segundo nombre:</b> $dato[segundo_nombre]</p>";
     echo "<p><b>Apellido:</b> $dato[apellido]</p>";
@@ -109,8 +110,8 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     echo "<p><b>Fecha de Nacimiento:</b> $dato[fecha_nacimiento]</p>";
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
-    echo "<p><b>Cobertura:</b> $dato[en_poliza]</p>";
-    echo "<a class='boton' background-color:red;' href='?controller=Cliente&action=Eliminar&cliente=$id&depende=1&titular=$cliente'>Eliminar</a><br><br>";
+    echo "<p><b>Cobertura:</b> $dato[en_poliza]</p></div>";
+    echo "<a class='boton' style=background-color:red;' href='?controller=Cliente&action=Eliminar&cliente=$id&depende=1&titular=$cliente'>Eliminar</a><br><br>";
     echo "<hr><br>";
 }
     echo "<br><a class='boton' style:'margin-left:0px' href='?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente&depende=0'>Agregar +</a><br><br>";

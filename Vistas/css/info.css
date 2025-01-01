@@ -22,7 +22,8 @@ lightblue;
 */
 .barra {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
 }
 
 #caja1 {
@@ -79,4 +80,5 @@ p {
     background-color:rgb(43, 46, 226);
     align-items: left;
     margin-top: 10px;
+    margin-left: 0%;
 }
