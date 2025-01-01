@@ -15,7 +15,11 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     echo "<a class='boton' style='margin-left:0px;' href='?controller=Paneles&action=editar&cliente_titular=$id'>Editar Titular</a>";
     echo "<a class='boton' href='?controller=Paneles&action=InfoSeguros&cliente=$cliente'>Informacion de Seguros</a>
     <a class='boton' href='?controller=Paneles&action=InfoBanco&cliente=$cliente'>Informacion Bancaria</a>
-    <a class='boton' style='background-color:red;' href='?controller=Paneles&action=advertencia&cliente=$cliente'>Eliminar poliza</a>";
+    <a class='boton' href=''>Registro</a>
+    <a class='boton' style='background-color:red;' href='?controller=Paneles&action=advertencia&cliente=$cliente'>Eliminar</a>";
+    $DB = new DatosManager(tabla: 'Img');
+    $imagenes = $DB->Conseguir_Registro("WHERE id_cliente = $id");
+
     echo "</div>";
     echo "<div id='titular' class='titular'>";
     echo "<div class='grid'>";
@@ -46,7 +50,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
         echo "<p><b>Actualizado:</b> <span>No</span></p>";
     }
     if($dato['estatus_migratorio'] == 1){
-        echo "<p><b>Documentos de estatus migratorio: </b> <span>Si</span></p>";
+            echo "<p><b>Documentos de estatus migratorio: </b> <span>Si</span></p>";
     }else{
         echo "<p><b>Documentos de estatus migratorio: </b> <span>No</span></p>";
     }
@@ -55,6 +59,13 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     }else{
         echo "<p><b>Declaracion Fiscal: </b> <span>No</span></p>";
     }
+    # Si no hay imagenes asociadas al titular mostrar boton para agregar
+    # Si hay imagenes asociadas al titular mostrar boton para ver
+        if($imagenes->rowCount()){
+            echo " <a class ='boton' style='margin-left:0px; margin-right:4px;' href='?controller=Paneles&action=pagina_img&cliente=$id&add=0'>Ver Documentos</a><br><br>";
+        }else{
+            echo " <a class='boton' style='margin-left:0px; margin-right:4px;' href='?controller=Paneles&action=pagina_img&cliente=$id&add=1'>Agregar Documentos</a><br><br>";
+        }
     echo "<hr>";
     }
 
