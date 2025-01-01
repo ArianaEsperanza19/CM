@@ -1,12 +1,7 @@
 <?php
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioTitular.css\">";
-if(isset($_SESSION['flash']) && $_SESSION['flash'] != 'vacio'){
-    echo "<p class='mensaje'><b>$_SeSSION[flash]</b></p>";
-    unset($_SESSION['flash']);
-}else{
 echo "<div id='contenedor'><a href='?controller=Paneles&action=principal'>Cancelar</a>";
 
-}
 if(isset($editar_titular)){
     $id = $editar_titular;
     if(isset($_SESSION['editar'])){

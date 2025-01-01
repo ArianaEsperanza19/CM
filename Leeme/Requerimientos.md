@@ -1,6 +1,6 @@
 # Requerimientos
 
----
+
 ## Base de Datos
 - [x] Crear base de datos
 - [x] Crear tablas
@@ -36,6 +36,9 @@
 - [x] Editar seguro
 - [x] Eliminar seguro
 - [x] Editar números
+- [x] Subir imagen
+- [ ] Eliminar imagen
+- [ ] Editar imagen
 
 ## Login del usuario
 - [ ] Login
@@ -54,5 +57,6 @@
 - [x] Editar grupo
 - [x] Eliminar miembros por separado
 - [x] Ver información del seguro
+- [ ] Ver imagenes del titular
 ### Detalles
 - [x] Asegurarse de que al retroceder despues de una edicion, desaparezca la informacion en el formulario.
