@@ -204,6 +204,52 @@ class ClienteController
                 echo "Error al eliminar";
             }
     }}
+/*
+    public function agregarImg() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    require_once 'Modelos/IMGmanager.php';
+    $datos = [
+        'id' => $_POST['id'],
+        'nombre' => $_POST['nombre']
+    ];
+    
+    $modelo = new IMGmanager("Vistas/img/"); // Asegúrate de que estás usando la clase correcta
+    $imagen = $modelo->uploadImage($_FILES['imagen']);
+
+    if ($imagen) {
+        require_once 'Modelos/Grupo.php';
+        $DB = new Grupo();
+        $sentencia = $DB->registrar_img($datos, $imagen);
+        if($sentencia){
+        header('Location: ?controller=Paneles&action=info&cliente='.$_POST['id']);    
+        }
+    } else {
+        echo "Error al subir la imagen.";
+    }
+}
+
+    }*/
+
+    public function eliminarImg() {
+        
+    }
+
+    public function editarImg() {
+        
+    }
+
+    public function agregarRegistro() {
+
+    }
+
+    public function eliminarRegistro() {
+        
+    }
+
+    public function editarRegistro() {
+        
+    }
+
     public function buscar() {
         
         if(isset($_POST['busqueda'])) {

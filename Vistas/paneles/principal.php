@@ -23,7 +23,8 @@ echo "<p class='lista'>".$titular['id_cliente']." - ".$titular['nombre']." ".$ti
 }
 echo "</div>";// Fin de lista de titulares
 }else{
-header('Location: ?controller=Paneles&action=principal');
+  //Error: No hay titulares
+header('Location: ?controller=Paneles&action=nuevo_titular');
 }
 ?>
 <?php
