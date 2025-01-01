@@ -83,6 +83,16 @@ class PanelesController
             echo "No se ha enviado un cliente";
         }
     }
+
+    public function pagina_img(){
+        if (isset($_GET['cliente'])){
+        global $cliente;
+        $cliente = $_GET['cliente'];
+        require_once 'Vistas/paneles/pagina_img.php';
+        }else{
+        die("No se ha enviado un cliente");
+        }
+    }
     
     }
 
