@@ -107,7 +107,7 @@ class ClienteController
             $grupo = new Grupo();
             $sentecia = $grupo->eliminar_uno($id);
             if($sentecia){
-                header('Location: ?controller=Paneles&action=info&cliente='.$titular);
+                header("Location: ?controller=Paneles&action=info&cliente=$titular");
             }else{
                 die("Error al eliminar");
             }
@@ -115,7 +115,6 @@ class ClienteController
         if(isset($_GET['conyugue']) == 1){
             $grupo = new Grupo();
             $sentecia = $grupo->eliminar_uno($id);
-            //ERROR redirecciona a panel principal
             if($sentecia){
                 header('Location: ?controller=Paneles&action=info&cliente='.$titular);
             }else{
@@ -125,7 +124,7 @@ class ClienteController
         $registro = new Grupo();
         $sentencia = $registro->eliminar_todos($_GET['cliente']);
         if($sentencia){
-        header('Location: ?controller=Paneles&action=principal');
+            header('Location: ?controller=Paneles&action=info&cliente='.$titular);
         }else{
             echo "Error al eliminar";
         }
