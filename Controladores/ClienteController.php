@@ -1,7 +1,7 @@
 <?php
 require_once 'Modelos/DatosManager.php';
 
-class ClienteController 
+class ClienteController
 {
     public function VerTodos() {
     }
@@ -10,13 +10,13 @@ class ClienteController
     public function Crear() {
         //echo "Soy el formulario para un nuevo cliente";
         if(isset($_POST)) {
-            
+
             $datos = new DatosManager(tabla : 'Titulares');
             $sentencia = $datos->Registrar($_POST);
             $cliente_id = $datos->Ultimo_Registro();
             $cliente_id = $cliente_id['id_cliente'];
             if($sentencia){
-            
+
             if($_POST['matrimonio'] == 1 && $_POST['dependientes'] == 0){
                 header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=0");
                 //die('detenido en matrimonio 1 y dependientes 0');
@@ -31,7 +31,7 @@ class ClienteController
             }
             if($_POST['matrimonio'] == 0 && $_POST['dependientes'] == 0){
                 header('Location: ?controller=Paneles&action=principal');
-            } 
+            }
             }else{
                 header('Location: ?controller=Paneles&action=principal');
             }}
@@ -47,13 +47,13 @@ class ClienteController
         $registro = new Grupo($DB);
         $registro->registrar($_POST, $id_cliente);
         if($_GET['depende'] == 1){
-            
+
             header('Location: ?controller=Paneles&action=formularioDepende'."&id_cliente=$id_cliente");
         }
         if($_GET['depende'] == 0){
             header("Location: ?controller=Paneles&action=info&cliente=$id_cliente");
         }
-        
+
     }}
 
     public function Agregar_Depende(){
@@ -81,7 +81,7 @@ class ClienteController
                 $token = md5(uniqid());
                 header("Location: ?controller=Paneles&action=info&cliente=$titular&token=$token");
                 }
-                
+
             }else{
             # Editar titular
             require_once 'Modelos/DatosManager.php';
@@ -177,7 +177,7 @@ class ClienteController
             header('Location: ?controller=Paneles&action=InfoBanco&cliente='.$id);
         }
         }}}
-    
+
     public function eliminar_seguro(){
             if(isset($_GET)){
             $id = $_GET['cliente'];
@@ -190,7 +190,7 @@ class ClienteController
                 echo "Error al eliminar";
             }
         }}
-    
+
     public function eliminar_banco(){
             if(isset($_GET)){
             $id = $_GET['cliente'];
@@ -211,7 +211,7 @@ class ClienteController
         'id' => $_POST['id'],
         'nombre' => $_POST['nombre']
     ];
-    
+
     $modelo = new IMGmanager("Vistas/img/"); // Verifica la url
     $imagen = $modelo->uploadImage($_FILES['imagen']);
     if ($imagen) {
@@ -219,7 +219,7 @@ class ClienteController
         $DB = new Grupo();
         $sentencia = $DB->registrar_img($datos, $imagen);
         if($sentencia){
-        header('Location: ?controller=Paneles&action=info&cliente='.$_POST['id']);    
+        header('Location: ?controller=Paneles&action=info&cliente='.$_POST['id']);
         }
     } else {
         echo "Error al subir la imagen.";
@@ -229,11 +229,11 @@ class ClienteController
     }
 
     public function eliminarImg() {
-        
+
     }
 
     public function editarImg() {
-        
+
     }
 
     public function agregarRegistro() {
@@ -241,15 +241,15 @@ class ClienteController
     }
 
     public function eliminarRegistro() {
-        
+
     }
 
     public function editarRegistro() {
-        
+
     }
 
     public function buscar() {
-        
+
         if(isset($_POST['busqueda'])) {
             require_once 'Modelos/DatosManager.php';
             $DB = new DatosManager(tabla: 'Titulares');
@@ -261,7 +261,7 @@ class ClienteController
             $_SESSION['flash'] = "No se encontraron coincidencias en la base de datos";
             require_once 'Vistas/paneles/principal.php';
             }
-            
+
         }else{
             header('Location: ?controller=Paneles&action=principal');
         }

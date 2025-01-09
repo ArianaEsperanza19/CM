@@ -12,7 +12,7 @@ if(@$_GET){
 		exit();
 	}
 	#Comprobar si la clase del controlador existe
-	if(class_exists($nombre_controlador)){	
+	if(class_exists($nombre_controlador)){
 		$controlador = new $nombre_controlador();
 		#Comprobar si el metodo llamado mediante 'action' en la url, existe en el controlador dado
 		if(isset($_GET['action']) && method_exists($controlador, $_GET['action'])){

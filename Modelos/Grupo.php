@@ -16,35 +16,35 @@ class Grupo
          * Este método verifica si todos los campos obligatorios se han rellenado correctamente
          * y, si es así, registra un nuevo cónyuge o dependiente en la base de datos.
          * Devuelve la sentencia preparada ejecutada.
-         * 
+         *
          * @param array $datos Arreglo con los datos a registrar.
          * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
          */
         // Verificar si la sesión está iniciada y la variable 'cliente' está definida
         // Construir la sentencia SQL
         $sql = "INSERT INTO Conyugues_Dependientes (
-                    id_cliente, 
+                    id_cliente,
                     en_poliza,
-                    nombre, 
-                    segundo_nombre, 
-                    apellido, 
-                    SSN, 
-                    alien_number, 
-                    genero, 
-                    fecha_nacimiento, 
-                    estatus_migratorio, 
+                    nombre,
+                    segundo_nombre,
+                    apellido,
+                    SSN,
+                    alien_number,
+                    genero,
+                    fecha_nacimiento,
+                    estatus_migratorio,
                     pareja
                 ) VALUES (
                     :id_cliente,
-                    :en_poliza, 
-                    :nombre, 
-                    :segundo_nombre, 
-                    :apellido, 
-                    :SSN, 
-                    :alien_number, 
-                    :genero, 
-                    :fecha_nacimiento, 
-                    :estatus_migratorio, 
+                    :en_poliza,
+                    :nombre,
+                    :segundo_nombre,
+                    :apellido,
+                    :SSN,
+                    :alien_number,
+                    :genero,
+                    :fecha_nacimiento,
+                    :estatus_migratorio,
                     :pareja
                 )";
 
@@ -76,9 +76,9 @@ class Grupo
     {
         /**
          * Elimina todos los registros asociados a un cliente en la base de datos.
-         * Este método elimina todos los titulares pertenecientes al cliente con el 
+         * Este método elimina todos los titulares pertenecientes al cliente con el
          * ID proporcionado.
-         * 
+         *
          * @param int $id_cliente El ID del cliente cuyos registros se eliminarán.
          * @return PDOStatement La sentencia preparada ejecutada.
          */
@@ -103,7 +103,7 @@ class Grupo
          * Edita un registro en la base de datos.
          * Este método actualiza un registro ya existente en la base de datos
          * con los datos proporcionados.
-         * 
+         *
          * @param array $datos Arreglo con los datos a actualizar, conseguidos directamente por post.
          * @param int $id_cliente El ID del registro a editar.
          * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.

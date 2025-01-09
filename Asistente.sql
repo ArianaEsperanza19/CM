@@ -70,6 +70,7 @@ CREATE TABLE Img (
     id_img INT PRIMARY KEY AUTO_INCREMENT,
     id_cliente INT,
     nombre VARCHAR(50),
+    descripcion VARCHAR(255),
     imagen VARCHAR(250),
     FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
 );
