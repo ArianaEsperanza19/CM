@@ -209,17 +209,18 @@ class ClienteController
     require_once 'Modelos/IMGmanager.php';
     $datos = [
         'id' => $_POST['id'],
-        'nombre' => $_POST['nombre']
+        'nombre' => $_POST['nombre'],
+        'descripcion' => $_POST['descripcion']
     ];
-
+    $location = 'Location: ?controller=Paneles&action=info&cliente='.$_POST['id'];
     $modelo = new IMGmanager("Vistas/img/"); // Verifica la url
-    $imagen = $modelo->uploadImage($_FILES['imagen']);
+    $imagen = $modelo->uploadImage($_FILES['imagen'], $datos['nombre'], $location);
     if ($imagen) {
         require_once 'Modelos/Grupo.php';
         $DB = new Grupo();
         $sentencia = $DB->registrar_img($datos, $imagen);
         if($sentencia){
-        header('Location: ?controller=Paneles&action=info&cliente='.$_POST['id']);
+            header('Location: ?controller=Paneles&action=pagina_img&cliente='.$_POST['id'].'&add=0');
         }
     } else {
         echo "Error al subir la imagen.";
@@ -227,14 +228,60 @@ class ClienteController
 }
 
     }
-
     public function eliminarImg() {
+        if(isset($_GET)){
+        $id = isset($_GET['img']) ? $_GET['img'] : null;
+        $cliente = isset($_GET['cliente']) ? $_GET['cliente'] : null;
+        if($id){
+        require_once 'Modelos/DatosManager.php';
+        $DB = new DatosManager(tabla: 'Img', id: $id);
+        $consulta = $DB->Conseguir_Registro("WHERE id_img = $id");
+        $consulta = $consulta->fetch();
+        $nombre = $consulta['imagen'];
+        require_once 'Modelos/IMGmanager.php';
+        $img = new IMGmanager("Vistas/img/");
+        $img->borrarImagen($nombre);
+        $sentencia = $DB->Eliminar();
+        if($sentencia){
+            header('Location: ?controller=Paneles&action=pagina_img&cliente='.$cliente.'&add=0');
 
-    }
+        }else{
+echo "Error al eliminar";
+}
+}
+
+    }}
 
     public function editarImg() {
+        if(isset($_POST) && isset($_FILES)){
+        $cliente = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $centinela = $_FILES['imagen']['name'];
+        # Si no hay una nueva imagen
+        if($centinela == ""){
+            $_SESSION['flash'] = "No se ha subido ninguna imagen!";
+            header ('Location: ?controller=Paneles&action=pagina_img&cliente='.$_POST['id'].'&add=0');
+            // header('Location: ?controller=Paneles&action=info&cliente='.$_POST['id']);
+}else{
 
-    }
+        require_once 'Modelos/DatosManager.php';
+        $DB = new DatosManager(tabla: 'Img');
+        $sentencia = $DB->Conseguir_Registro("WHERE id_cliente = '$cliente'");
+        if($sentencia){
+            $sentencia = $sentencia->fetch();
+            require_once 'Modelos/IMGmanager.php';
+            $rediret = "?controller=Paneles&action=info&cliente=".$_POST['id'];
+            $img = new IMGmanager("Vistas/img/");
+            $img->borrarImagen($sentencia['imagen']);
+            $imagen = $img->uploadImage($_FILES['imagen'], $nombre, $rediret);
+            require_once 'Modelos/Grupo.php';
+            $DB = new Grupo();
+            $actualizar = $DB->actualizar_img($_POST, $imagen, $centinela);
+            if($actualizar){
+            header('Location: ?controller=Paneles&action=info&cliente='.$_POST['id']);
+            }
+            }else{ echo "error";}
+            echo "error";}}}
 
     public function agregarRegistro() {
 

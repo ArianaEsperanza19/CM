@@ -11,6 +11,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 5px;
+    margin-bottom: 10px;
 }
 .imagen img{
     width: 200px;
@@ -31,3 +32,11 @@ h1 {
     background-color: rgb(211, 210, 191);
     margin-left: 10px;
 }
+.miniatura {
+    width: 50px;
+    margin: 2px;
+}
+#flash {
+    color: red;
+}
+

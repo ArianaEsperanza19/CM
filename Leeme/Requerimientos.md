@@ -5,7 +5,7 @@
 - [x] Crear base de datos
 - [x] Crear tablas
 - [x] Crear relaciones
-- [ ] Dar usuarios y contraseñas
+<!-- - [ ] Dar usuarios y contraseñas -->
 - [ ] Crear interfaz para conectar a la base de datos
 - [ ] Que detecte si no se ha conectado a ninguna base de datos y exige conectarse a una
 
@@ -26,7 +26,7 @@
 - [x] Ingresar nuevo cónyuge
 - [x] Ingresar un dependiente
 - [x] Agregar multiples dependientes
-- [x] Listar grupo de un Titular 
+- [x] Listar grupo de un Titular
 - [x] Editar grupo
 - [x] Asegurarse de que solo se puede tener un conyugue al mismo tiempo
 
@@ -37,8 +37,8 @@
 - [x] Eliminar seguro
 - [x] Editar números
 - [x] Subir imagen
-- [ ] Eliminar imagen
-- [ ] Editar imagen
+- [x] Eliminar imagen
+- [x] Editar imagen
 
 ## Login del usuario
 - [ ] Login
@@ -57,6 +57,9 @@
 - [x] Editar grupo
 - [x] Eliminar miembros por separado
 - [x] Ver información del seguro
-- [ ] Ver imagenes del titular
+- [x] Ver imagenes del Titular
+- [x] Formulario para subir y editar imagenes
+- [ ] Estilizar formularios y hacerlos responsive
 ### Detalles
-- [x] Asegurarse de que al retroceder despues de una edicion, desaparezca la informacion en el formulario.
+- [x] Asegurarse de que al retroceder después de una edicion, desaparezca la informacion en el formulario.
+- [ ] Escapar datos de los formularios

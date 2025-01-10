@@ -154,11 +154,12 @@ class Grupo
     public function registrar_img($datos, $img)
     {
 
-            $sql = "INSERT INTO Img (id_cliente, nombre, imagen) VALUES (:id_cliente, :nombre, :imagen)";
+            $sql = "INSERT INTO Img (id_cliente, nombre, imagen, descripcion) VALUES (:id_cliente, :nombre, :imagen, :descripcion)";
             $stmt = $this->DB->prepare($sql);
             $stmt->bindParam(':id_cliente', $datos['id'], PDO::PARAM_INT);
             $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
             $stmt->bindParam(':imagen', $img);
+            $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
 
             // Configura PDO para lanzar excepciones detalladas
             $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -168,5 +169,18 @@ class Grupo
             } else {
                 return false;
             }
+    }
+
+    public function actualizar_img($datos, $img, $centinela = true) {
+        $sql = "UPDATE Img SET id_cliente = :id_cliente, imagen = :imagen, nombre = :nombre, descripcion = :descripcion WHERE id_img = :id";
+        $stmt = $this->DB->prepare($sql);
+        $stmt->bindParam(':id_cliente', $datos['id'], PDO::PARAM_INT);
+        $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
+        $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
+        $stmt->bindParam(':imagen', $img);
+        $stmt->bindParam(':id', $datos['id_img'], PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt;
     }
 }

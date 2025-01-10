@@ -12,7 +12,7 @@ $titulares = $DB->Conseguir_Todos();
 if($titulares){
 echo "<div id='titularesBox'>
 <h1>Titulares</h1>";
-if(isset($_SESSION['flash']) && $_SESSION['flash'] != 'vacio'){
+if(isset($_SESSION['flash'])){
     $mensaje = $_SESSION['flash'];
     unset($_SESSION['flash']);
     echo "<p class='mensaje'><b>$mensaje</b></p>";

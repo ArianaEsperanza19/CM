@@ -4,7 +4,7 @@ class IMGmanager {
 
     /**
      * Constructor de la clase IMGmanager.
-     * 
+     *
      * @param string $url_img Ruta del directorio donde se almacenarán las imágenes.
      */
     public function __construct($url_img) {
@@ -13,7 +13,7 @@ class IMGmanager {
 
     /**
      * Borrar una imagen del directorio.
-     * 
+     *
      * @param string $imagen Nombre del archivo de imagen a borrar.
      * @return string Mensaje indicando el resultado de la operación.
      */
@@ -34,20 +34,30 @@ class IMGmanager {
 
     /**
      * Subir una imagen al directorio especificado.
-     * 
+     *
      * @param array $image Información del archivo de imagen a subir, que incluye 'name' y 'tmp_name'.
      * @return string|null Nombre del archivo subido en caso de éxito, mensaje de error en caso de extensión no permitida, o NULL si el archivo no es válido.
      */
 
-     public function uploadImage($image) {
+     public function uploadImage($image, $nombre = NULL, $rediret = NULL) {
          // Validar la extensión del archivo
          $extensiones_permitidas = ['jpg', 'jpeg', 'png'];
          $extension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
-     
          if (!in_array($extension, $extensiones_permitidas)) {
-             return "Solo se permiten archivos con extensión .jpg, .jpeg y .png";
-         }
-     
+            header("Location: $rediret");
+         }else{
+        # Si el archivo tiene un nombre
+        if($nombre !== NULL) {
+            $fecha = new DateTime();
+            $imageName = $nombre . '_' . $fecha->getTimestamp();
+            $imagenTemporal = $image['tmp_name'];
+            $m = move_uploaded_file($imagenTemporal, $this->url_img . $imageName . '.' . $extension);
+            if($m) {
+                return $imageName . '.' . $extension;
+            }
+            return $m;
+        }else {
+            # Si el archivo no tiene un nombre
          if ($image['name'] !== NULL && $image !== false) {
              $fecha = new DateTime();
              $imageName = pathinfo($image['name'], PATHINFO_FILENAME) . '_' . $fecha->getTimestamp();
@@ -60,6 +70,8 @@ class IMGmanager {
          } else {
              return NULL;
          }
+
+        }}
      }
 }
 /*
