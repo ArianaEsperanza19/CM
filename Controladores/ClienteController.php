@@ -255,6 +255,7 @@ echo "Error al eliminar";
     public function editarImg() {
         if(isset($_POST) && isset($_FILES)){
         $cliente = $_POST['id'];
+        $id_img = $_POST['id_img'];
         $nombre = $_POST['nombre'];
         $centinela = $_FILES['imagen']['name'];
         # Si no hay una nueva imagen
@@ -266,7 +267,7 @@ echo "Error al eliminar";
 
         require_once 'Modelos/DatosManager.php';
         $DB = new DatosManager(tabla: 'Img');
-        $sentencia = $DB->Conseguir_Registro("WHERE id_cliente = '$cliente'");
+        $sentencia = $DB->Conseguir_Registro("WHERE id_cliente = '$cliente' AND id_img = '$id_img'");
         if($sentencia){
             $sentencia = $sentencia->fetch();
             require_once 'Modelos/IMGmanager.php';
@@ -278,7 +279,7 @@ echo "Error al eliminar";
             $DB = new Grupo();
             $actualizar = $DB->actualizar_img($_POST, $imagen, $centinela);
             if($actualizar){
-            header('Location: ?controller=Paneles&action=info&cliente='.$_POST['id']);
+            header ('Location: ?controller=Paneles&action=pagina_img&cliente='.$_POST['id'].'&add=0');
             }
             }else{ echo "error";}
             echo "error";}}}

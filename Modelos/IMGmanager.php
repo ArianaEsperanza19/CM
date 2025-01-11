@@ -58,7 +58,7 @@ class IMGmanager {
             return $m;
         }else {
             # Si el archivo no tiene un nombre
-         if ($image['name'] !== NULL && $image !== false) {
+             if ($image['name'] !== NULL && $image !== false) {
              $fecha = new DateTime();
              $imageName = pathinfo($image['name'], PATHINFO_FILENAME) . '_' . $fecha->getTimestamp();
              $imagenTemporal = $image['tmp_name'];
@@ -74,6 +74,7 @@ class IMGmanager {
         }}
      }
 }
+?>
 /*
 // Ejemplo de uso
 $imgManager = new IMGmanager("assets/img/");
@@ -88,3 +89,4 @@ $image = $_FILES['imagen'];
 $resultadoSubir = $imgManager->uploadImage($image);
 echo $resultadoSubir;
 */
+
