@@ -124,7 +124,7 @@ class ClienteController
         $registro = new Grupo();
         $sentencia = $registro->eliminar_todos($_GET['cliente']);
         if($sentencia){
-            header('Location: ?controller=Paneles&action=info&cliente='.$titular);
+            header('Location: ?controller=Paneles&action=principal');
         }else{
             echo "Error al eliminar";
         }
