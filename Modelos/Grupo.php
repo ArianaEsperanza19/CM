@@ -183,4 +183,75 @@ class Grupo
 
         return $stmt;
     }
+
+    public function guardarRegistro($datos){
+        if(isset($datos)){
+            $sql = "INSERT INTO Registros (id_cliente, fecha, descripcion) VALUES (:id_cliente, CURDATE(), :descripcion)";
+            $stmt = $this->DB->prepare($sql);
+            $stmt->bindParam(':id_cliente', $datos['id_cliente'], PDO::PARAM_INT);
+            $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
+            try {
+            $stmt->execute();
+}catch (PDOException $e) {
+    echo "Error al guardar el registro: " . $e->getMessage();
+    die();
+}
+return $stmt;
+
+}else{
+    return false;}}
+
+public function eliminarRegistro($id){
+    if(isset($id)){
+    $sql = "DELETE FROM Registros WHERE id_cliente = :id";
+    $stmt = $this->DB->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+try {
+    $stmt->execute();
+}catch (PDOException $e) {
+    echo "Error al eliminar el registro: " . $e->getMessage();
+    die();
+}
+    return $stmt;
+}else{
+    return false;
+}
+}
+
+public function conseguirRegistro($id){
+    if(isset($id)){
+    $sql = "SELECT * FROM Registros WHERE id_registro = :id";
+    $stmt = $this->DB->prepare($sql);
+    $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+    try{
+
+$stmt->execute();
+}catch(PDOException $e){
+die("Error al conseguir registro: ".$e->getMessage());
+}
+    return $stmt;
+}else{
+ return false;
+}
+}
+
+public function actualizarRegistro($datos){
+    if(isset($datos)){
+    $sql = "UPDATE Registros SET descripcion = :descripcion WHERE id_cliente = :id_cliente AND id_registro = :id_registro";
+            $stmt = $this->DB->prepare($sql);
+            $stmt->bindParam(':id_cliente', $datos['id_cliente'], PDO::PARAM_INT);
+            $stmt->bindParam(':id_registro', $datos['id_registro'], PDO::PARAM_INT);
+            $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
+            try{
+            $stmt->execute();
+}catch(PDOException $e){
+die("Error al actualizar: ".$e->getMessage());
+}
+return $stmt;
+}else{
+// Datos no enviados
+return false;
+}
+}
+
 }

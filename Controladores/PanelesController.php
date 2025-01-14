@@ -1,7 +1,7 @@
 <?php
 #session_start();
 require_once 'Modelos/DatosManager.php';
-class PanelesController 
+class PanelesController
 {
     public function principal() {
         require_once 'Vistas/paneles/principal.php';
@@ -10,11 +10,19 @@ class PanelesController
         require_once 'Vistas/paneles/Formularios/nuevo_titular.php';
     }
     public function formularioConyugal() {
-       require_once 'Vistas/paneles/Formularios/formularioConyugal.php'; 
+       require_once 'Vistas/paneles/Formularios/formularioConyugal.php';
     }
     public function formularioDepende() {
         require_once 'Vistas/paneles/Formularios/formularioDepende.php';
     }
+    public function formularioRegistro(){
+        if(isset($_GET['cliente'])){
+            global $cliente;
+            $cliente = $_GET['cliente'];
+        }
+        require_once 'Vistas/paneles/Formularios/formularioRegistro.php';
+
+}
     public function info() {
     if (isset($_GET['cliente'])) {
         global $cliente;
@@ -24,7 +32,7 @@ class PanelesController
     }
     public function editar() {
         if(isset($_GET['cliente'])){
-            global $cliente; 
+            global $cliente;
             $cliente = $_GET['cliente'];
             if(isset($_GET['depende'])){
             global $depende;
@@ -61,7 +69,7 @@ class PanelesController
         require_once 'Vistas/paneles/Formularios/formularioSeguro.php';
         }
         if(!isset($_GET['seguro']) || isset($_GET['seguro']) != 1){
-        require_once 'Vistas/paneles/InfoSeguros.php'; 
+        require_once 'Vistas/paneles/InfoSeguros.php';
         }
         }else{
             echo "No se ha enviado un cliente";
@@ -93,6 +101,6 @@ class PanelesController
         die("No se ha enviado un cliente");
         }
     }
-    
+
     }
 

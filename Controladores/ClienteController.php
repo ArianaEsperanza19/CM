@@ -285,16 +285,48 @@ echo "Error al eliminar";
             echo "error";}}}
 
     public function agregarRegistro() {
-
+        if(isset($_POST)){
+            require_once 'Modelos/Grupo.php';
+            $registro = new Grupo();
+$sentencia = $registro->guardarRegistro($_POST);
+            if($sentencia){
+                header('Location: ?controller=Paneles&action=formularioRegistro&cliente='.$_POST['id_cliente']);
+            }
+        }
     }
 
     public function eliminarRegistro() {
-
+        if(isset($_GET)){
+            require_once 'Modelos/Grupo.php';
+            $registro = new Grupo();
+            $sentencia = $registro->eliminarRegistro($_GET['cliente']);
+            if($sentencia){
+                header('Location: ?controller=Paneles&action=info&cliente='.$_GET['cliente']);
+            }
+        }
+    }
+public function editarRegistro() {
+    // Verifica si hay un parámetro GET
+    if(isset($_GET['editar']) && $_GET['editar'] == 1){
+        global $cliente;
+        $cliente = $_GET['cliente'];
+        require_once 'Vistas/paneles/Formularios/formularioRegistro.php';
     }
 
-    public function editarRegistro() {
+    // Verifica si hay una solicitud POST
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        require_once "Modelos/Grupo.php";
+        $registro = new Grupo();
+        $sentencia = $registro->actualizarRegistro($_POST);
 
+        if($sentencia){
+            header('Location: ?controller=Paneles&action=formularioRegistro&cliente='.$_POST['id_cliente']);
+        } else {
+            die("Error al ejecutar actualización");
+        }
     }
+}
+
 
     public function buscar() {
 
