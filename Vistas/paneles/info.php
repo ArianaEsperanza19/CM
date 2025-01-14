@@ -8,7 +8,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     $DB = new DatosManager(tabla: 'Titulares');
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
     $_SESSION['eliminar'] = true;
-    echo "<a class='boton' style='margin-left:0' href='?controller=Paneles&action=principal'>Inicio</a><h1>Informacion Poliza</h1>";
+    echo "<a class='boton' style='margin-left:0' href='?controller=Paneles&action=index'>Inicio</a><h1>Informacion Poliza</h1>";
     foreach ($titular as $dato) {
     $id = $dato['id_cliente'];
     echo "<div class='barra'>";

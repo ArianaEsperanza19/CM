@@ -30,10 +30,10 @@ class ClienteController
                 //die('detenido en dependientes 1 y matrimonio 0');
             }
             if($_POST['matrimonio'] == 0 && $_POST['dependientes'] == 0){
-                header('Location: ?controller=Paneles&action=principal');
+                header('Location: ?controller=Paneles&action=index');
             }
             }else{
-                header('Location: ?controller=Paneles&action=principal');
+                header('Location: ?controller=Paneles&action=index');
             }}
     }
     public function Agregar_Conyugue() {
@@ -124,7 +124,7 @@ class ClienteController
         $registro = new Grupo();
         $sentencia = $registro->eliminar_todos($_GET['cliente']);
         if($sentencia){
-            header('Location: ?controller=Paneles&action=principal');
+            header('Location: ?controller=Paneles&action=index');
         }else{
             echo "Error al eliminar";
         }
@@ -343,7 +343,7 @@ public function editarRegistro() {
             }
 
         }else{
-            header('Location: ?controller=Paneles&action=principal');
+            header('Location: ?controller=Paneles&action=index');
         }
     }
 

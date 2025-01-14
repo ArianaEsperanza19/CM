@@ -1,9 +1,9 @@
 <?php
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioTitular.css\">";
-echo "<div id='contenedor'><a href='?controller=Paneles&action=principal'>Cancelar</a>";
 
 if(isset($editar_titular)){
     $id = $editar_titular;
+echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'>Cancelar</a>";
     if(isset($_SESSION['editar'])){
     unset($_SESSION['editar']);
     header('Location: ?controller=Paneles&action=info&cliente='.$id);
@@ -49,13 +49,13 @@ if(isset($editar_titular)){
     <label for='genero'>Genero </label>
     <select id='genero' name='genero'>
     ";
-    if($genero == "F"){ 
+    if($genero == "F"){
     echo "<option value='F' selected>Femenino</option>";
     echo "<option value='M'>Masculino</option>";}
-    if($genero == "M"){ 
+    if($genero == "M"){
     echo "<option value='M' selected>Masculino</option>";
     echo "<option value='F'>Femenino</option>";}
-       
+
     echo "</select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label><br>
     <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'><br>

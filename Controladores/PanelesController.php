@@ -3,7 +3,7 @@
 require_once 'Modelos/DatosManager.php';
 class PanelesController
 {
-    public function principal() {
+    public function index() {
         require_once 'Vistas/paneles/principal.php';
     }
     public function nuevo_titular() {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/conyugueDependiente.css\">";
     # Centinela que vigila si se ha editado la informacion
     if(isset($_SESSION['editar']) && isset($_GET['titular'])){
@@ -43,7 +43,7 @@ if(isset($depende) == 1){
     <label for='seguro'>¿Solicita la cobertura? </label>
     <select id='seguro' name='seguro'>";
         if($seguro == 'si'){
-         echo "<option value='si' selected>Si</option>";   
+         echo "<option value='si' selected>Si</option>";
         echo "<option value='no'>No</option>";
         }
         if($seguro == 'no'){
@@ -119,7 +119,7 @@ if(isset($depende) == 1){
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'><br>
     <button class='boton' type='submit'>Enviar</button>
-    <a href='?controller=Paneles&action=principal'>Listo</a>
+    <a href='?controller=Paneles&action=index'>Listo</a>
     </form>
     </div>
     </div>";
