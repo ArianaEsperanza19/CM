@@ -16,7 +16,7 @@ class DatosManager{
         $this->tabla = $tabla;
         $this->id = $id;
         $this->DB = DB::Connect();
-      }    
+      }
     public function __destruct(){
     /**
      * Destructor de la clase. Cierra la conexion a la base de datos.
@@ -32,7 +32,7 @@ class DatosManager{
     public function Conseguir_Todos(){
     /*
      * Consigue todos los registros de una tabla dada.
-     * 
+     *
      * @param string $tabla El nombre de la tabla en la que se buscan los registros.
      * @return array -> Un array con todos los registros de la tabla.
      */
@@ -46,7 +46,7 @@ class DatosManager{
     public function Conseguir_Registro($condicion){
     /**
      * Consigue un registro de una tabla dada.
-     * 
+     *
      * @param string $condicion La condicion de busqueda para el registro.
      * @return PDOStatement La sentencia de selección ejecutada.
      * @throws Exception Si la tabla no existe.
@@ -98,7 +98,7 @@ class DatosManager{
      * Este método verifica si todos los campos de la tabla se han rellenado correctamente
      * y, si es así, registra un nuevo titular en la base de datos.
      * Devuelve la sentencia preparada ejecutada.
-     * 
+     *
      * @param array $datos Arreglo con los datos a registrar.
      * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
      */
@@ -109,9 +109,9 @@ class DatosManager{
     $this->DB = DB::Connect();
 
     // Construir la sentencia SQL
-    $sql = "INSERT INTO $tabla (nombre, segundo_nombre, primer_apellido, segundo_apellido, SSN, alien_number, genero, fecha_nacimiento, direccion, ciudad, estado, codigo_postal, telefono, email, empresa, notas, actualizado) 
+    $sql = "INSERT INTO $tabla (nombre, segundo_nombre, primer_apellido, segundo_apellido, SSN, alien_number, genero, fecha_nacimiento, direccion, ciudad, estado, codigo_postal, telefono, email, empresa, notas, actualizado)
             VALUES (:nombre, :segundo_nombre, :primer_apellido, :segundo_apellido, :SSN, :alien_number, :genero, :fecha_nacimiento, :direccion, :ciudad, :estado, :codigo_postal, :telefono, :email, :empresa, :notas, :actualizado)";
-    
+
     $stmt = $this->DB->prepare($sql);
 
     // Vincular los parámetros con los datos
@@ -134,7 +134,7 @@ class DatosManager{
     //$stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
     $stmt->bindParam(':notas', $datos['notas']);
     $stmt->bindParam(':actualizado', $datos['actualizado']);
-    
+
     // Ejecutar la sentencia
     if ($stmt->execute()) {
         return $stmt;
@@ -152,7 +152,7 @@ class DatosManager{
      */
         $table = $this->tabla;
         $id = $this->id;
-        $stmt = $this->DB->prepare("DELETE FROM $table WHERE id = :id");
+        $stmt = $this->DB->prepare("DELETE FROM $table WHERE id_img = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt;
@@ -166,7 +166,7 @@ public function Editar($datos, $id) {
     $this->DB = DB::Connect();
 
     // Construir la sentencia SQL
-    $sql = "UPDATE $tabla SET 
+    $sql = "UPDATE $tabla SET
             nombre = :nombre,
             segundo_nombre = :segundo_nombre,
             primer_apellido = :primer_apellido,
@@ -212,8 +212,8 @@ public function Editar($datos, $id) {
     } else {
         return false;
     }
-}   
-     
+}
+
     public function Cifrar($datos){
     /**
      * Cifra un string con password_hash.

@@ -8,14 +8,18 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     $DB = new DatosManager(tabla: 'Titulares');
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
     $_SESSION['eliminar'] = true;
-    echo "<a class='boton' style='margin-left:0' href='?controller=Paneles&action=principal'>Inicio</a><h1>Informacion Poliza</h1>";
+    echo "<a class='boton' style='margin-left:0' href='?controller=Paneles&action=index'>Inicio</a><h1>Informacion Poliza</h1>";
     foreach ($titular as $dato) {
     $id = $dato['id_cliente'];
     echo "<div class='barra'>";
     echo "<a class='boton' style='margin-left:0px;' href='?controller=Paneles&action=editar&cliente_titular=$id'>Editar Titular</a>";
     echo "<a class='boton' href='?controller=Paneles&action=InfoSeguros&cliente=$cliente'>Informacion de Seguros</a>
     <a class='boton' href='?controller=Paneles&action=InfoBanco&cliente=$cliente'>Informacion Bancaria</a>
-    <a class='boton' style='background-color:red;' href='?controller=Paneles&action=advertencia&cliente=$cliente'>Eliminar poliza</a>";
+    <a class='boton' href='?controller=Paneles&action=formularioRegistro&cliente=$cliente'>Registro</a>
+    <a class='boton' style='background-color:red;' href='?controller=Paneles&action=advertencia&cliente=$cliente'>Eliminar</a>";
+    $DB = new DatosManager(tabla: 'Img');
+    $imagenes = $DB->Conseguir_Registro("WHERE id_cliente = $id");
+
     echo "</div>";
     echo "<div id='titular' class='titular'>";
     echo "<div class='grid'>";
@@ -46,7 +50,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
         echo "<p><b>Actualizado:</b> <span>No</span></p>";
     }
     if($dato['estatus_migratorio'] == 1){
-        echo "<p><b>Documentos de estatus migratorio: </b> <span>Si</span></p>";
+            echo "<p><b>Documentos de estatus migratorio: </b> <span>Si</span></p>";
     }else{
         echo "<p><b>Documentos de estatus migratorio: </b> <span>No</span></p>";
     }
@@ -55,6 +59,13 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     }else{
         echo "<p><b>Declaracion Fiscal: </b> <span>No</span></p>";
     }
+    # Si no hay imagenes asociadas al titular mostrar boton para agregar
+    # Si hay imagenes asociadas al titular mostrar boton para ver
+        if($imagenes->rowCount()){
+            echo " <a class ='boton' style='margin-left:0px; margin-right:4px;' href='?controller=Paneles&action=pagina_img&cliente=$id&add=0'>Ver Documentos</a><br><br>";
+        }else{
+            echo " <a class='boton' style='margin-left:0px; margin-right:4px;' href='?controller=Paneles&action=pagina_img&cliente=$id&add=1'>Agregar Documentos</a><br><br>";
+        }
     echo "<hr>";
     }
 
@@ -80,7 +91,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     }
 } else {
     // La consulta no ha encontrado nada
-    echo "<a class='boton' href='?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente'>Agregar +</a>";
+  echo "<a class='boton' href='?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente'>Agregar +</a><br><br>";
 }
 
 
@@ -91,6 +102,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     foreach ($dependientes as $dato) {
     $id=$dato['id_miembro_grupo'];
     echo "<a class='boton' href='?controller=Paneles&action=editar&cliente=$id&depende=1&titular=$cliente'>Editar</a>";
+    echo "<div class='miembro'>";
     echo "<p><b>Nombre:</b> $dato[nombre]</p>";
     echo "<p><b>Segundo nombre:</b> $dato[segundo_nombre]</p>";
     echo "<p><b>Apellido:</b> $dato[apellido]</p>";
@@ -98,8 +110,8 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     echo "<p><b>Fecha de Nacimiento:</b> $dato[fecha_nacimiento]</p>";
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
-    echo "<p><b>Cobertura:</b> $dato[en_poliza]</p>";
-    echo "<a class='boton' background-color:red;' href='?controller=Cliente&action=Eliminar&cliente=$id&depende=1&titular=$cliente'>Eliminar</a><br><br>";
+    echo "<p><b>Cobertura:</b> $dato[en_poliza]</p></div>";
+    echo "<a class='boton' style=background-color:red;' href='?controller=Cliente&action=Eliminar&cliente=$id&depende=1&titular=$cliente'>Eliminar</a><br><br>";
     echo "<hr><br>";
 }
     echo "<br><a class='boton' style:'margin-left:0px' href='?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente&depende=0'>Agregar +</a><br><br>";

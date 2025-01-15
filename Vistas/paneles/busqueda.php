@@ -15,7 +15,7 @@ echo "<h1>Titulares</h1>";
             }
 echo "</div>";
 }else{
-header('Location: ?controller=Paneles&action=principal');
+header('Location: ?controller=Paneles&action=index');
 }
 require_once 'Barras/Footer.php';
 ?>
