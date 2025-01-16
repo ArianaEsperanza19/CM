@@ -48,6 +48,7 @@ CREATE TABLE Conyugues_Dependientes (
     en_poliza VARCHAR(20),
     estatus_migratorio BOOLEAN,
     pareja BOOLEAN,
+    relacion VARCHAR(20),
     FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
 );
 

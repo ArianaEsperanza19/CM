@@ -1,5 +1,5 @@
 <?php
-$_SESSION['DB_name'] = "AsistenteSeguros";
+$_SESSION['DB_name'] = "AsistenteSeguris";
 $_SESSION['DB_user'] = "root";
 $_SESSION['DB_pass'] = "";
 class DB{
@@ -15,6 +15,7 @@ class DB{
     }else{
     echo "<p>Error de Conexión:<p>"."<p style='color:red;'>".$e->getMessage()."</p>";
     }
+    echo "<a class='boton' href='?controller=DB&action=crear'>Crear nueva</a>";
     }
     echo "</div>";
     }

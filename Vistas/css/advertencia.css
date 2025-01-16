@@ -1,16 +1,22 @@
 #advertencia {
-    width: 20%; 
-    margin: auto; 
+    width: 20%;
+    margin: auto;
     padding: 10px;
-    border: 1px solid rgb(43, 46, 226); 
+    border: 1px solid rgb(43, 46, 226);
     text-align: center;
 }
 
 .boton {
+    display: block;
+    text-align: center;
     text-decoration: none;
-    display: inline-block;
-    margin: 0 10px;
-    margin-bottom: 2px;
+    color: white;
+    padding: 10px;
+    background-color: rgb(43, 46, 226);
+    align-items: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 3%;
 }
 
 @media (max-width: 750px) {
