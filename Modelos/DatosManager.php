@@ -109,8 +109,8 @@ class DatosManager{
     $this->DB = DB::Connect();
 
     // Construir la sentencia SQL
-    $sql = "INSERT INTO $tabla (nombre, segundo_nombre, primer_apellido, segundo_apellido, SSN, alien_number, genero, fecha_nacimiento, direccion, ciudad, estado, codigo_postal, telefono, email, empresa, notas, actualizado)
-            VALUES (:nombre, :segundo_nombre, :primer_apellido, :segundo_apellido, :SSN, :alien_number, :genero, :fecha_nacimiento, :direccion, :ciudad, :estado, :codigo_postal, :telefono, :email, :empresa, :notas, :actualizado)";
+    $sql = "INSERT INTO $tabla (nombre, segundo_nombre, primer_apellido, segundo_apellido, SSN, alien_number, genero, fecha_nacimiento, direccion, ciudad, estado, codigo_postal, telefono, email, empresa, notas, actualizado, en_poliza)
+            VALUES (:nombre, :segundo_nombre, :primer_apellido, :segundo_apellido, :SSN, :alien_number, :genero, :fecha_nacimiento, :direccion, :ciudad, :estado, :codigo_postal, :telefono, :email, :empresa, :notas, :actualizado, :en_poliza)";
 
     $stmt = $this->DB->prepare($sql);
 
@@ -134,6 +134,7 @@ class DatosManager{
     //$stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
     $stmt->bindParam(':notas', $datos['notas']);
     $stmt->bindParam(':actualizado', $datos['actualizado']);
+    $stmt->bindParam(':en_poliza', $datos['seguro']);
 
     // Ejecutar la sentencia
     if ($stmt->execute()) {

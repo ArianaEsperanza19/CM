@@ -9,6 +9,9 @@ class ClienteController
     }
     public function Crear() {
         //echo "Soy el formulario para un nuevo cliente";
+        echo"<pre>";print_r($_POST['dependientes']);echo"</pre>";
+        echo"<pre>";print_r($_POST['matrimonio']);echo"</pre>";
+// die();
         if(isset($_POST)) {
 
             $datos = new DatosManager(tabla : 'Titulares');
@@ -17,25 +20,41 @@ class ClienteController
             $cliente_id = $cliente_id['id_cliente'];
             if($sentencia){
 
-            if($_POST['matrimonio'] == 1 && $_POST['dependientes'] == 0){
-                header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=0");
-                //die('detenido en matrimonio 1 y dependientes 0');
-            }
-            if($_POST['dependientes'] == 1 && $_POST['matrimonio'] == 1){
-                header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=1");
-                //die('detenido en dependientes 1 y matrimonio 1');
-            }
-            if($_POST['dependientes'] == 1 && $_POST['matrimonio'] == 0){
-                header("Location: ?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente_id&depende=1");
-                //die('detenido en dependientes 1 y matrimonio 0');
-            }
-            if($_POST['matrimonio'] == 0 && $_POST['dependientes'] == 0){
-                header('Location: ?controller=Paneles&action=index');
-            }
-            }else{
-                header('Location: ?controller=Paneles&action=index');
-            }}
-    }
+            // if($_POST['matrimonio'] == 1 && $_POST['dependientes'] == 0){
+            //     header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=0");
+            //     //die('detenido en matrimonio 1 y dependientes 0');
+            // }
+            // if($_POST['dependientes'] == 1 && $_POST['matrimonio'] == 1){
+            //     header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=1");
+            //     //die('detenido en dependientes 1 y matrimonio 1');
+            // }
+            // if($_POST['dependientes'] == 1 && $_POST['matrimonio'] == 0){
+            //     header("Location: ?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente_id&depende=1");
+            //     //die('detenido en dependientes 1 y matrimonio 0');
+            // }
+            // if($_POST['matrimonio'] == 0 && $_POST['dependientes'] == 0){
+            //     header('Location: ?controller=Paneles&action=index');
+            // }
+            // }else{
+            //     header('Location: ?controller=Paneles&action=index');
+            // }}
+if($_POST['matrimonio'] == 1 && $_POST['dependientes'] == 0){
+    header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=0");
+    exit;
+} elseif($_POST['dependientes'] == 1 && $_POST['matrimonio'] == 1){
+    header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=1");
+    exit;
+} elseif($_POST['dependientes'] == 1 && $_POST['matrimonio'] == 0){
+    header("Location: ?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente_id&depende=1");
+    exit;
+} elseif($_POST['matrimonio'] == 0 && $_POST['dependientes'] == 0){
+    header('Location: ?controller=Paneles&action=index');
+    exit;
+} else {
+    header('Location: ?controller=Paneles&action=index');
+    exit;
+}
+    }}}
     public function Agregar_Conyugue() {
         # Verificar si se puede usar sin datosmanager
         if(isset($_POST)) {

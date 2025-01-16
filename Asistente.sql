@@ -18,6 +18,7 @@ CREATE TABLE Titulares (
     telefono VARCHAR(20),
     email VARCHAR(50),
     empresa VARCHAR(50),
+    en_poliza VARCHAR(20),
     estatus_migratorio BOOLEAN,
     declaracion_fiscal BOOLEAN,
     actualizado BOOLEAN,

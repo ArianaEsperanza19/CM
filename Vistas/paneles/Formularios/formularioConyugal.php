@@ -11,7 +11,7 @@ if(isset($_GET['id_cliente'])){
     echo "<div id='contenedor'>
     <a class='boton' href='?controller=Paneles&action=info&cliente=$id'>Volver</a>";
     # Si tiene dependientes
-    if(isset($_GET['depende']) == 1){
+    if(isset($_GET['depende']) && $_GET['depende'] == 1){
     $redireccion = "?controller=Cliente&action=Agregar_Conyugue&id_cliente=$id&depende=1";
     }
     # No tiene dependientes
@@ -49,7 +49,7 @@ if(isset($conyugue) == 1){
     <select id='seguro' name='seguro'>
     ";
     if($seguro == 'si'){
-        echo "<option value='si' selected>Si</option>";   
+        echo "<option value='si' selected>Si</option>";
         echo "<option value='no'>No</option>";
     }
     if($seguro == 'no'){
@@ -89,10 +89,11 @@ if(isset($conyugue) == 1){
     </select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
-    <button type='submit'>Enviar</button>
+    <button type='submit' class='boton'>Enviar</button>
 </form></div></div>
 ";
 }else{
+
     # Agregar conyugue
     echo "
     <div id='datos'>
@@ -124,7 +125,7 @@ if(isset($conyugue) == 1){
     </select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
-    <button type='submit'>Enviar</button>
+    <button type='submit' class='boton'>Enviar</button>
 </form></div></div>
 ";
 }

@@ -28,13 +28,28 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'
         $empresa = $dato["empresa"];
         $actualizado = $dato["actualizado"];
         $notas = $dato["notas"];
+        $seguro = $dato["en_poliza"];
     }
     $redirect = "?controller=Cliente&action=Editar&cliente=$id";
     echo "
     <div id='datos'>
     <h2>Formulario de Registro de Titulares</h2>
     <form action='$redirect' method='POST'>
-    <label for='nombre'>Nombre:</label><br>
+    <label for='seguro'>¿El titular está en la poliza?</label>
+    <select id='seguro' name='seguro'>";
+
+        if($seguro == 'si'){
+         echo "<option value='si' selected>Si</option>";
+        echo "<option value='no'>No</option>";
+        }
+        if($seguro == 'no'){
+        echo "<option value='no' selected>No</option>";
+        echo "<option value='no'>No</option>";
+
+        }
+
+
+    echo"</select><br><label for='nombre'>Nombre:</label><br>
     <input value='$nombre' type='text' id='nombre' name='nombre' maxlength='50' required><br>
     <label for='segundo_nombre'>Segundo Nombre:</label><br>
     <input value='$segundo_nombre' type='text' id='segundo_nombre' name='segundo_nombre' maxlength='50'><br>
@@ -84,11 +99,16 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'
 </form>
 </div>";
 }else{
+echo "<div id='contenedor'><a href='?controller=Paneles&action=index'>Cancelar</a>";
     echo "
     <div id='datos'>
     <h2>Formulario de Registro de Titulares</h2>
     <form action='?controller=Cliente&action=Crear' method='POST'>
-    <label for='nombre'>Nombre:</label><br>
+    <label for='seguro'>¿El titular está en la poliza? </label>
+    <select id='seguro' name='seguro'>
+    <option value='si' selected>Si</option>
+    <option value='no'>No</option>
+    </select><br><label for='nombre'>Nombre:</label><br>
     <input type='text' id='nombre' name='nombre' maxlength='50' required><br>
     <label for='segundo_nombre'>Segundo Nombre:</label><br>
     <input type='text' id='segundo_nombre' name='segundo_nombre' maxlength='50'><br>

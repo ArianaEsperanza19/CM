@@ -119,7 +119,7 @@ if(isset($depende) == 1){
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'><br>
     <button class='boton' type='submit'>Enviar</button>
-    <a href='?controller=Paneles&action=index'>Listo</a>
+    <a class='boton' href='?controller=Paneles&action=info&cliente=$id_titular'>Listo</a>
     </form>
     </div>
     </div>";
