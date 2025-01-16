@@ -69,17 +69,6 @@ class DBController {
         $conexion->exec($sql);
 
         $sql = "
-            CREATE TABLE IF NOT EXISTS Cuentas (
-                id_cliente INT,
-                numero_cuenta VARCHAR(20),
-                tipo_cuenta VARCHAR(20),
-                PRIMARY KEY (id_cliente),
-                FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
-            );
-        ";
-        $conexion->exec($sql);
-
-        $sql = "
             CREATE TABLE IF NOT EXISTS Registros (
                 id_registro INT PRIMARY KEY AUTO_INCREMENT,
                 id_cliente INT,

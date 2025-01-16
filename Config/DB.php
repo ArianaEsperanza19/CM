@@ -1,5 +1,5 @@
 <?php
-$_SESSION['DB_name'] = "AsistenteSeguris";
+$_SESSION['DB_name'] = "AsistenteSeguros";
 $_SESSION['DB_user'] = "root";
 $_SESSION['DB_pass'] = "";
 class DB{
