@@ -6,8 +6,10 @@
 - [x] Crear tablas
 - [x] Crear relaciones
 <!-- - [ ] Dar usuarios y contraseñas -->
-- [ ] Crear interfaz para conectar a la base de datos
-- [ ] Que detecte si no se ha conectado a ninguna base de datos y exige conectarse a una
+- [x] Crear interfaz para conectar a la base de datos
+- [x] Que detecte si no se ha conectado a ninguna base de datos y exige conectarse a una
+- [x] Botón para exportar datos como CSV o sql
+- [ ] Botón para importar datos
 
 ## Titulares Crud
 - [x] Ingresar nuevo cliente
@@ -16,6 +18,7 @@
 - [x] Eliminar Cliente
 - [x] Al eliminar Cliente, borrar los miembros de su grupo
 - [x] Mensaje de advertencia al eliminar un cliente
+- [ ] Paginar listado de clientes en el index
 
 ## Datos Bancarios del Cliente
 - [x] Ingresar nueva cuenta (números de cuenta, tipo de cuenta)
@@ -25,10 +28,10 @@
 ## Cónyuges y dependientes
 - [x] Ingresar nuevo cónyuge
 - [x] Ingresar un dependiente
-- [x] Agregar multiples dependientes
+- [x] Agregar múltiples dependientes
 - [x] Listar grupo de un Titular
 - [x] Editar grupo
-- [x] Asegurarse de que solo se puede tener un conyugue al mismo tiempo
+- [x] Asegurarse de que solo se puede tener un cónyuge al mismo tiempo
 
 ## Datos del Seguro
 - [x] Ingresar nuevo seguro y sus números
@@ -57,9 +60,9 @@
 - [x] Editar grupo
 - [x] Eliminar miembros por separado
 - [x] Ver información del seguro
-- [x] Ver imagenes del Titular
-- [x] Formulario para subir y editar imagenes
+- [x] Ver imágenes del Titular
+- [x] Formulario para subir y editar imágenes
 - [ ] Estilizar formularios y hacerlos responsive
 ### Detalles
-- [x] Asegurarse de que al retroceder después de una edicion, desaparezca la informacion en el formulario.
-- [ ] Escapar datos de los formularios
+- [x] Asegurarse de que al retroceder después de una edición, desaparezca la información en el formulario.
+- [x] Escapar datos de los formularios

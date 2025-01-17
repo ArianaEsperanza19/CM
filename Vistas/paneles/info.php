@@ -8,7 +8,9 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     $DB = new DatosManager(tabla: 'Titulares');
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
     $_SESSION['eliminar'] = true;
-    echo "<a class='boton' style='margin-left:0' href='?controller=Paneles&action=index'>Inicio</a><h1>Informacion Poliza</h1>";
+    echo "  <a class='boton' style='margin-left:0' href='?controller=Paneles&action=index'>Inicio</a>
+            <a class='boton' style='margin-left:0' href='?controller=DB&action=exportarGrupo&id=$cliente'>Exportar</a>
+            <h1>Informacion Poliza</h1>";
     foreach ($titular as $dato) {
     $id = $dato['id_cliente'];
     echo "<div class='barra'>";
@@ -91,17 +93,6 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
     echo "<p><b>Cobertura:</b> $dato[en_poliza]</p></div></div></div>";
-
-    // echo "<a class='boton' style='margin-left:0px; margin-right:4px;' href='?controller=Paneles&action=editar&cliente=$id&conyugue=1&titular=$cliente'>Editar</a>";
-    // echo "<div class='miembro'>";
-    // echo "<p><b>Nombre:</b> $dato[nombre]</p>";
-    // echo "<p><b>Segundo nombre:</b> $dato[segundo_nombre]</p>";
-    // echo "<p><b>Apellido:</b> $dato[apellido]</p>";
-    // echo "<p><b>Genero:</b> $dato[genero]</p>";
-    // echo "<p><b>Fecha de Nacimiento:</b> $dato[fecha_nacimiento]</p>";
-    // echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
-    // echo "<p><b>SSN:</b> $dato[SSN]</p>";
-    // echo "<p><b>Cobertura:</b> $dato[en_poliza]</p></div>";
     }
 } else {
     // La consulta no ha encontrado nada
@@ -127,9 +118,8 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     echo "<p><b>Fecha de Nacimiento:</b> $dato[fecha_nacimiento]</p>";
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
-    echo "<p><b>Cobertura:</b> $dato[en_poliza]</p></div>";
-    echo "</div>";
-    echo "<hr><br>";
+    echo "<p><b>Cobertura:</b> $dato[en_poliza]</p></div>
+    <p style='padding-left:10px;'><b> Relacion:</b></p></div><hr><br>";
 }
     echo "<br><a class='boton' style:'margin-left:0px' href='?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente&depende=0'>Agregar +</a><br><br>";
 ?>

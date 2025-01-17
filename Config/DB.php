@@ -2,10 +2,11 @@
 $_SESSION['DB_name'] = "AsistenteSeguros";
 $_SESSION['DB_user'] = "root";
 $_SESSION['DB_pass'] = "";
+$_SESSION['DB_host'] = "localhost";
 class DB{
     public static function Connect(){
     try {
-    $conexion = new PDO("mysql:host=localhost;dbname=".$_SESSION['DB_name'], $_SESSION['DB_user'], $_SESSION['DB_pass']);
+    $conexion = new PDO("mysql:host=".$_SESSION['DB_host'].";dbname=".$_SESSION['DB_name'], $_SESSION['DB_user'], $_SESSION['DB_pass']);
     }catch(PDOException $e){ {
     echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/advertencia.css\">";
     echo "<div id='advertencia' style='margin-top: 5%;'>";
