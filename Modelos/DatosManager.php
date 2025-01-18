@@ -103,15 +103,13 @@ class DatosManager{
      * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
      */
 
-
     // Asignar valores
     $tabla = $this->tabla;
     $this->DB = DB::Connect();
 
     // Construir la sentencia SQL
-    $sql = "INSERT INTO $tabla (nombre, segundo_nombre, primer_apellido, segundo_apellido, SSN, alien_number, genero, fecha_nacimiento, direccion, ciudad, estado, codigo_postal, telefono, email, empresa, notas, actualizado, en_poliza)
-            VALUES (:nombre, :segundo_nombre, :primer_apellido, :segundo_apellido, :SSN, :alien_number, :genero, :fecha_nacimiento, :direccion, :ciudad, :estado, :codigo_postal, :telefono, :email, :empresa, :notas, :actualizado, :en_poliza)";
-
+    $sql = "INSERT INTO $tabla (nombre, segundo_nombre, primer_apellido, segundo_apellido, SSN, alien_number, genero, fecha_nacimiento, estatus_migratorio, declaracion_fiscal, direccion, ciudad, estado, codigo_postal, telefono, email, empresa, notas, actualizado, en_poliza)
+            VALUES (:nombre, :segundo_nombre, :primer_apellido, :segundo_apellido, :SSN, :alien_number, :genero, :fecha_nacimiento, :estatus_migratorio, :declaracion_fiscal, :direccion, :ciudad, :estado, :codigo_postal, :telefono, :email, :empresa, :notas, :actualizado, :en_poliza)";
     $stmt = $this->DB->prepare($sql);
 
     // Vincular los parámetros con los datos
@@ -130,8 +128,8 @@ class DatosManager{
     $stmt->bindParam(':telefono', $datos['telefono']);
     $stmt->bindParam(':email', $datos['email']);
     $stmt->bindParam(':empresa', $datos['empresa']);
-    //$stmt->bindParam(':declaracion_fiscal', $datos['declaracion_fiscal'], PDO::PARAM_BOOL);
-    //$stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
+    $stmt->bindParam(':estatus_migratorio', $datos['estatus']);
+    $stmt->bindParam(':declaracion_fiscal', $datos['fiscal']);
     $stmt->bindParam(':notas', $datos['notas']);
     $stmt->bindParam(':actualizado', $datos['actualizado']);
     $stmt->bindParam(':en_poliza', $datos['seguro']);
@@ -176,6 +174,8 @@ public function Editar($datos, $id) {
             SSN = :SSN,
             alien_number = :alien_number,
             fecha_nacimiento = :fecha_nacimiento,
+            estatus_migratorio = :estatus_migratorio,
+            declaracion_fiscal = :declaracion_fiscal,
             direccion = :direccion,
             ciudad = :ciudad,
             estado = :estado,
@@ -198,6 +198,8 @@ public function Editar($datos, $id) {
     $stmt->bindParam(':SSN', $datos['ssn']);
     $stmt->bindParam(':alien_number', $datos['alien_number']);
     $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
+    $stmt->bindParam(':estatus_migratorio', $datos['estatus']);
+    $stmt->bindParam(':declaracion_fiscal', $datos['fiscal']);
     $stmt->bindParam(':direccion', $datos['direccion']);
     $stmt->bindParam(':ciudad', $datos['ciudad']);
     $stmt->bindParam(':estado', $datos['estado']);

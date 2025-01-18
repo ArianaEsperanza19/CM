@@ -20,24 +20,6 @@ class ClienteController
             $cliente_id = $cliente_id['id_cliente'];
             if($sentencia){
 
-            // if($_POST['matrimonio'] == 1 && $_POST['dependientes'] == 0){
-            //     header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=0");
-            //     //die('detenido en matrimonio 1 y dependientes 0');
-            // }
-            // if($_POST['dependientes'] == 1 && $_POST['matrimonio'] == 1){
-            //     header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=1");
-            //     //die('detenido en dependientes 1 y matrimonio 1');
-            // }
-            // if($_POST['dependientes'] == 1 && $_POST['matrimonio'] == 0){
-            //     header("Location: ?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente_id&depende=1");
-            //     //die('detenido en dependientes 1 y matrimonio 0');
-            // }
-            // if($_POST['matrimonio'] == 0 && $_POST['dependientes'] == 0){
-            //     header('Location: ?controller=Paneles&action=index');
-            // }
-            // }else{
-            //     header('Location: ?controller=Paneles&action=index');
-            // }}
 if($_POST['matrimonio'] == 1 && $_POST['dependientes'] == 0){
     header("Location: ?controller=Paneles&action=formularioConyugal"."&id_cliente=$cliente_id&depende=0");
     exit;

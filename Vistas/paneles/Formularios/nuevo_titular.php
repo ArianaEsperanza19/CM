@@ -28,6 +28,8 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'
         $empresa = $dato["empresa"];
         $actualizado = $dato["actualizado"];
         $notas = $dato["notas"];
+        $estatus = $dato["estatus_migratorio"];
+        $fiscal = $dato["declaracion_fiscal"];
         $seguro = $dato["en_poliza"];
     }
     $redirect = "?controller=Cliente&action=Editar&cliente=$id";
@@ -90,11 +92,21 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'
     <input value='$empresa' type='text' id='empresa' name='empresa' maxlength='50'><br>
     <label for='notas'>Notas:</label><br>
     <textarea value='$notas' id='notas' name='notas' maxlength='200'></textarea><br>
-    <label for='actualizado'>¿La información está actualizada? </label>
-    <select id='actualizado' name='actualizado'>";
-    if($actualizado == "0"){ echo "<option value='0' selected>No</option>";}
-    if($actualizado == "1"){ echo "<option value='1'>Sí</option>";}
-    echo "</select><br>
+<label for='fiscal'>¿Hizo una declaración fiscal? </label>
+<select id='fiscal' name='fiscal'>";
+    if ($fiscal == "0"){echo "<option value='0' selected>No</option>"; echo "<option value='1'>Sí</option>";}
+    if ($fiscal == "1"){echo "<option value='1' selected>Sí</option>"; echo "<option value='0'>No</option>";}
+echo "</select><br>
+<label for='actualizado'>¿Tiene estatus migratorio? </label>
+<select id='estatus' name='estatus'>";
+    if ($estatus == "0"){echo "<option value='0' selected>No</option>"; echo "<option value='1'>Sí</option>";}
+    if ($estatus == "1"){echo "<option value='1' selected>Sí</option>"; echo "<option value='0'>No</option>";}
+echo "</select><br>
+<label for='actualizado'>¿La información está actualizada? </label>
+<select id='actualizado' name='actualizado'>";
+if($actualizado == "0"){ echo "<option value='0' selected>No</option>"; echo "<option value='1'>Sí</option>";}
+if($actualizado == "1"){ echo "<option value='1' selected>Sí</option>"; echo "<option value='0'>No</option>";}
+echo "</select><br>
     <button class='boton' type='submit'>Enviar</button>
 </form>
 </div>";
@@ -143,10 +155,20 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=index'>Cancelar</
     <input type='text' id='empresa' name='empresa' maxlength='50'><br>
     <label for='notas'>Notas:</label><br>
     <textarea id='notas' name='notas' maxlength='200'></textarea><br>
-    <label for='actualizado'>¿La información está actualizada? </label>
-    <select id='actualizado' name='actualizado'>
+    <label for='fiscal'>¿Hizo una declaración fiscal? </label>
+    <select id='fiscal' name='fiscal'>
         <option value='0' selected>No</option>
         <option value='1'>Sí</option>
+    </select><br>
+    <label for='estatus'>¿Tiene estatus migratorio? </label>
+    <select id='estatus' name='estatus'>
+        <option value='0' selected>No</option>
+        <option value='1'>Sí</option>
+    </select><br>
+    <label for='actualizado'>¿La información está actualizada? </label>
+    <select id='actualizado' name='actualizado'>
+    <option value='0' selected>No</option>
+    <option value='1'>Sí</option>
     </select><br>
     <label for='conyugue'>¿Está casad@? </label>
     <select id='conyugue' name='matrimonio'>
@@ -161,7 +183,6 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=index'>Cancelar</
     <button class='boton' type='submit'>Enviar</button>
 </form>
 </div>
-</div>
-    ";
+</div>";
 }
 ?>

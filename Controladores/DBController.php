@@ -33,8 +33,8 @@ public function __construct() {
                 email VARCHAR(50),
                 empresa VARCHAR(50),
                 en_poliza VARCHAR(20),
-                estatus_migratorio BOOLEAN,
-                declaracion_fiscal BOOLEAN,
+                estatus_migratorio INT(1),
+                declaracion_fiscal INT(1),
                 actualizado BOOLEAN,
                 notas VARCHAR(200)
             );
@@ -116,11 +116,7 @@ try{
 $sql = "SELECT * FROM Titulares";
 $titulares = $this->DB->query($sql);
 $titulares = $titulares->fetchAll();
-}catch(PDOException $e){
-die("Error al buscar en base de datos: ".$e->getMessage());
 
-}
-if($titulares){
     header("Content-Type: text/csv");
     header("Content-Disposition: attachment; filename=titulares.csv");
     echo "id_cliente,nombre,segundo_nombre,primer_apellido,segundo_apellido,SSN,alien_number,genero,fecha_nacimiento,direccion,ciudad,estado,codigo_postal,telefono,email,empresa,estatus_migratorio,declaracion_fiscal,actualizado,notas,en_poliza\n";
@@ -146,10 +142,70 @@ if($titulares){
         echo "$titular[actualizado],";
         echo "$titular[notas],";
         echo "$titular[en_poliza]\n";
+}
+echo "id_miembro_grupo,nombre,segundo_nombre,apellido,SSN,alien_number,genero,fecha_nacimiento,en_poliza,estatus_migratorio,pareja,relacion\n";
+foreach ($titulares as $id_titular) {
+    $sql = "SELECT * FROM Conyugues_Dependientes WHERE id_cliente = :id AND pareja = 1";
+    $stmt = $this->DB->prepare($sql);
+    $stmt->bindParam(':id', $id_titular['id_cliente']);
+    $stmt->execute();
+    $conyuge = $stmt->fetch();
+    // contar columnas
+    if($conyuge){
+    echo "$conyuge[id_miembro_grupo],";
+    echo "$conyuge[nombre],$conyuge[segundo_nombre],$conyuge[apellido],";
+    echo "$conyuge[SSN],$conyuge[alien_number],$conyuge[genero],$conyuge[fecha_nacimiento],$conyuge[en_poliza],$conyuge[estatus_migratorio],$conyuge[pareja],$conyuge[relacion]\n";
 
-    }
-exit;
-}}
+    }else{
+    continue;
+}
+$sql = "SELECT * FROM Conyugues_Dependientes WHERE id_cliente = :id AND pareja = 0";
+$stmt = $this->DB->prepare($sql);
+$stmt->bindParam(':id', $id_titular['id_cliente']);
+$stmt->execute();
+$dependientes = $stmt->fetch();
+if($dependientes){
+echo "$dependientes[id_miembro_grupo],";
+echo "$dependientes[nombre],$dependientes[segundo_nombre],$dependientes[apellido],";
+echo "$dependientes[SSN],$dependientes[alien_number],$dependientes[genero],$dependientes[fecha_nacimiento],$dependientes[en_poliza],$dependientes[estatus_migratorio],$dependientes[pareja]\n";
+}
+}
+// die();
+}catch(PDOException $e){
+die("Error al buscar en base de datos: ".$e->getMessage());
+
+}
+// if($titulares){
+//     header("Content-Type: text/csv");
+//     header("Content-Disposition: attachment; filename=titulares.csv");
+//     echo "id_cliente,nombre,segundo_nombre,primer_apellido,segundo_apellido,SSN,alien_number,genero,fecha_nacimiento,direccion,ciudad,estado,codigo_postal,telefono,email,empresa,estatus_migratorio,declaracion_fiscal,actualizado,notas,en_poliza\n";
+//     foreach ($titulares as $titular) {
+//         echo "$titular[id_cliente],";
+//         echo "$titular[nombre],";
+//         echo "$titular[segundo_nombre],";
+//         echo "$titular[primer_apellido],";
+//         echo "$titular[segundo_apellido],";
+//         echo "$titular[SSN],";
+//         echo "$titular[alien_number],";
+//         echo "$titular[genero],";
+//         echo "$titular[fecha_nacimiento],";
+//         echo "$titular[direccion],";
+//         echo "$titular[ciudad],";
+//         echo "$titular[estado],";
+//         echo "$titular[codigo_postal],";
+//         echo "$titular[telefono],";
+//         echo "$titular[email],";
+//         echo "$titular[empresa],";
+//         echo "$titular[estatus_migratorio],";
+//         echo "$titular[declaracion_fiscal],";
+//         echo "$titular[actualizado],";
+//         echo "$titular[notas],";
+//         echo "$titular[en_poliza]\n";
+//
+//     }
+// exit;
+// }
+}//Fin de exportarCSV
 
 public function exportarGrupoCSV(){
     if(isset($_GET['id'])){
