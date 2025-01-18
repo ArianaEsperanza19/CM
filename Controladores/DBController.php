@@ -123,7 +123,7 @@ die("Error al buscar en base de datos: ".$e->getMessage());
 if($titulares){
     header("Content-Type: text/csv");
     header("Content-Disposition: attachment; filename=titulares.csv");
-        echo "id_cliente,nombre,segundo_nombre,primer_apellido,segundo_apellido,SSN,alien_number,genero,fecha_nacimiento,direccion,ciudad,estado,codigo_postal,telefono,email,empresa,en_poliza,estatus_migratorio,declaracion_fiscal,actualizado,notas\n";
+    echo "id_cliente,nombre,segundo_nombre,primer_apellido,segundo_apellido,SSN,alien_number,genero,fecha_nacimiento,direccion,ciudad,estado,codigo_postal,telefono,email,empresa,estatus_migratorio,declaracion_fiscal,actualizado,notas,en_poliza\n";
     foreach ($titulares as $titular) {
         echo "$titular[id_cliente],";
         echo "$titular[nombre],";
@@ -141,20 +141,17 @@ if($titulares){
         echo "$titular[telefono],";
         echo "$titular[email],";
         echo "$titular[empresa],";
-        echo "$titular[en_poliza],";
         echo "$titular[estatus_migratorio],";
         echo "$titular[declaracion_fiscal],";
         echo "$titular[actualizado],";
-        echo "$titular[notas]\n";
+        echo "$titular[notas],";
+        echo "$titular[en_poliza]\n";
+
     }
 exit;
 }}
 
 public function exportarGrupoCSV(){
-
-}
-
-public function exportarDB(){
     if(isset($_GET['id'])){
         $id = $_GET['id'];
         try {

@@ -9,12 +9,12 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
     $_SESSION['eliminar'] = true;
     echo "  <a class='boton' style='margin-left:0' href='?controller=Paneles&action=index'>Inicio</a>
-            <a class='boton' style='margin-left:0' href='?controller=DB&action=exportarGrupo&id=$cliente'>Exportar</a>
+            <a class='boton' style='margin-left:0' href='?controller=DB&action=exportarGrupoCSV&id=$cliente'>Exportar</a>
             <h1>Informacion Poliza</h1>";
     foreach ($titular as $dato) {
     $id = $dato['id_cliente'];
     echo "<div class='barra'>";
-    echo "<a class='boton' style='margin-left:0px;' href='?controller=Paneles&action=editar&cliente_titular=$id'>Editar Titular</a>";
+    echo "<a class='boton' style='margin-left:0px;' href='?controller=Paneles&action=editar&cliente_titular=$id'>Editar Titular #$cliente</a>";
     echo "<a class='boton' href='?controller=Paneles&action=InfoSeguros&cliente=$cliente'>Informacion de Seguros</a>
     <a class='boton' href='?controller=Paneles&action=InfoBanco&cliente=$cliente'>Informacion Bancaria</a>
     <a class='boton' href='?controller=Paneles&action=formularioRegistro&cliente=$cliente'>Registro</a>

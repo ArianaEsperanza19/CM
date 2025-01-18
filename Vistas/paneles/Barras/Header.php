@@ -9,6 +9,6 @@
 <body>
 <p> Panel de Control
 <a href="?controller=DB&action=exportarCSV">Exportar Titulares</a>
-<a href="?controller=DB&action=exportarSQL">Exportar Datos</a>
+<a href="?controller=DB&action=importarTitularesCSV">Importar Titulares</a>
 </p>
 
