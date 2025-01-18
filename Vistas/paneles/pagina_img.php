@@ -42,7 +42,14 @@ if(isset($_SESSION['flash'])){
         echo "</div>";
     }else{
 
+        $DB = new DatosManager(tabla: 'Img');
+        $imagenes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
+if($imagenes->rowCount() == 0){
+echo "<div id='contenedor'><a class='boton' href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
+}elseif($imagenes->rowCount() > 0){
 echo "<div id='contenedor'><a class='boton' href='?controller=Paneles&action=pagina_img&cliente=$cliente&add=0'>Volver</a>";
+
+}
 # Formulario para registrar imagen
 if (isset($_GET['add']) && isset($_GET['cliente']) && $_GET['add'] == 1) {
     echo "

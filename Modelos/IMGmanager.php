@@ -75,18 +75,3 @@ class IMGmanager {
      }
 }
 ?>
-/*
-// Ejemplo de uso
-$imgManager = new IMGmanager("assets/img/");
-$imagen = "nombre_de_la_imagen.jpg";
-
-// Borrar imagen
-$resultadoBorrar = $imgManager->borrarImagen($imagen);
-echo $resultadoBorrar;
-
-// Subir imagen
-$image = $_FILES['imagen'];
-$resultadoSubir = $imgManager->uploadImage($image);
-echo $resultadoSubir;
-*/
-
