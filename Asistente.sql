@@ -35,7 +35,7 @@ CREATE TABLE Datos_Seguro (
     FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
 );
 
-CREATE TABLE Conyugues_Dependientes (
+CREATE TABLE Conyuges_Dependientes (
     id_miembro_grupo INT PRIMARY KEY AUTO_INCREMENT,
     id_cliente INT,
     nombre VARCHAR(50),

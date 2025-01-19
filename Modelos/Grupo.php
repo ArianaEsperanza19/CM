@@ -23,7 +23,7 @@ class Grupo
         // Verificar si la sesión está iniciada y la variable 'cliente' está definida
         // Construir la sentencia SQL
 
-$sql = "INSERT INTO Conyugues_Dependientes (
+$sql = "INSERT INTO Conyuges_Dependientes (
             id_cliente,
             en_poliza,
             nombre,
@@ -91,7 +91,7 @@ $stmt->bindParam(':relacion', $datos['relacion']);
 
     public function eliminar_uno($id)
     {
-        $stmt = $this->DB->prepare("DELETE FROM Conyugues_Dependientes WHERE id_miembro_grupo = :id");
+        $stmt = $this->DB->prepare("DELETE FROM Conyuges_Dependientes WHERE id_miembro_grupo = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt;
@@ -108,7 +108,7 @@ $stmt->bindParam(':relacion', $datos['relacion']);
          * @param int $id_cliente El ID del registro a editar.
          * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
          */
-        $sql = "UPDATE Conyugues_Dependientes SET
+        $sql = "UPDATE Conyuges_Dependientes SET
                     en_poliza = :en_poliza,
                     nombre = :nombre,
                     segundo_nombre = :segundo_nombre,
@@ -145,7 +145,7 @@ $stmt->bindParam(':relacion', $datos['relacion']);
 
     public function info_titular($id)
     {
-        $stmt = $this->DB->prepare("SELECT id_cliente FROM Conyugues_Dependientes WHERE id_miembro_grupo = :id");
+        $stmt = $this->DB->prepare("SELECT id_cliente FROM Conyuges_Dependientes WHERE id_miembro_grupo = :id");
         $stmt->execute([':id' => $id]);
         return $stmt->fetchColumn();
     }

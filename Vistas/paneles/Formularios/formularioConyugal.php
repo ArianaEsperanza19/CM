@@ -12,11 +12,11 @@ if(isset($_GET['id_cliente'])){
     <a class='boton' href='?controller=Paneles&action=info&cliente=$id'>Volver</a>";
     # Si tiene dependientes
     if(isset($_GET['depende']) && $_GET['depende'] == 1){
-    $redireccion = "?controller=Cliente&action=Agregar_Conyugue&id_cliente=$id&depende=1";
+    $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=1";
     }
     # No tiene dependientes
     else{
-    $redireccion = "?controller=Cliente&action=Agregar_Conyugue&id_cliente=$id&depende=0";
+    $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=0";
     }
 }
 # Editar conyugue
@@ -27,7 +27,7 @@ if(isset($conyugue) == 1){
     $titular = isset($_GET['titular']) ? $_GET['titular'] : false;
     echo "<div id='contenedor'>
     <a class='boton' href='?controller=Paneles&action=info&cliente=$titular'>Volver</a>";
-    $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
+    $DB = new DatosManager(tabla: 'Conyuges_Dependientes');
     $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND relacion = 'Conyuge'");
     foreach ($datos as $dato) {
         $nombre = $dato['nombre'];
@@ -43,7 +43,7 @@ if(isset($conyugue) == 1){
     $redireccion = "?controller=Cliente&action=Editar&cliente=$id&conyugue=1";
     echo "
     <div id='datos'>
-    <h2>Formulario del Conyugue</h2>
+    <h2>Formulario del Conyuge</h2>
     <form action='$redireccion' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
     <select id='seguro' name='seguro'>
@@ -94,7 +94,7 @@ if(isset($conyugue) == 1){
     # Agregar conyugue
     echo "
     <div id='datos'>
-    <h2>Formulario del Conyugue</h2>
+    <h2>Formulario del Conyuge</h2>
     <form action='$redireccion' method='POST'>
     <label for='seguro'>¿Solicita la cobertura? </label>
     <select id='seguro' name='seguro'>

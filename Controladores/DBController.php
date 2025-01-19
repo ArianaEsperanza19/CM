@@ -66,7 +66,7 @@ public function __construct() {
         $conexion->exec($sql);
 
         $sql = "
-            CREATE TABLE IF NOT EXISTS Conyugues_Dependientes (
+            CREATE TABLE IF NOT EXISTS Conyuges_Dependientes (
                 id_miembro_grupo INT PRIMARY KEY AUTO_INCREMENT,
                 id_cliente INT,
                 nombre VARCHAR(50),
@@ -118,8 +118,8 @@ $titulares = $titulares->fetchAll();
 
     header("Content-Type: text/csv");
     header("Content-Disposition: attachment; filename=titulares.csv");
-    echo "id_cliente,nombre,segundo_nombre,primer_apellido,segundo_apellido,SSN,alien_number,genero,fecha_nacimiento,direccion,ciudad,estado,codigo_postal,telefono,email,empresa,estatus_migratorio,declaracion_fiscal,actualizado,notas,en_poliza\n";
     foreach ($titulares as $titular) {
+    echo "id_cliente,nombre,segundo_nombre,primer_apellido,segundo_apellido,SSN,alien_number,genero,fecha_nacimiento,direccion,ciudad,estado,codigo_postal,telefono,email,empresa,estatus_migratorio,declaracion_fiscal,actualizado,notas,en_poliza\n";
         echo "$titular[id_cliente],";
         echo "$titular[nombre],";
         echo "$titular[segundo_nombre],";
@@ -141,35 +141,42 @@ $titulares = $titulares->fetchAll();
         echo "$titular[actualizado],";
         echo "$titular[notas],";
         echo "$titular[en_poliza]\n";
-}
-echo "id_miembro_grupo,nombre,segundo_nombre,apellido,SSN,alien_number,genero,fecha_nacimiento,en_poliza,estatus_migratorio,relacion\n";
-foreach ($titulares as $id_titular) {
-    $sql = "SELECT * FROM Conyugues_Dependientes WHERE id_cliente = :id AND relacion != 'Conyugue'";
+echo "-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-\n";
+    echo "relacion,nombre,segundo_nombre,apellido,SSN,alien_number,genero,fecha_nacimiento,en_poliza,estatus_migratorio,id_miembro_grupo,id_cliente\n";
+// echo "id_miembro_grupo,nombre,segundo_nombre,apellido,SSN,alien_number,genero,fecha_nacimiento,en_poliza,estatus_migratorio,relacion\n";
+    $sql = "SELECT * FROM Conyuges_Dependientes WHERE id_cliente = :id AND relacion = 'Conyuge'";
     $stmt = $this->DB->prepare($sql);
-    $stmt->bindParam(':id', $id_titular['id_cliente']);
+    $stmt->bindParam(':id', $titular['id_cliente']);
     $stmt->execute();
     $conyuge = $stmt->fetch();
     // contar columnas
     if($conyuge){
-    echo "$conyuge[id_miembro_grupo],";
-    echo "$conyuge[nombre],$conyuge[segundo_nombre],$conyuge[apellido],";
-    echo "$conyuge[SSN],$conyuge[alien_number],$conyuge[genero],$conyuge[fecha_nacimiento],$conyuge[en_poliza],$conyuge[estatus_migratorio],$conyuge[relacion]\n";
+    echo "$conyuge[relacion],$conyuge[nombre],$conyuge[segundo_nombre],$conyuge[apellido],";
+    echo "$conyuge[SSN],$conyuge[alien_number],$conyuge[genero],$conyuge[fecha_nacimiento],$conyuge[en_poliza],$conyuge[estatus_migratorio],$conyuge[id_miembro_grupo],$conyuge[id_cliente]\n";
 
-    }else{
-    continue;
+    }
+    $sql = "SELECT * FROM Conyuges_Dependientes WHERE id_cliente = :id AND relacion != 'Conyuge'";
+    $stmt = $this->DB->prepare($sql);
+    $stmt->bindParam(':id', $titular['id_cliente']);
+    $stmt->execute();
+    $dependientes = $stmt->fetchAll();
+    if($dependientes){
+    foreach ($dependientes as $depende) {
+    echo "$depende[relacion],";
+    echo "$depende[nombre],";
+    echo "$depende[segundo_nombre],";
+    echo "$depende[apellido],";
+    echo "$depende[SSN],";
+    echo "$depende[alien_number],";
+    echo "$depende[genero],";
+    echo "$depende[fecha_nacimiento],";
+    echo "$depende[en_poliza],";
+    echo "$depende[estatus_migratorio],";
+    echo "$depende[id_miembro_grupo]\n";
+    }
+echo "-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,-----\n";
 }
-$sql = "SELECT * FROM Conyugues_Dependientes WHERE id_cliente = :id AND relacion = 'Conyugue'";
-$stmt = $this->DB->prepare($sql);
-$stmt->bindParam(':id', $id_titular['id_cliente']);
-$stmt->execute();
-$dependientes = $stmt->fetch();
-if($dependientes){
-echo "$dependientes[id_miembro_grupo],";
-echo "$dependientes[nombre],$dependientes[segundo_nombre],$dependientes[apellido],";
-echo "$dependientes[SSN],$dependientes[alien_number],$dependientes[genero],$dependientes[fecha_nacimiento],$dependientes[en_poliza],$dependientes[estatus_migratorio]\n";
 }
-}
-// die();
 }catch(PDOException $e){
 die("Error al buscar en base de datos: ".$e->getMessage());
 
@@ -225,7 +232,7 @@ public function exportarGrupoCSV(){
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             $cuenta = $stmt->fetch();
-            $sql = "SELECT * FROM Conyugues_Dependientes WHERE id_cliente = :id";
+            $sql = "SELECT * FROM Conyuges_Dependientes WHERE id_cliente = :id";
             $stmt = $this->DB->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
@@ -259,7 +266,7 @@ public function exportarGrupoCSV(){
             foreach ($grupo as $miembro) {
                 echo "$miembro[id_miembro_grupo],";
                 if($miembro['relacion'] == 'Conyuge'){
-                    echo "Conyugue,";
+                    echo "Conyuge,";
                 }else{
                     echo "Dependiente,";
                 }

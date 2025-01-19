@@ -23,7 +23,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/conyugueDepen
 if(isset($depende) == 1){
     # id del dependiente para editar
     $id = $_GET['cliente'];
-    $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
+    $DB = new DatosManager(tabla: 'Conyuges_Dependientes');
     $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND relacion != 'Conyuge'");
     foreach ($datos as $dato) {
         $nombre = $dato['nombre'];

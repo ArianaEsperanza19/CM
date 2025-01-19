@@ -37,13 +37,13 @@ if($_POST['matrimonio'] == 1 && $_POST['dependientes'] == 0){
     exit;
 }
     }}}
-    public function Agregar_Conyugue() {
+    public function Agregar_Conyuge() {
         # Verificar si se puede usar sin datosmanager
         if(isset($_POST)) {
         if($_GET['id_cliente']){
             $id_cliente = $_GET['id_cliente'];
         }
-        $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
+        $DB = new DatosManager(tabla: 'Conyuges_Dependientes');
         require_once 'Modelos/Grupo.php';
         $registro = new Grupo($DB);
         $registro->registrar($_POST, $id_cliente);

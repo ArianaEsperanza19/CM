@@ -72,10 +72,10 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     echo "<hr>";
     }
 
-    # Conyugue
-    $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
+    # Conyuge
+    $DB = new DatosManager(tabla: 'Conyuges_Dependientes');
     $conyugue = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND relacion = 'Conyuge'");
-    echo "<h1>Informacion del Conyugue</h1>";
+    echo "<h1>Informacion del Conyuge</h1>";
     if ($conyugue->rowCount() > 0) {
     // La consulta ha encontrado algo
     foreach ($conyugue as $dato) {
