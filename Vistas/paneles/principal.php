@@ -5,7 +5,7 @@
 require_once 'Barras/Header.php';
 require_once 'Barras/Barra_buscador.php';
 # Si no hay clientes, mostrar el panel de nuevo titular
-echo "<a href='?controller=Paneles&action=nuevo_titular' id='nuevo_titular'>Nuevo Cliente</a>";
+echo "<a href='?controller=Paneles&action=formularioTitular' id='formularioTitular'>Nuevo Cliente</a>";
 require_once 'Modelos/DatosManager.php';
 $DB = new DatosManager(tabla: 'Titulares');
 $titulares = $DB->Conseguir_Todos();
@@ -24,7 +24,7 @@ echo "<p class='lista'>".$titular['id_cliente']." - ".$titular['nombre']." ".$ti
 echo "</div>";// Fin de lista de titulares
 }else{
 //Error: No hay titulares
-header('Location: ?controller=Paneles&action=nuevo_titular');
+header('Location: ?controller=Paneles&action=formularioTitular');
 }
 ?>
 <?php

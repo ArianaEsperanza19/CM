@@ -22,7 +22,7 @@
     padding-left: 5%;
 }
 
-#nuevo_titular {
+#formularioTitular {
     display: inline-block !important;
     box-sizing: border-box;
     background-color: blue;
@@ -56,7 +56,7 @@
 
 
 @media (max-width: 750px) {
-    #nuevo_titular {
+    #formularioTitular {
         width: 20%;
         margin-left: 20%;;
     }

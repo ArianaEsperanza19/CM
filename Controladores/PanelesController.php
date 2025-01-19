@@ -6,8 +6,8 @@ class PanelesController
     public function index() {
         require_once 'Vistas/paneles/principal.php';
     }
-    public function nuevo_titular() {
-        require_once 'Vistas/paneles/Formularios/nuevo_titular.php';
+    public function formularioTitular() {
+        require_once 'Vistas/paneles/Formularios/formularioTitular.php';
     }
     public function formularioConyugal() {
        require_once 'Vistas/paneles/Formularios/formularioConyugal.php';
@@ -48,7 +48,7 @@ class PanelesController
         if(isset($_GET['cliente_titular'])){
             global $editar_titular;
             $editar_titular = $_GET['cliente_titular'];
-            require_once 'Vistas/paneles/Formularios/nuevo_titular.php';
+            require_once 'Vistas/paneles/Formularios/formularioTitular.php';
         }}
     public function advertencia(){
         if($_GET['cliente']){
