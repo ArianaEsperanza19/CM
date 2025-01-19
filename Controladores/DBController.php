@@ -78,7 +78,6 @@ public function __construct() {
                 fecha_nacimiento DATE DEFAULT NULL,
                 en_poliza VARCHAR(20),
                 estatus_migratorio BOOLEAN,
-                pareja BOOLEAN,
                 relacion VARCHAR(20),
                 FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
             );
@@ -143,9 +142,9 @@ $titulares = $titulares->fetchAll();
         echo "$titular[notas],";
         echo "$titular[en_poliza]\n";
 }
-echo "id_miembro_grupo,nombre,segundo_nombre,apellido,SSN,alien_number,genero,fecha_nacimiento,en_poliza,estatus_migratorio,pareja,relacion\n";
+echo "id_miembro_grupo,nombre,segundo_nombre,apellido,SSN,alien_number,genero,fecha_nacimiento,en_poliza,estatus_migratorio,relacion\n";
 foreach ($titulares as $id_titular) {
-    $sql = "SELECT * FROM Conyugues_Dependientes WHERE id_cliente = :id AND pareja = 1";
+    $sql = "SELECT * FROM Conyugues_Dependientes WHERE id_cliente = :id AND relacion != 'Conyugue'";
     $stmt = $this->DB->prepare($sql);
     $stmt->bindParam(':id', $id_titular['id_cliente']);
     $stmt->execute();
@@ -154,12 +153,12 @@ foreach ($titulares as $id_titular) {
     if($conyuge){
     echo "$conyuge[id_miembro_grupo],";
     echo "$conyuge[nombre],$conyuge[segundo_nombre],$conyuge[apellido],";
-    echo "$conyuge[SSN],$conyuge[alien_number],$conyuge[genero],$conyuge[fecha_nacimiento],$conyuge[en_poliza],$conyuge[estatus_migratorio],$conyuge[pareja],$conyuge[relacion]\n";
+    echo "$conyuge[SSN],$conyuge[alien_number],$conyuge[genero],$conyuge[fecha_nacimiento],$conyuge[en_poliza],$conyuge[estatus_migratorio],$conyuge[relacion]\n";
 
     }else{
     continue;
 }
-$sql = "SELECT * FROM Conyugues_Dependientes WHERE id_cliente = :id AND pareja = 0";
+$sql = "SELECT * FROM Conyugues_Dependientes WHERE id_cliente = :id AND relacion = 'Conyugue'";
 $stmt = $this->DB->prepare($sql);
 $stmt->bindParam(':id', $id_titular['id_cliente']);
 $stmt->execute();
@@ -167,7 +166,7 @@ $dependientes = $stmt->fetch();
 if($dependientes){
 echo "$dependientes[id_miembro_grupo],";
 echo "$dependientes[nombre],$dependientes[segundo_nombre],$dependientes[apellido],";
-echo "$dependientes[SSN],$dependientes[alien_number],$dependientes[genero],$dependientes[fecha_nacimiento],$dependientes[en_poliza],$dependientes[estatus_migratorio],$dependientes[pareja]\n";
+echo "$dependientes[SSN],$dependientes[alien_number],$dependientes[genero],$dependientes[fecha_nacimiento],$dependientes[en_poliza],$dependientes[estatus_migratorio]\n";
 }
 }
 // die();
@@ -256,10 +255,10 @@ public function exportarGrupoCSV(){
             echo "$titular[actualizado],";
             echo "$titular[notas]\n";
             echo "-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,\n";
-            echo "MIEMBRO,Relación,Nombre,Segundo_nombre,Apellido(s),SSN,Alien_number,Fecha_nacimiento,Cobertura,Estatus Migratorio,Genero\n";
+            echo "MIEMBRO,Tipo,Nombre,Segundo_nombre,Apellido(s),SSN,Alien_number,Fecha_nacimiento,Cobertura,Estatus Migratorio,Genero,Relacion\n";
             foreach ($grupo as $miembro) {
                 echo "$miembro[id_miembro_grupo],";
-                if($miembro['pareja'] == 1){
+                if($miembro['relacion'] == 'Conyuge'){
                     echo "Conyugue,";
                 }else{
                     echo "Dependiente,";
@@ -272,7 +271,8 @@ public function exportarGrupoCSV(){
                 echo "$miembro[fecha_nacimiento],";
                 echo "$miembro[en_poliza],";
                 echo "$miembro[estatus_migratorio],";
-                echo "$miembro[genero],\n";
+                echo "$miembro[genero],";
+                echo "$miembro[relacion]\n";
             }
             echo "-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,\n";
             echo "SEGURO,Numero de poliza, Numero de miembro,Numero de grupo,Plan\n";

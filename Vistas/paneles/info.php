@@ -74,7 +74,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
 
     # Conyugue
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
-    $conyugue = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND pareja = 1");
+    $conyugue = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND relacion = 'Conyuge'");
     echo "<h1>Informacion del Conyugue</h1>";
     if ($conyugue->rowCount() > 0) {
     // La consulta ha encontrado algo
@@ -101,7 +101,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
 
 
     # Dependientes
-    $dependientes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND pareja = 0");
+    $dependientes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND relacion != 'Conyuge'");
     echo "<hr>";
     echo "<h1>Informacion de Dependientes</h1>";
     foreach ($dependientes as $dato) {
@@ -119,7 +119,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     echo "<p><b>Alien Number:</b> $dato[alien_number]</p>";
     echo "<p><b>SSN:</b> $dato[SSN]</p>";
     echo "<p><b>Cobertura:</b> $dato[en_poliza]</p></div>
-    <p style='padding-left:10px;'><b> Relacion:</b></p></div><hr><br>";
+    <p style='padding-left:10px;'><b> Relacion:</b> $dato[relacion]</p></div><hr><br>";
 }
     echo "<br><a class='boton' style:'margin-left:0px' href='?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente&depende=0'>Agregar +</a><br><br>";
 ?>

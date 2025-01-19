@@ -182,6 +182,7 @@ public function Editar($datos, $id) {
             codigo_postal = :codigo_postal,
             telefono = :telefono,
             email = :email,
+            empresa = :empresa,
             notas = :notas,
             actualizado = :actualizado
             WHERE id_cliente = :id_cliente";
@@ -206,6 +207,7 @@ public function Editar($datos, $id) {
     $stmt->bindParam(':codigo_postal', $datos['codigo_postal']);
     $stmt->bindParam(':telefono', $datos['telefono']);
     $stmt->bindParam(':email', $datos['email']);
+    $stmt->bindParam(':empresa', $datos['empresa']);
     $stmt->bindParam(':notas', $datos['notas']);
     $stmt->bindParam(':actualizado', $datos['actualizado']);
 

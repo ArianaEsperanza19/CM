@@ -1,7 +1,7 @@
 <?php
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/conyugueDependiente.css\">";
     # Centinela que vigila si se ha editado la informacion
-    if(isset($_SESSION['editar']) && isset($_GET['titular'])){
+   if(isset($_SESSION['editar']) && isset($_GET['titular'])){
     unset($_SESSION['editar']);
     header('Location: ?controller=Paneles&action=info&cliente='.$_GET['titular']);
     }
@@ -24,7 +24,7 @@ if(isset($depende) == 1){
     # id del dependiente para editar
     $id = $_GET['cliente'];
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
-    $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND pareja = 0");
+    $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND relacion != 'Conyuge'");
     foreach ($datos as $dato) {
         $nombre = $dato['nombre'];
         $segundo_nombre = $dato['segundo_nombre'];
@@ -33,6 +33,7 @@ if(isset($depende) == 1){
         $alien_number = $dato['alien_number'];
         $genero = $dato['genero'];
         $fecha_nacimiento = $dato['fecha_nacimiento'];
+        $relacion = $dato['relacion'];
         $seguro = $dato['en_poliza'];
     }
 
@@ -75,13 +76,31 @@ if(isset($depende) == 1){
         }
     echo "
     </select><br>
-    <select id='pareja' name='pareja' hidden>
-        <option value='0' selected>No</option>
-        <option value='1'>Si</option>
-    </select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
-    <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
-    <button class='boton' type='submit'>Enviar</button>
+    <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>";
+
+$opciones = array(
+array('Padre', '<option value="Padre" selected>Padre/Madre</option>', '<option value="Padre">Padre/Madre</option>'),
+array('Hijo', '<option value="Hijo" selected>Hijo/a</option>', '<option value="Hijo">Hijo/a</option>'),
+array('Sobrino', '<option value="Sobrino" selected>Sobrino/a</option>', '<option value="Sobrino">Sobrino/a</option>'),
+array('Hermano', '<option value="Hermano" selected>Hermano/a</option>', '<option value="Hermano">Hermano/a</option>'),
+array('Primo', '<option value="Primo" selected>Primo/a</option>', '<option value="Primo">Primo/a</option>'),
+array('Nieto', '<option value="Nieto" selected>Nieto/a</option>', '<option value="Nieto">Nieto/a</option>'),
+array('Cuñado', '<option value="Cuñado" selected>Cuñado/a</option>', '<option value="Cuñado">Cuñado/a</option>'),
+array('Otros', '<option value="Otros" selected>Otros</option>', '<option value="Otros">Otros</option>')
+);
+
+echo "<select id='relacion' name='relacion'>";
+foreach ($opciones as $op) {
+    if($op[0] == $relacion){
+        echo $op[1];
+    }else{
+        echo $op[2];
+    }
+}
+echo "</select><br>";
+
+echo "    <button class='boton' type='submit'>Enviar</button>
     </form>
     </div>
     </div>
@@ -112,12 +131,18 @@ if(isset($depende) == 1){
         <option value='F' selected>Femenino</option>
         <option value='M'>Masculino</option>
     </select><br>
-    <select id='pareja' name='pareja' hidden>
-        <option value='0' selected>No</option>
-        <option value='1'>Si</option>
-    </select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'><br>
+<select id='relacion' name='relacion'>
+        <option value='Progenitor' selected>Padre/Madre</option>
+        <option value='Hijo'>Hijo/a</option>
+        <option value='Sobrino'>Sobrino/a</option>
+        <option value='Hermano'>Hermano/a</option>
+        <option value='Primo'>Primo/a</option>
+        <option value='Nieto'>Nieto/a</option>
+        <option value='Cuñado'>Cuñado/a</option>
+        <option value='Otros'>Otros</option>
+</select><br>
     <button class='boton' type='submit'>Enviar</button>
     <a class='boton' href='?controller=Paneles&action=info&cliente=$id_titular'>Listo</a>
     </form>

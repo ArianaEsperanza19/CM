@@ -28,7 +28,7 @@ if(isset($conyugue) == 1){
     echo "<div id='contenedor'>
     <a class='boton' href='?controller=Paneles&action=info&cliente=$titular'>Volver</a>";
     $DB = new DatosManager(tabla: 'Conyugues_Dependientes');
-    $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND pareja = 1");
+    $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND relacion = 'Conyuge'");
     foreach ($datos as $dato) {
         $nombre = $dato['nombre'];
         $segundo_nombre = $dato['segundo_nombre'];
@@ -83,10 +83,7 @@ if(isset($conyugue) == 1){
     }
     echo "
     </select><br>
-    <select id='pareja' name='pareja' hidden>
-        <option value='0'>No</option>
-        <option value='1' selected>Si</option>
-    </select><br>
+    <input type='hidden' id='relacion' name='relacion' value='Conyuge'>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
     <button type='submit' class='boton'>Enviar</button>
@@ -119,10 +116,7 @@ if(isset($conyugue) == 1){
         <option value='F' selected>Femenino</option>
         <option value='M'>Masculino</option>
     </select><br>
-    <select id='pareja' name='pareja' hidden>
-        <option value='0'>No</option>
-        <option value='1' selected>Si</option>
-    </select><br>
+<input type='hidden' id='relacion' name='relacion' value='Conyuge'>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
     <button type='submit' class='boton'>Enviar</button>

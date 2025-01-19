@@ -88,9 +88,24 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'
     <input value='$telefono' type='text' id='telefono' name='telefono' maxlength='20'><br>
     <label for='email'>Email:</label><br>
     <input value='$email' type='email' id='email' name='email' maxlength='50'><br>
-    <label for='empresa'>Empresa:</label><br>
-    <input value='$empresa' type='text' id='empresa' name='empresa' maxlength='50'><br>
-    <label for='notas'>Notas:</label><br>
+    <label for='empresa'>Empresa:</label><br>";
+$opciones = array (
+array("Ambetter", "<option value='Ambetter' selected>Ambetter</option>", "<option value='Ambetter'>Ambetter</option>"),
+array("Oscar", "<option value='Oscar' selected>Oscar</option>", "<option value='Oscar'>Oscar</option>"),
+array("Aetna", "<option value='Aetna' selected>Aetna</option>", "<option value='Aetna'>Aetna</option>"),
+);
+echo "<select id='empresa' name='empresa'>";
+foreach($opciones as $opcion){
+    if($empresa == $opcion[0]){
+        echo $opcion[1];
+    }
+    if($empresa != $opcion[0]){
+        echo $opcion[2];
+    }
+}
+echo "</select><br>";
+    //<input value='$empresa' type='text' id='empresa' name='empresa' maxlength='50'><br>
+    echo "<label for='notas'>Notas:</label><br>
     <textarea value='$notas' id='notas' name='notas' maxlength='200'></textarea><br>
 <label for='fiscal'>¿Hizo una declaración fiscal? </label>
 <select id='fiscal' name='fiscal'>";
@@ -152,7 +167,11 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=index'>Cancelar</
     <label for='email'>Email:</label><br>
     <input type='email' id='email' name='email' maxlength='50'><br>
     <label for='empresa'>Empresa:</label><br>
-    <input type='text' id='empresa' name='empresa' maxlength='50'><br>
+<select id='empresa' name='empresa'>
+    <option value='Ambetter'>Ambetter</option>
+    <option value='Oscar'>Oscar</option>
+    <option value='Aetna'>Aetna</option>
+</select><br>
     <label for='notas'>Notas:</label><br>
     <textarea id='notas' name='notas' maxlength='200'></textarea><br>
     <label for='fiscal'>¿Hizo una declaración fiscal? </label>

@@ -22,47 +22,47 @@ class Grupo
          */
         // Verificar si la sesión está iniciada y la variable 'cliente' está definida
         // Construir la sentencia SQL
-        $sql = "INSERT INTO Conyugues_Dependientes (
-                    id_cliente,
-                    en_poliza,
-                    nombre,
-                    segundo_nombre,
-                    apellido,
-                    SSN,
-                    alien_number,
-                    genero,
-                    fecha_nacimiento,
-                    estatus_migratorio,
-                    pareja
-                ) VALUES (
-                    :id_cliente,
-                    :en_poliza,
-                    :nombre,
-                    :segundo_nombre,
-                    :apellido,
-                    :SSN,
-                    :alien_number,
-                    :genero,
-                    :fecha_nacimiento,
-                    :estatus_migratorio,
-                    :pareja
-                )";
 
-        $stmt = $this->DB->prepare($sql);
+$sql = "INSERT INTO Conyugues_Dependientes (
+            id_cliente,
+            en_poliza,
+            nombre,
+            segundo_nombre,
+            apellido,
+            SSN,
+            alien_number,
+            genero,
+            fecha_nacimiento,
+            estatus_migratorio,
+            relacion
+        ) VALUES (
+            :id_cliente,
+            :en_poliza,
+            :nombre,
+            :segundo_nombre,
+            :apellido,
+            :SSN,
+            :alien_number,
+            :genero,
+            :fecha_nacimiento,
+            :estatus_migratorio,
+            :relacion
+        )";
 
-        // Vincular los parámetros con los datos
-        $stmt->bindParam(':id_cliente', $id_cliente);
-        $stmt->bindParam(':en_poliza', $datos['seguro']);
-        $stmt->bindParam(':nombre', $datos['nombre']);
-        $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
-        $stmt->bindParam(':apellido', $datos['apellidos']);
-        $stmt->bindParam(':SSN', $datos['ssn']);
-        $stmt->bindParam(':alien_number', $datos['alien_number']);
-        $stmt->bindParam(':genero', $datos['genero']);
-        $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
-        $stmt->bindParam(':estatus_migratorio', $datos['estatus_migratorio'], PDO::PARAM_BOOL);
-        $stmt->bindParam(':pareja', $datos['pareja'], PDO::PARAM_BOOL);
+$stmt = $this->DB->prepare($sql);
 
+// Vincular los parámetros con los datos
+$stmt->bindParam(':id_cliente', $id_cliente);
+$stmt->bindParam(':en_poliza', $datos['seguro']);
+$stmt->bindParam(':nombre', $datos['nombre']);
+$stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
+$stmt->bindParam(':apellido', $datos['apellidos']);
+$stmt->bindParam(':SSN', $datos['ssn']);
+$stmt->bindParam(':alien_number', $datos['alien_number']);
+$stmt->bindParam(':genero', $datos['genero']);
+$stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
+$stmt->bindParam(':estatus_migratorio', $datos['estatus_migratorio'], PDO::PARAM_BOOL);
+$stmt->bindParam(':relacion', $datos['relacion']);
         // Ejecutar la sentencia
         if ($stmt->execute()) {
             return $stmt;
@@ -118,7 +118,7 @@ class Grupo
                     genero = :genero,
                     fecha_nacimiento = :fecha_nacimiento,
                     estatus_migratorio = :estatus_migratorio,
-                    pareja = :pareja
+                    relacion = :relacion
                 WHERE id_miembro_grupo = $id_cliente";
 
         $stmt = $this->DB->prepare($sql);
@@ -133,7 +133,7 @@ class Grupo
         $stmt->bindParam(':genero', $datos['genero']);
         $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
         $stmt->bindParam(':estatus_migratorio', $datos['estatus_migratorio'], PDO::PARAM_BOOL);
-        $stmt->bindParam(':pareja', $datos['pareja'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':relacion', $datos['relacion']);
 
         // Ejecutar la sentencia
         if ($stmt->execute()) {
