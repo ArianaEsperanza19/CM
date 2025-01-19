@@ -104,7 +104,6 @@ foreach($opciones as $opcion){
     }
 }
 echo "</select><br>";
-    //<input value='$empresa' type='text' id='empresa' name='empresa' maxlength='50'><br>
     echo "<label for='notas'>Notas:</label><br>
     <textarea value='$notas' id='notas' name='notas' maxlength='200'></textarea><br>
 <label for='fiscal'>¿Hizo una declaración fiscal? </label>

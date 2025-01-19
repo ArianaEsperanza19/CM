@@ -35,6 +35,7 @@ if(isset($depende) == 1){
         $fecha_nacimiento = $dato['fecha_nacimiento'];
         $relacion = $dato['relacion'];
         $seguro = $dato['en_poliza'];
+        $estatus = $dato['estatus_migratorio'];
     }
 
     $redirect = "?controller=Cliente&action=Editar&cliente=$id&depende=1";
@@ -79,6 +80,11 @@ if(isset($depende) == 1){
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>";
 
+echo "<label for='actualizado'>¿Tiene estatus migratorio? </label>
+<select id='estatus' name='estatus'>";
+    if ($estatus == "0"){echo "<option value='0' selected>No</option>"; echo "<option value='1'>Sí</option>";}
+    if ($estatus == "1"){echo "<option value='1' selected>Sí</option>"; echo "<option value='0'>No</option>";}
+echo "</select><br>";
 $opciones = array(
 array('Padre', '<option value="Padre" selected>Padre/Madre</option>', '<option value="Padre">Padre/Madre</option>'),
 array('Hijo', '<option value="Hijo" selected>Hijo/a</option>', '<option value="Hijo">Hijo/a</option>'),
@@ -133,6 +139,11 @@ echo "    <button class='boton' type='submit'>Enviar</button>
     </select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'><br>
+    <label for='estatus'>¿Tiene estatus migratorio? </label>
+    <select id='estatus' name='estatus'>
+        <option value='0' selected>No</option>
+        <option value='1'>Sí</option>
+    </select><br>
 <select id='relacion' name='relacion'>
         <option value='Progenitor' selected>Padre/Madre</option>
         <option value='Hijo'>Hijo/a</option>

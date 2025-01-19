@@ -38,6 +38,7 @@ if(isset($conyugue) == 1){
         $genero = $dato['genero'];
         $fecha_nacimiento = $dato['fecha_nacimiento'];
         $seguro = $dato['en_poliza'];
+        $estatus = $dato['estatus_migratorio'];
     }
     # id del conyugue a editar
     $redireccion = "?controller=Cliente&action=Editar&cliente=$id&conyugue=1";
@@ -85,10 +86,14 @@ if(isset($conyugue) == 1){
     </select><br>
     <input type='hidden' id='relacion' name='relacion' value='Conyuge'>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
-    <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
-    <button type='submit' class='boton'>Enviar</button>
-</form></div></div>
-";
+    <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>";
+
+echo "<label for='actualizado'>¿Tiene estatus migratorio? </label>
+<select id='estatus' name='estatus'>";
+    if ($estatus == "0"){echo "<option value='0' selected>No</option>"; echo "<option value='1'>Sí</option>";}
+    if ($estatus == "1"){echo "<option value='1' selected>Sí</option>"; echo "<option value='0'>No</option>";}
+echo "</select><br><button type='submit' class='boton'>Enviar</button>
+</form></div></div>";
 }else{
 
     # Agregar conyugue
@@ -119,6 +124,11 @@ if(isset($conyugue) == 1){
 <input type='hidden' id='relacion' name='relacion' value='Conyuge'>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>
+    <label for='estatus'>¿Tiene estatus migratorio? </label>
+    <select id='estatus' name='estatus'>
+        <option value='0' selected>No</option>
+        <option value='1'>Sí</option>
+    </select><br>
     <button type='submit' class='boton'>Enviar</button>
 </form></div></div>
 ";

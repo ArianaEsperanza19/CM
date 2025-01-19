@@ -61,7 +61,7 @@ $stmt->bindParam(':SSN', $datos['ssn']);
 $stmt->bindParam(':alien_number', $datos['alien_number']);
 $stmt->bindParam(':genero', $datos['genero']);
 $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
-$stmt->bindParam(':estatus_migratorio', $datos['estatus_migratorio'], PDO::PARAM_BOOL);
+$stmt->bindParam(':estatus_migratorio', $datos['estatus'], PDO::PARAM_BOOL);
 $stmt->bindParam(':relacion', $datos['relacion']);
         // Ejecutar la sentencia
         if ($stmt->execute()) {
@@ -132,7 +132,7 @@ $stmt->bindParam(':relacion', $datos['relacion']);
         $stmt->bindParam(':alien_number', $datos['alien_number']);
         $stmt->bindParam(':genero', $datos['genero']);
         $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
-        $stmt->bindParam(':estatus_migratorio', $datos['estatus_migratorio'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':estatus_migratorio', $datos['estatus'], PDO::PARAM_BOOL);
         $stmt->bindParam(':relacion', $datos['relacion']);
 
         // Ejecutar la sentencia
