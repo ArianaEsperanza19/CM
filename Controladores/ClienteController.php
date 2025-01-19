@@ -243,8 +243,14 @@ if($_POST['matrimonio'] == 1 && $_POST['dependientes'] == 0){
         $img = new IMGmanager("Vistas/img/");
         $img->borrarImagen($nombre);
         $sentencia = $DB->Eliminar();
+        $consulta = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
+        $consulta = $consulta->fetch();
         if($sentencia){
+            if(!$consulta){
+            header('Location: ?controller=Paneles&action=info&cliente='.$cliente);
+}else{
             header('Location: ?controller=Paneles&action=pagina_img&cliente='.$cliente.'&add=0');
+}
 
         }else{
 echo "Error al eliminar";
