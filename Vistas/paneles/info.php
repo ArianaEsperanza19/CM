@@ -7,7 +7,6 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     }
     $DB = new DatosManager(tabla: 'Titulares');
     $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
-    $_SESSION['eliminar'] = true;
     echo "  <a class='boton' style='margin-left:0' href='?controller=Paneles&action=index'>Inicio</a>
             <a class='boton' style='margin-left:0' href='?controller=DB&action=exportarGrupoCSV&id=$cliente'>Exportar</a>
             <h1>Informacion Poliza</h1>";
@@ -18,7 +17,7 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
     echo "<a class='boton' href='?controller=Paneles&action=InfoSeguros&cliente=$cliente'>Informacion de Seguros</a>
     <a class='boton' href='?controller=Paneles&action=InfoBanco&cliente=$cliente'>Informacion Bancaria</a>
     <a class='boton' href='?controller=Paneles&action=formularioRegistro&cliente=$cliente'>Registro</a>
-    <a class='boton' style='background-color:red;' href='?controller=Paneles&action=advertencia&cliente=$cliente'>Eliminar</a>";
+    <a class='boton' style='background-color:red;' href='?controller=Paneles&action=advertencia&cliente=$cliente&opcion=eliminarTodos'>Eliminar</a>";
     $DB = new DatosManager(tabla: 'Img');
     $imagenes = $DB->Conseguir_Registro("WHERE id_cliente = $id");
 

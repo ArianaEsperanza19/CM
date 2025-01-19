@@ -7,16 +7,10 @@
 }
 
 .boton {
-    display: block;
     text-align: center;
     text-decoration: none;
     color: white;
-    padding: 10px;
-    background-color: rgb(43, 46, 226);
-    align-items: left;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 3%;
+    padding: 2px;
 }
 
 @media (max-width: 750px) {

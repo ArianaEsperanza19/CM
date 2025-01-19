@@ -54,6 +54,13 @@ class PanelesController
         if($_GET['cliente']){
         global $cliente;
         $cliente = $_GET['cliente'];
+        if(isset($_GET['opcion']) == "eliminarConyuge"){
+            global $miembro;
+            $miembro = $_GET['miembro'];
+        }elseif(isset($_GET['opcion']) == "eliminarDependiente"){
+            global $miembro;
+            $miembro = $_GET['miembro'];
+        }
         require_once 'Vistas/paneles/Advertencia.php';
         }else{
             echo "No se ha enviado un cliente";
