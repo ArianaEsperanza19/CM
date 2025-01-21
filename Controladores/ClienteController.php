@@ -120,7 +120,7 @@ class ClienteController
     public function Eliminar()
     {
         if (isset($_GET['cliente'])) {
-            $titular = $_GET['titular'];
+            $titular = isset($_GET['titular']) ? $_GET['titular'] : false;
             $id = $_GET['cliente'];
             require_once 'Modelos/Grupo.php';
             if (isset($_GET['depende']) == 1) {

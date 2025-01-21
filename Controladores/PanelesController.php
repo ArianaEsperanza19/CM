@@ -66,10 +66,10 @@ class PanelesController
             $cliente = $_GET['cliente'];
             if (isset($_GET['opcion']) == "eliminarConyuge") {
                 global $miembro;
-                $miembro = $_GET['miembro'];
+                $miembro = isset($_GET['miembro']) ? $_GET['miembro'] : false;
             } elseif (isset($_GET['opcion']) == "eliminarDependiente") {
                 global $miembro;
-                $miembro = $_GET['miembro'];
+                $miembro = isset($_GET['miembro']) ? $_GET['miembro'] : false;
             }
             require_once 'Vistas/paneles/Advertencia.php';
         } else {

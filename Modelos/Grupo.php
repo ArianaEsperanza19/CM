@@ -1,4 +1,5 @@
 <?php
+
 $rootDir = dirname(dirname(__DIR__));
 require_once $rootDir . '/CustomersManager/Config/DB.php';
 class Grupo
@@ -23,7 +24,7 @@ class Grupo
         // Verificar si la sesión está iniciada y la variable 'cliente' está definida
         // Construir la sentencia SQL
 
-$sql = "INSERT INTO Conyuges_Dependientes (
+        $sql = "INSERT INTO Conyuges_Dependientes (
             id_cliente,
             en_poliza,
             nombre,
@@ -49,20 +50,20 @@ $sql = "INSERT INTO Conyuges_Dependientes (
             :relacion
         )";
 
-$stmt = $this->DB->prepare($sql);
+        $stmt = $this->DB->prepare($sql);
 
-// Vincular los parámetros con los datos
-$stmt->bindParam(':id_cliente', $id_cliente);
-$stmt->bindParam(':en_poliza', $datos['seguro']);
-$stmt->bindParam(':nombre', $datos['nombre']);
-$stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
-$stmt->bindParam(':apellido', $datos['apellidos']);
-$stmt->bindParam(':SSN', $datos['ssn']);
-$stmt->bindParam(':alien_number', $datos['alien_number']);
-$stmt->bindParam(':genero', $datos['genero']);
-$stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
-$stmt->bindParam(':estatus_migratorio', $datos['estatus'], PDO::PARAM_BOOL);
-$stmt->bindParam(':relacion', $datos['relacion']);
+        // Vincular los parámetros con los datos
+        $stmt->bindParam(':id_cliente', $id_cliente);
+        $stmt->bindParam(':en_poliza', $datos['seguro']);
+        $stmt->bindParam(':nombre', $datos['nombre']);
+        $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
+        $stmt->bindParam(':apellido', $datos['apellidos']);
+        $stmt->bindParam(':SSN', $datos['ssn']);
+        $stmt->bindParam(':alien_number', $datos['alien_number']);
+        $stmt->bindParam(':genero', $datos['genero']);
+        $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
+        $stmt->bindParam(':estatus_migratorio', $datos['estatus'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':relacion', $datos['relacion']);
         // Ejecutar la sentencia
         if ($stmt->execute()) {
             return $stmt;
@@ -82,6 +83,16 @@ $stmt->bindParam(':relacion', $datos['relacion']);
          * @param int $id_cliente El ID del cliente cuyos registros se eliminarán.
          * @return PDOStatement La sentencia preparada ejecutada.
          */
+        $sql = "SELECT imagen FROM Img WHERE id_cliente = :id_cliente";
+        $stmt = $this->DB->prepare($sql);
+        $stmt->execute([':id_cliente' => $id_cliente]);
+        $img = $stmt->fetchAll();
+        require_once 'Modelos/IMGmanager.php';
+        $imgM = new IMGmanager("Vistas/img/");
+        foreach ($img as $imagen) {
+            // Borrar imagen en la carpeta
+            $imgM->borrarImagen($imagen['imagen']);
+        }
         $sql = "DELETE FROM Titulares WHERE id_cliente = :id_cliente";
         $stmt = $this->DB->prepare($sql);
         $stmt->bindParam(':id_cliente', $id_cliente);
@@ -154,24 +165,25 @@ $stmt->bindParam(':relacion', $datos['relacion']);
     public function registrar_img($datos, $img)
     {
 
-            $sql = "INSERT INTO Img (id_cliente, nombre, imagen, descripcion) VALUES (:id_cliente, :nombre, :imagen, :descripcion)";
-            $stmt = $this->DB->prepare($sql);
-            $stmt->bindParam(':id_cliente', $datos['id'], PDO::PARAM_INT);
-            $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
-            $stmt->bindParam(':imagen', $img);
-            $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
+        $sql = "INSERT INTO Img (id_cliente, nombre, imagen, descripcion) VALUES (:id_cliente, :nombre, :imagen, :descripcion)";
+        $stmt = $this->DB->prepare($sql);
+        $stmt->bindParam(':id_cliente', $datos['id'], PDO::PARAM_INT);
+        $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
+        $stmt->bindParam(':imagen', $img);
+        $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
 
-            // Configura PDO para lanzar excepciones detalladas
-            $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Configura PDO para lanzar excepciones detalladas
+        $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            if ($stmt->execute()) {
-                return $stmt;
-            } else {
-                return false;
-            }
+        if ($stmt->execute()) {
+            return $stmt;
+        } else {
+            return false;
+        }
     }
 
-    public function actualizar_img($datos, $img, $centinela = true) {
+    public function actualizar_img($datos, $img, $centinela = true)
+    {
         $sql = "UPDATE Img SET id_cliente = :id_cliente, imagen = :imagen, nombre = :nombre, descripcion = :descripcion WHERE id_img = :id";
         $stmt = $this->DB->prepare($sql);
         $stmt->bindParam(':id_cliente', $datos['id'], PDO::PARAM_INT);
@@ -184,74 +196,80 @@ $stmt->bindParam(':relacion', $datos['relacion']);
         return $stmt;
     }
 
-    public function guardarRegistro($datos){
-        if(isset($datos)){
+    public function guardarRegistro($datos)
+    {
+        if (isset($datos)) {
             $sql = "INSERT INTO Registros (id_cliente, fecha, descripcion) VALUES (:id_cliente, CURDATE(), :descripcion)";
             $stmt = $this->DB->prepare($sql);
             $stmt->bindParam(':id_cliente', $datos['id_cliente'], PDO::PARAM_INT);
             $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
             try {
-            $stmt->execute();
-}catch (PDOException $e) {
-    echo "Error al guardar el registro: " . $e->getMessage();
-    die();
-}
-return $stmt;
+                $stmt->execute();
+            } catch (PDOException $e) {
+                echo "Error al guardar el registro: " . $e->getMessage();
+                die();
+            }
+            return $stmt;
 
-}else{
-    return false;}}
+        } else {
+            return false;
+        }
+    }
 
-public function eliminarRegistro($id){
-    if(isset($id)){
-    $sql = "DELETE FROM Registros WHERE id_cliente = :id";
-    $stmt = $this->DB->prepare($sql);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-try {
-    $stmt->execute();
-}catch (PDOException $e) {
-    echo "Error al eliminar el registro: " . $e->getMessage();
-    die();
-}
-    return $stmt;
-}else{
-    return false;
-}
-}
+    public function eliminarRegistro($id)
+    {
+        if (isset($id)) {
+            $sql = "DELETE FROM Registros WHERE id_cliente = :id";
+            $stmt = $this->DB->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            try {
+                $stmt->execute();
+            } catch (PDOException $e) {
+                echo "Error al eliminar el registro: " . $e->getMessage();
+                die();
+            }
+            return $stmt;
+        } else {
+            return false;
+        }
+    }
 
-public function conseguirRegistro($id){
-    if(isset($id)){
-    $sql = "SELECT * FROM Registros WHERE id_registro = :id";
-    $stmt = $this->DB->prepare($sql);
-    $stmt->bindParam(':id',$id,PDO::PARAM_INT);
-    try{
+    public function conseguirRegistro($id)
+    {
+        if (isset($id)) {
+            $sql = "SELECT * FROM Registros WHERE id_registro = :id";
+            $stmt = $this->DB->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            try {
 
-$stmt->execute();
-}catch(PDOException $e){
-die("Error al conseguir registro: ".$e->getMessage());
-}
-    return $stmt;
-}else{
- return false;
-}
-}
+                $stmt->execute();
+            } catch (PDOException $e) {
+                die("Error al conseguir registro: ".$e->getMessage());
+            }
+            return $stmt;
+        } else {
+            return false;
+        }
+    }
 
-public function actualizarRegistro($datos){
-    if(isset($datos)){
-    $sql = "UPDATE Registros SET descripcion = :descripcion WHERE id_cliente = :id_cliente AND id_registro = :id_registro";
+    public function actualizarRegistro($datos)
+    {
+        if (isset($datos)) {
+            $sql = "UPDATE Registros SET descripcion = :descripcion WHERE id_cliente = :id_cliente AND id_registro = :id_registro";
             $stmt = $this->DB->prepare($sql);
             $stmt->bindParam(':id_cliente', $datos['id_cliente'], PDO::PARAM_INT);
             $stmt->bindParam(':id_registro', $datos['id_registro'], PDO::PARAM_INT);
             $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
-            try{
-            $stmt->execute();
-}catch(PDOException $e){
-die("Error al actualizar: ".$e->getMessage());
-}
-return $stmt;
-}else{
-// Datos no enviados
-return false;
-}
-}
+            try {
+                $stmt->execute();
+            } catch (PDOException $e) {
+                die("Error al actualizar: ".$e->getMessage());
+            }
+            return $stmt;
+        } else {
+            // Datos no enviados
+            return false;
+        }
+    }
 
 }

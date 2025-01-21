@@ -1,5 +1,7 @@
 <?php
-class IMGmanager {
+
+class IMGmanager
+{
     private $url_img;
 
     /**
@@ -7,7 +9,8 @@ class IMGmanager {
      *
      * @param string $url_img Ruta del directorio donde se almacenarán las imágenes.
      */
-    public function __construct($url_img) {
+    public function __construct($url_img)
+    {
         $this->url_img = $url_img;
     }
 
@@ -17,7 +20,8 @@ class IMGmanager {
      * @param string $imagen Nombre del archivo de imagen a borrar.
      * @return string Mensaje indicando el resultado de la operación.
      */
-    public function borrarImagen($imagen) {
+    public function borrarImagen($imagen)
+    {
         // Verificar si la imagen existe en el directorio
         if (file_exists($this->url_img . $imagen)) {
             // Borrar la imagen
@@ -39,39 +43,40 @@ class IMGmanager {
      * @return string|null Nombre del archivo subido en caso de éxito, mensaje de error en caso de extensión no permitida, o NULL si el archivo no es válido.
      */
 
-     public function uploadImage($image, $nombre = NULL, $rediret = NULL) {
-         // Validar la extensión del archivo
-         $extensiones_permitidas = ['jpg', 'jpeg', 'png'];
-         $extension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
-         if (!in_array($extension, $extensiones_permitidas)) {
+    public function uploadImage($image, $nombre = null, $rediret = null)
+    {
+        // Validar la extensión del archivo
+        $extensiones_permitidas = ['jpg', 'jpeg', 'png'];
+        $extension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+        if (!in_array($extension, $extensiones_permitidas)) {
             header("Location: $rediret");
-         }else{
-        # Si el archivo tiene un nombre
-        if($nombre !== NULL) {
-            $fecha = new DateTime();
-            $imageName = $nombre . '_' . $fecha->getTimestamp();
-            $imagenTemporal = $image['tmp_name'];
-            $m = move_uploaded_file($imagenTemporal, $this->url_img . $imageName . '.' . $extension);
-            if($m) {
-                return $imageName . '.' . $extension;
-            }
-            return $m;
-        }else {
-            # Si el archivo no tiene un nombre
-             if ($image['name'] !== NULL && $image !== false) {
-             $fecha = new DateTime();
-             $imageName = pathinfo($image['name'], PATHINFO_FILENAME) . '_' . $fecha->getTimestamp();
-             $imagenTemporal = $image['tmp_name'];
-             $m = move_uploaded_file($imagenTemporal, $this->url_img . $imageName . '.' . $extension);
-             if($m) {
-                 return $imageName . '.' . $extension;
-             }
-             return $m;
-         } else {
-             return NULL;
-         }
+        } else {
+            # Si el archivo tiene un nombre
+            if ($nombre !== null) {
+                $fecha = new DateTime();
+                $imageName = $nombre . '_' . $fecha->getTimestamp();
+                $imagenTemporal = $image['tmp_name'];
+                $m = move_uploaded_file($imagenTemporal, $this->url_img . $imageName . '.' . $extension);
+                if ($m) {
+                    return $imageName . '.' . $extension;
+                }
+                return $m;
+            } else {
+                # Si el archivo no tiene un nombre
+                if ($image['name'] !== null && $image !== false) {
+                    $fecha = new DateTime();
+                    $imageName = pathinfo($image['name'], PATHINFO_FILENAME) . '_' . $fecha->getTimestamp();
+                    $imagenTemporal = $image['tmp_name'];
+                    $m = move_uploaded_file($imagenTemporal, $this->url_img . $imageName . '.' . $extension);
+                    if ($m) {
+                        return $imageName . '.' . $extension;
+                    }
+                    return $m;
+                } else {
+                    return null;
+                }
 
-        }}
-     }
+            }
+        }
+    }
 }
-?>
