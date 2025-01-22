@@ -1,42 +1,92 @@
-h1 {
-    margin: 20px;
-    color: rgb(43, 46, 226);
-}
-.contenedor {
-    background-color: rgb(43, 46, 226);
-    padding:10px;
-    margin: 10px;
-}
-.imagen {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 5px;
-    margin-bottom: 10px;
-}
-.imagen img{
-    width: 200px;
-}
-.texto {
-    border: 1px solid rgb(211, 210, 191);
-    color: rgb(211, 210, 191);
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-gap: 5px;
-    padding : 10px;
-}
-.boton {
-    width: 50px;
-    text-decoration: none;
-    color: rgb(43, 46, 226)rgb;
-    padding: 10px;
-    background-color: rgb(211, 210, 191);
-    margin-left: 10px;
-}
-.miniatura {
-    width: 50px;
-    margin: 2px;
-}
-#flash {
-    color: red;
+body {
+  height: 100vh; /* Alto de la pantalla */
+  margin: 0;
+  padding: 5px;
 }
 
+h1 {
+  margin: 20px;
+  color: rgb(43, 46, 226);
+}
+.contenedor {
+  background-color: rgb(43, 46, 226);
+  padding: 10px;
+  margin: 10px;
+}
+
+.formularioCaja {
+  border: 1px solid rgb(43, 46, 226);
+  padding: 10px;
+  margin: 10px;
+  width: 30%;
+}
+.formularioCaja form {
+  padding-left: 10px;
+  display: block;
+  text-align: left;
+  margin: 10px;
+}
+#enviar {
+  margin-top: 10px;
+  background-color: rgb(43, 46, 226);
+  color: rgb(211, 210, 191);
+  width: 60px;
+  text-decoration: none;
+  padding: 10px;
+}
+
+#imgField {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.imagen {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  margin-bottom: 10px;
+}
+.imagen img {
+  width: 200px;
+}
+.texto {
+  border: 1px solid rgb(211, 210, 191);
+  color: rgb(211, 210, 191);
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 5px;
+  padding: 10px;
+}
+.boton {
+  width: 50px;
+  text-decoration: none;
+  color: rgb(43, 46, 226);
+  padding: 10px;
+  background-color: rgb(211, 210, 191);
+  margin-left: 10px;
+}
+.miniatura {
+  width: 50px;
+  margin: 2px;
+}
+#flash {
+  color: red;
+}
+
+/* Media query para pantallas de 750px */
+@media (max-width: 750px) {
+  .formularioCaja {
+    width: 50%;
+  }
+  .imagen {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .imagen img {
+    width: 100%;
+  }
+  .texto {
+    grid-template-rows: repeat(2, 1fr);
+  }
+  .boton {
+    width: 100%;
+  }
+}

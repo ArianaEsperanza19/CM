@@ -1,77 +1,82 @@
+body {
+  height: 100vh; /* Alto de la pantalla */
+  margin: 0;
+  padding: 5px;
+}
+
 #buscador {
-    background-color: blue;
-    position: fixed;
-    width: fit-content;
-    left: 40px;
-    margin-left: 60%;;
+  background-color: blue;
+  position: fixed;
+  width: fit-content;
+  left: 40px;
+  margin-left: 60%;
 }
 
 #buscador div {
-    margin-top: 10px;
-    margin-bottom: 0px;
-    margin-left: 5px;
-    margin-right: 7px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  margin-left: 5px;
+  margin-right: 7px;
 }
 
-#titularesBox{
-    border: solid 1px blue;
-    width: 60%;
-    text-align: left;
-    margin: auto;
-    padding-top: 10px;
-    padding-left: 5%;
+#titularesBox {
+  border: solid 1px blue;
+  width: 60%;
+  text-align: left;
+  margin: auto;
+  padding-top: 10px;
+  padding-left: 5%;
 }
 
 #formularioTitular {
-    display: inline-block !important;
-    box-sizing: border-box;
-    background-color: blue;
-    text-decoration: none;
-    text-align: center;
-    color: white;
-    margin-left: 53%;
-    padding-top: 10px;
-    width: 10%;
-    height: 50px;
+  display: inline-block !important;
+  box-sizing: border-box;
+  background-color: blue;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  margin-left: 53%;
+  padding-top: 10px;
+  width: 10%;
+  height: 50px;
 }
 
 .lista a {
-    text-decoration: none;
-    color : rgb(43, 46, 226);
+  text-decoration: none;
+  color: rgb(43, 46, 226);
 }
 
 .mensaje {
-    color: red;
-    text-decoration: overline;
+  color: red;
+  text-decoration: overline;
 }
-.footer{
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 10px;
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
 }
-
 
 @media (max-width: 750px) {
-    #formularioTitular {
-        width: 20%;
-        margin-left: 20%;;
-    }
-    .boton {
-        margin-left: auto;
-        margin-right: auto;
-    }
+  #formularioTitular {
+    width: 20%;
+    margin-left: 20%;
+  }
+  .boton {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    #buscador {
-        left: 20px;
-        margin-left: 41%;
-        display: block;
-    }
+  #buscador {
+    left: 20px;
+    margin-left: 41%;
+    display: block;
+  }
 
-    #titularesBox{
-        width: 80%;
-    }
+  #titularesBox {
+    width: 80%;
+  }
 }
