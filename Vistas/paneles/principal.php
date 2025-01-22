@@ -15,7 +15,9 @@ if ($titulares) {
     if (isset($_SESSION['flash'])) {
         $mensaje = $_SESSION['flash'];
         unset($_SESSION['flash']);
-        echo "<p class='mensaje'><b>$mensaje</b></p>";
+        require_once "Modelos/Mensajes.php";
+        $aviso = new Mensajes();
+        echo $aviso->noEncontrado($mensaje);
     }
     foreach ($titulares as $titular) {
         echo "<p class='lista'>".$titular['id_cliente']." - ".$titular['nombre']." ".$titular['primer_apellido'].

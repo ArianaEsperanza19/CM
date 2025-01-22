@@ -18,8 +18,10 @@ if (isset($_GET['add']) && isset($_GET['cliente']) && $_GET['add'] == 0) {
         echo "<a class='boton' href='?controller=Paneles&action=pagina_img&cliente=$id&add=1&cliente=$cliente'>Agregar</a>";
         if (isset($_SESSION['flash'])) {
             $m = $_SESSION['flash'];
-            echo "<span style='color: red;margin-left: 10px'>$m</span>";
             unset($_SESSION['flash']);
+            require_once "Modelos/Mensajes.php";
+            $aviso = new Mensajes();
+            $aviso->imagenNoSubida($m);
         }
         echo "<h1>Documentos</h1>";
         echo "<div class='contenedor'>";
@@ -105,7 +107,10 @@ if (isset($_GET['add']) && isset($_GET['cliente']) && $_GET['add'] == 0) {
     }
 }
 if ($imagenes->rowCount() == 0) {
-    echo "No se encontraron imágenes.";
+
+    require_once "Modelos/Mensajes.php";
+    $mensaje = new Mensajes();
+    $mensaje->NoImagenes("No se encontraron imágenes.");
 }
 
 

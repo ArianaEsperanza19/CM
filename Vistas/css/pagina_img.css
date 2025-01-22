@@ -71,6 +71,11 @@ h1 {
 #flash {
   color: red;
 }
+.mensaje {
+  margin-left: 10px;
+  color: red;
+  text-decoration: overline;
+}
 
 /* Media query para pantallas de 750px */
 @media (max-width: 750px) {
