@@ -61,7 +61,7 @@ class PanelesController
     }
     public function advertencia()
     {
-        if ($_GET['cliente']) {
+        if (isset($_GET['cliente'])) {
             global $cliente;
             $cliente = $_GET['cliente'];
             if (isset($_GET['opcion']) == "eliminarConyuge") {

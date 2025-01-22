@@ -12,14 +12,6 @@ class ClienteController
     }
     public function Crear()
     {
-        //echo "Soy el formulario para un nuevo cliente";
-        echo"<pre>";
-        print_r($_POST['dependientes']);
-        echo"</pre>";
-        echo"<pre>";
-        print_r($_POST['matrimonio']);
-        echo"</pre>";
-        // die();
         if (isset($_POST)) {
 
             $datos = new DatosManager(tabla : 'Titulares');
