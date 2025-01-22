@@ -4,6 +4,15 @@ body {
   padding: 5px;
 }
 
+header,
+header a {
+  padding: 5px;
+  border: 1px solid rgb(43, 46, 226);
+  text-decoration: none;
+  color: rgb(43, 46, 226);
+  margin-bottom: 10px;
+}
+
 #buscador {
   background-color: blue;
   position: fixed;
@@ -50,14 +59,14 @@ body {
   color: red;
   text-decoration: overline;
 }
-.footer {
-  left: 0;
-  bottom: 0;
+footer {
   width: 100%;
   background-color: black;
   color: white;
   text-align: center;
   padding: 10px;
+  margin-top: 10px;
+  margin-left: 0px;
 }
 
 @media (max-width: 750px) {

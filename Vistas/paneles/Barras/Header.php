@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="Vistas/css/index.css">
 </head>
 <body>
-<p> Panel de Control
-<a href="?controller=DB&action=exportarCSV">Exportar Titulares</a>
-<a href="?controller=DB&action=importarTitularesCSV">Importar Titulares</a>
-</p>
-
+<header> Panel de Control
+<a href="?controller=DB&action=exportarCSV">Exportar CSV</a>
+</header>
