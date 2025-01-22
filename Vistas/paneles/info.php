@@ -76,7 +76,7 @@ foreach ($titular as $dato) {
 // $DB = new DatosManager(tabla: 'Conyuges_Dependientes');
 require_once "Modelos/Grupo.php";
 $DB = new Grupo();
-$conyugue = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND relacion = 'Conyuge'");
+$conyugue = $DB->Conseguir_Miembro("WHERE id_cliente = $cliente AND relacion = 'Conyuge'");
 echo "<h1>Informacion del Conyuge</h1>";
 if ($conyugue->rowCount() > 0) {
     // La consulta ha encontrado algo
@@ -108,7 +108,7 @@ if ($conyugue->rowCount() > 0) {
 
 
 # Dependientes
-$dependientes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente AND relacion != 'Conyuge'");
+$dependientes = $DB->Conseguir_Miembro("WHERE id_cliente = $cliente AND relacion != 'Conyuge'");
 echo "<hr>";
 echo "<h1>Informacion de Dependientes</h1>";
 foreach ($dependientes as $dato) {

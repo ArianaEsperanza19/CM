@@ -7,9 +7,9 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/pagina_img.cs
 # Mostrar imagenes
 if (isset($_GET['add']) && isset($_GET['cliente']) && $_GET['add'] == 0) {
     echo "<div id='contenedor'><a class='boton' href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
-    require_once "Modelos/DatosManager.php";
-    $DB = new DatosManager(tabla: 'Img');
-    $imagenes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
+    require_once "Modelos/IMGmanager.php";
+    $DB = new ImgManager();
+    $imagenes = $DB->ConseguirImg("WHERE id_cliente = $cliente");
     foreach ($imagenes as $dato) {
         $id = $dato['id_img'];
         $img = $dato['imagen'];
@@ -26,8 +26,9 @@ if (isset($_GET['add']) && isset($_GET['cliente']) && $_GET['add'] == 0) {
         echo "<h1>Documentos</h1>";
         echo "<div class='contenedor'>";
         echo "<div id='datos'>";
-        $DB = new DatosManager(tabla: 'Img');
-        $imagenes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
+        require_once "Modelos/IMGmanager.php";
+        $DB = new ImgManager();
+        $imagenes = $DB->ConseguirImg("WHERE id_cliente = $cliente");
         foreach ($imagenes as $dato) {
             $id = $dato['id_img'];
             $Img = $dato['imagen'];
@@ -46,8 +47,9 @@ if (isset($_GET['add']) && isset($_GET['cliente']) && $_GET['add'] == 0) {
     echo "</div>";
 } else {
 
-    $DB = new DatosManager(tabla: 'Img');
-    $imagenes = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
+    require_once "Modelos/IMGmanager.php";
+    $DB = new ImgManager();
+    $imagenes = $DB->ConseguirImg("WHERE id_cliente = $cliente");
     if ($imagenes->rowCount() == 0) {
         echo "<div id='contenedor'><a class='boton' href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
     } elseif ($imagenes->rowCount() > 0) {
@@ -75,10 +77,11 @@ if (isset($_GET['add']) && isset($_GET['cliente']) && $_GET['add'] == 0) {
 
     # Editar imagen
     if (isset($_GET['add']) && isset($_GET['cliente']) && isset($_GET['img']) && $_GET['add'] == 2) {
-        require_once "Modelos/DatosManager.php";
-        $DB = new DatosManager(tabla: 'Img');
         $img = $_GET['img'];
-        $imagenes = $DB->Conseguir_Registro("WHERE id_img = $img");
+        // $imagenes = $DB->Conseguir_Registro("WHERE id_img = $img");
+        require_once "Modelos/IMGmanager.php";
+        $DB = new ImgManager();
+        $imagenes = $DB->ConseguirImg("WHERE id_img = $img");
         if ($imagenes->rowCount() > 0) {
             foreach ($imagenes as $dato) {
                 $id = $dato['id_img'];
@@ -112,6 +115,3 @@ if ($imagenes->rowCount() == 0) {
     $mensaje = new Mensajes();
     $mensaje->NoImagenes("No se encontraron imágenes.");
 }
-
-
-# Volver a la pagina del cliente

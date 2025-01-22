@@ -165,7 +165,7 @@ class Grupo
         return $stmt->fetchColumn();
     }
 
-    public function Conseguir_Registro($condicion)
+    public function Conseguir_Miembro($condicion)
     {
         /**
          * Consigue un registro de la tabla de Conyuges_Dependientes.
