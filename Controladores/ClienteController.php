@@ -105,7 +105,6 @@ class ClienteController
                         echo "Error al editar";
                     }
                 }
-                //header('Location: ?controller=Paneles&action=principal');
             }
         }
     }
@@ -119,23 +118,28 @@ class ClienteController
                 $grupo = new Grupo();
                 $sentecia = $grupo->eliminar_uno($id);
                 if ($sentecia) {
-                    header("Location: ?controller=Paneles&action=info&cliente=$titular");
+                    $_SESSION['advertencia'] = true;
+                    header('Location: ?controller=Paneles&action=info&cliente='.$titular);
                 } else {
                     die("Error al eliminar");
                 }
+                exit;
             }
             if (isset($_GET['conyugue']) == 1) {
                 $grupo = new Grupo();
                 $sentecia = $grupo->eliminar_uno($id);
                 if ($sentecia) {
+                    $_SESSION['advertencia'] = true;
                     header('Location: ?controller=Paneles&action=info&cliente='.$titular);
                 } else {
                     die("Error al eliminar");
                 }
+                exit;
             }
             $registro = new Grupo();
             $sentencia = $registro->eliminar_todos($_GET['cliente']);
             if ($sentencia) {
+                $_SESSION['advertencia'] = true;
                 header('Location: ?controller=Paneles&action=index');
             } else {
                 echo "Error al eliminar";

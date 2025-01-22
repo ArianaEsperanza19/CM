@@ -1,6 +1,10 @@
 <?php
 
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/advertencia.css\">";
+if (isset($_SESSION['advertencia'])) {
+    header('Location: ?controller=Paneles&action=info&cliente='.$cliente);
+    unset($_SESSION['advertencia']);
+}
 
 function advertencia($texto, $cliente, $redireccion)
 {
@@ -11,26 +15,6 @@ function advertencia($texto, $cliente, $redireccion)
     echo "</div>";
 
 }
-
-// die($_GET['opcion']);
-// if (isset($_GET['opcion']) == "eliminarTodos") {
-//     $texto = "¿Realmente desea <b style='color: red;'>eliminar</b> la poliza de este cliente y todos sus registros asociados?";
-//     $redireccion = "?controller=Cliente&action=Eliminar&cliente=$cliente";
-//     advertencia($texto, $cliente, $redireccion);
-//     exit;
-//
-// } elseif (isset($_GET['opcion']) == "eliminarConyuge") {
-//     $texto = "¿Realmente desea <b style='color: red;'>eliminar</b> al conyuge del titular?";
-//     $redireccion = "?controller=Cliente&action=Eliminar&cliente=$miembro&conyugue=1&titular=$cliente";
-//     advertencia($texto, $cliente, $redireccion);
-//     exit;
-// } elseif (isset($_GET['opcion']) == "eliminarDependiente") {
-//     $texto = "¿Realmente desea <b style='color: red;'>eliminar</b> al dependiente del titular?";
-//     $redireccion = "?controller=Cliente&action=Eliminar&cliente=$miembro&dependiente=1&titular=$cliente";
-//     advertencia($texto, $cliente, $redireccion);
-//     exit;
-//
-// }
 
 if (isset($_GET['opcion'])) {
     switch ($_GET['opcion']) {
