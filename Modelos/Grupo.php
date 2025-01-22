@@ -49,7 +49,7 @@ class Grupo
             :estatus_migratorio,
             :relacion
         )";
-
+        $this->DB->beginTransaction();
         $stmt = $this->DB->prepare($sql);
 
         // Vincular los parámetros con los datos
@@ -66,8 +66,10 @@ class Grupo
         $stmt->bindParam(':relacion', $datos['relacion']);
         // Ejecutar la sentencia
         if ($stmt->execute()) {
+            $this->DB->commit();
             return $stmt;
         } else {
+            $this->DB->rollBack();
             return false;
         }
     }
@@ -131,7 +133,7 @@ class Grupo
                     estatus_migratorio = :estatus_migratorio,
                     relacion = :relacion
                 WHERE id_miembro_grupo = $id_cliente";
-
+        $this->DB->beginTransaction();
         $stmt = $this->DB->prepare($sql);
 
         // Vincular los parámetros con los datos
@@ -148,8 +150,10 @@ class Grupo
 
         // Ejecutar la sentencia
         if ($stmt->execute()) {
+            $this->DB->commit();
             return $stmt;
         } else {
+            $this->DB->rollBack();
             return false;
         }
     }
@@ -166,6 +170,7 @@ class Grupo
     {
 
         $sql = "INSERT INTO Img (id_cliente, nombre, imagen, descripcion) VALUES (:id_cliente, :nombre, :imagen, :descripcion)";
+        $this->DB->beginTransaction();
         $stmt = $this->DB->prepare($sql);
         $stmt->bindParam(':id_cliente', $datos['id'], PDO::PARAM_INT);
         $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
@@ -176,8 +181,10 @@ class Grupo
         $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         if ($stmt->execute()) {
+            $this->DB->commit();
             return $stmt;
         } else {
+            $this->DB->rollBack();
             return false;
         }
     }
@@ -185,28 +192,37 @@ class Grupo
     public function actualizar_img($datos, $img, $centinela = true)
     {
         $sql = "UPDATE Img SET id_cliente = :id_cliente, imagen = :imagen, nombre = :nombre, descripcion = :descripcion WHERE id_img = :id";
+        $this->DB->beginTransaction();
         $stmt = $this->DB->prepare($sql);
         $stmt->bindParam(':id_cliente', $datos['id'], PDO::PARAM_INT);
         $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
         $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
         $stmt->bindParam(':imagen', $img);
         $stmt->bindParam(':id', $datos['id_img'], PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt;
+        $sentencia = $stmt->execute();
+        if ($sentencia) {
+            $this->DB->commit();
+            return $stmt;
+        } else {
+            $this->DB->rollBack();
+            return false;
+        }
     }
 
     public function guardarRegistro($datos)
     {
         if (isset($datos)) {
             $sql = "INSERT INTO Registros (id_cliente, fecha, descripcion) VALUES (:id_cliente, CURDATE(), :descripcion)";
+            $this->DB->beginTransaction();
             $stmt = $this->DB->prepare($sql);
             $stmt->bindParam(':id_cliente', $datos['id_cliente'], PDO::PARAM_INT);
             $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
             try {
                 $stmt->execute();
+                $this->DB->commit();
             } catch (PDOException $e) {
                 echo "Error al guardar el registro: " . $e->getMessage();
+                $this->DB->rollBack();
                 die();
             }
             return $stmt;
@@ -256,14 +272,17 @@ class Grupo
     {
         if (isset($datos)) {
             $sql = "UPDATE Registros SET descripcion = :descripcion WHERE id_cliente = :id_cliente AND id_registro = :id_registro";
+            $this->DB->beginTransaction();
             $stmt = $this->DB->prepare($sql);
             $stmt->bindParam(':id_cliente', $datos['id_cliente'], PDO::PARAM_INT);
             $stmt->bindParam(':id_registro', $datos['id_registro'], PDO::PARAM_INT);
             $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
             try {
                 $stmt->execute();
+                $this->DB->commit();
             } catch (PDOException $e) {
                 die("Error al actualizar: ".$e->getMessage());
+                $this->DB->rollBack();
             }
             return $stmt;
         } else {
