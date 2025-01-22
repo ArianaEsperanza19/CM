@@ -46,7 +46,6 @@ class ClienteController
             if ($_GET['id_cliente']) {
                 $id_cliente = $_GET['id_cliente'];
             }
-            $DB = new DatosManager(tabla: 'Conyuges_Dependientes');
             require_once 'Modelos/Grupo.php';
             $registro = new Grupo($DB);
             $registro->registrar($_POST, $id_cliente);

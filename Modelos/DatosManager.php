@@ -78,29 +78,6 @@ class DatosManager
         $sentencia->execute();
         return $sentencia->fetch();
     }
-    public function Restaurar()
-    {
-        /*
-        Restaura la tabla truncándola.
-        Este método verifica si la tabla existe en la base de datos y, si es así,
-        la trunca eliminando todos los registros.
-
-        @throws Exception Si la tabla no existe en la base de datos.
-        @return PDOStatement La sentencia de truncado ejecutada.
-         */
-        $tabla = $this->tabla;
-        $sql = "SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '$tabla'";
-        $sentencia = $this->DB->prepare($sql);
-        $sentencia->execute();
-        if ($sentencia->fetchColumn() == 0) {
-            throw new Exception("La tabla '$tabla' no existe");
-        } else {
-            $sql = "TRUNCATE TABLE $tabla";
-            $sentencia = $this->DB->prepare($sql);
-            $sentencia->execute();
-        }
-        return $sentencia;
-    }
     public function Registrar($datos)
     {
         /**
@@ -233,26 +210,4 @@ class DatosManager
         }
     }
 
-    public function Cifrar($datos)
-    {
-        /**
-         * Cifra un string con password_hash.
-         * @param string $datos String a cifrar.
-         * @return string El string cifrado.
-         */
-        //return password_hash($datos, PASSWORD_BCRYPT);
-        return password_hash($datos, PASSWORD_DEFAULT);
-    }
-    public function Descifrar($entrada)
-    {
-        $id = $this->id;
-        $consulta = $this->Conseguir_Registro("WHERE id = $id");
-        $fetch = $consulta->fetch(PDO::FETCH_ASSOC);
-        $password_hash = $fetch['password'];
-        if (password_verify($entrada, $password_hash)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

@@ -165,6 +165,28 @@ class Grupo
         return $stmt->fetchColumn();
     }
 
+    public function Conseguir_Registro($condicion)
+    {
+        /**
+         * Consigue un registro de la tabla de Conyuges_Dependientes.
+         *
+         * @param string $condicion La condicion de busqueda para el registro.
+         * @return PDOStatement La sentencia de selección ejecutada.
+         * @throws Exception Si la tabla no existe.
+         */
+        $tabla = "Conyuges_Dependientes";
+        $sql = "SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '$tabla'";
+        $sentencia = $this->DB->prepare($sql);
+        $sentencia->execute();
+        if ($sentencia->fetchColumn() == 0) {
+            throw new Exception("La tabla $tabla no existe");
+        } else {
+            $sql = "SELECT * FROM $tabla $condicion";
+            $sentencia = $this->DB->prepare($sql);
+            $sentencia->execute();
+        }
+        return $sentencia;
+    }
 
     public function registrar_img($datos, $img)
     {
