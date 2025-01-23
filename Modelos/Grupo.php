@@ -235,6 +235,15 @@ class Grupo
             return false;
         }
     }
+    public function eliminar_img($id)
+    {
+        $table = "Img";
+        $stmt = $this->DB->prepare("DELETE FROM $table WHERE id_img = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt;
+
+    }
 
     public function guardarRegistro($datos)
     {

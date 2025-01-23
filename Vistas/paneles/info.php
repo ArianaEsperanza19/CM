@@ -6,7 +6,8 @@ $cliente = $_GET['cliente'];
 if (isset($_GET['token'])) {
     $_SESSION['editar'] = true;
 }
-$DB = new DatosManager(tabla: 'Titulares');
+require_once "Modelos/Titulares.php";
+$DB = new Titulares();
 $titular = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
 echo "  <a class='boton' style='margin-left:0' href='?controller=Paneles&action=index'>Inicio</a>
             <a class='boton' style='margin-left:0' href='?controller=DB&action=exportarGrupoCSV&id=$cliente'>Exportar</a>

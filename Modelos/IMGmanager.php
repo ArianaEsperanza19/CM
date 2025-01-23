@@ -86,13 +86,6 @@ class IMGmanager
     }
     public function ConseguirImg($condicion)
     {
-        /**
-         * Consigue un registro de la tabla de Conyuges_Dependientes.
-         *
-         * @param string $condicion La condicion de busqueda para el registro.
-         * @return PDOStatement La sentencia de selección ejecutada.
-         * @throws Exception Si la tabla no existe.
-         */
         $tabla = "Img";
         $sql = "SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '$tabla'";
         $sentencia = $this->DB->prepare($sql);

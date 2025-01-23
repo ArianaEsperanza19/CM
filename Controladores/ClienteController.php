@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Modelos/DatosManager.php';
+require_once 'Modelos/Titulares.php';
 
 class ClienteController
 {
@@ -13,8 +13,7 @@ class ClienteController
     public function Crear()
     {
         if (isset($_POST)) {
-
-            $datos = new DatosManager(tabla : 'Titulares');
+            $datos = new Titulares();
             $sentencia = $datos->Registrar($_POST);
             $cliente_id = $datos->Ultimo_Registro();
             $cliente_id = $cliente_id['id_cliente'];
@@ -93,8 +92,7 @@ class ClienteController
 
                 } else {
                     # Editar titular
-                    require_once 'Modelos/DatosManager.php';
-                    $DB = new DatosManager(tabla: 'Titulares');
+                    $DB = new Titulares();
                     $sentencia = $DB->Editar($_POST, $id);
                     $token = md5(uniqid());
                     if ($sentencia) {
@@ -150,7 +148,7 @@ class ClienteController
     {
         if (isset($_POST)) {
             $id = $_GET['cliente'];
-            require_once 'Modelos/Seguros.php';
+            require_once 'Modelos/Seguros_Cuentas.php';
             $registro = new Seguros();
             # Editar
             if (isset($_GET['editar']) && $_GET['editar'] == 1) {
@@ -202,7 +200,7 @@ class ClienteController
     {
         if (isset($_GET)) {
             $id = $_GET['cliente'];
-            require_once 'Modelos/Seguros.php';
+            require_once 'Modelos/Seguros_Cuentas.php';
             $registro = new Seguros();
             $sentencia = $registro->eliminar($id);
             if ($sentencia) {
@@ -259,18 +257,21 @@ class ClienteController
             $id = isset($_GET['img']) ? $_GET['img'] : null;
             $cliente = isset($_GET['cliente']) ? $_GET['cliente'] : null;
             if ($id) {
-                require_once 'Modelos/DatosManager.php';
-                $DB = new DatosManager(tabla: 'Img', id: $id);
-                $consulta = $DB->Conseguir_Registro("WHERE id_img = $id");
+                require_once 'Modelos/IMGmanager.php';
+                $img = new IMGmanager();
+                $consulta = $img->ConseguirImg("WHERE id_img = $id");
                 $consulta = $consulta->fetch();
                 $nombre = $consulta['imagen'];
-                require_once 'Modelos/IMGmanager.php';
-                $img = new IMGmanager("Vistas/img/");
+                // Eliminar la propia imagen
                 $img->borrarImagen($nombre);
-                $sentencia = $DB->Eliminar();
-                $consulta = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
-                $consulta = $consulta->fetch();
-                if ($sentencia) {
+                require_once 'Modelos/Grupo.php';
+                $grupo = new Grupo();
+                // Eliminar la imagen de la base de datos
+                $grupo->Eliminar_Img($id);
+                $consulta = $img->ConseguirImg("WHERE id_cliente = $cliente");
+                // Verifica si hay mas imagenes en la base de datos
+                $consulta = $consulta->fetchAll();
+                if ($grupo) {
                     if (!$consulta) {
                         header('Location: ?controller=Paneles&action=info&cliente='.$cliente);
                     } else {
@@ -299,19 +300,17 @@ class ClienteController
                 // header('Location: ?controller=Paneles&action=info&cliente='.$_POST['id']);
             } else {
 
-                require_once 'Modelos/DatosManager.php';
-                $DB = new DatosManager(tabla: 'Img');
-                $sentencia = $DB->Conseguir_Registro("WHERE id_cliente = '$cliente' AND id_img = '$id_img'");
+                require_once 'Modelos/IMGmanager.php';
+                $img = new IMGmanager("Vistas/img/");
+                $sentencia = $img->ConseguirImg("WHERE id_cliente = '$cliente' AND id_img = '$id_img'");
                 if ($sentencia) {
                     $sentencia = $sentencia->fetch();
-                    require_once 'Modelos/IMGmanager.php';
                     $rediret = "?controller=Paneles&action=info&cliente=".$_POST['id'];
-                    $img = new IMGmanager("Vistas/img/");
                     $img->borrarImagen($sentencia['imagen']);
                     $imagen = $img->uploadImage($_FILES['imagen'], $nombre, $rediret);
                     require_once 'Modelos/Grupo.php';
-                    $DB = new Grupo();
-                    $actualizar = $DB->actualizar_img($_POST, $imagen, $centinela);
+                    $grupo = new Grupo();
+                    $actualizar = $grupo->actualizar_img($_POST, $imagen, $centinela);
                     if ($actualizar) {
                         header('Location: ?controller=Paneles&action=pagina_img&cliente='.$_POST['id'].'&add=0');
                     }
@@ -374,8 +373,8 @@ class ClienteController
     {
 
         if (isset($_POST['busqueda'])) {
-            require_once 'Modelos/DatosManager.php';
-            $DB = new DatosManager(tabla: 'Titulares');
+            require_once 'Modelos/Titulares.php';
+            $DB = new Titulares();
             global $sentencia;
             $sentencia = $DB->Conseguir_Registro("WHERE nombre LIKE '%".$_POST['busqueda']."%' OR primer_apellido LIKE '%".$_POST['busqueda']."%' OR segundo_apellido LIKE '%".$_POST['busqueda']."%'");
             if ($sentencia->rowCount() != 0) {

@@ -6,8 +6,8 @@ require_once 'Barras/Header.php';
 require_once 'Barras/Barra_buscador.php';
 # Si no hay clientes, mostrar el panel de nuevo titular
 echo "<a href='?controller=Paneles&action=formularioTitular' id='formularioTitular'>Nuevo Cliente</a>";
-require_once 'Modelos/DatosManager.php';
-$DB = new DatosManager(tabla: 'Titulares');
+require_once 'Modelos/Titulares.php';
+$DB = new Titulares();
 $titulares = $DB->Conseguir_Todos();
 if ($titulares) {
     echo "<div id='titularesBox'>
