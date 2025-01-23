@@ -1,12 +1,13 @@
 <?php
+
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioTitular.css\">";
 
-if(isset($editar_titular)){
+if (isset($editar_titular)) {
     $id = $editar_titular;
-echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'>Cancelar</a>";
-    if(isset($_SESSION['editar'])){
-    unset($_SESSION['editar']);
-    header('Location: ?controller=Paneles&action=info&cliente='.$id);
+    echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'>Cancelar</a>";
+    if (isset($_SESSION['editar'])) {
+        unset($_SESSION['editar']);
+        header('Location: ?controller=Paneles&action=info&cliente='.$id);
     }
     $DB = new DatosManager(tabla: 'Titulares');
     $datos = $DB->Conseguir_Registro("WHERE id_cliente = $id;");
@@ -40,15 +41,15 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'
     <label for='seguro'>¿El titular está en la poliza?</label>
     <select id='seguro' name='seguro'>";
 
-        if($seguro == 'si'){
-         echo "<option value='si' selected>Si</option>";
+    if ($seguro == 'si') {
+        echo "<option value='si' selected>Si</option>";
         echo "<option value='no'>No</option>";
-        }
-        if($seguro == 'no'){
+    }
+    if ($seguro == 'no') {
         echo "<option value='no' selected>No</option>";
         echo "<option value='no'>No</option>";
 
-        }
+    }
 
 
     echo"</select><br><label for='nombre'>Nombre:</label><br>
@@ -66,12 +67,14 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'
     <label for='genero'>Genero </label>
     <select id='genero' name='genero'>
     ";
-    if($genero == "F"){
-    echo "<option value='F' selected>Femenino</option>";
-    echo "<option value='M'>Masculino</option>";}
-    if($genero == "M"){
-    echo "<option value='M' selected>Masculino</option>";
-    echo "<option value='F'>Femenino</option>";}
+    if ($genero == "F") {
+        echo "<option value='F' selected>Femenino</option>";
+        echo "<option value='M'>Masculino</option>";
+    }
+    if ($genero == "M") {
+        echo "<option value='M' selected>Masculino</option>";
+        echo "<option value='F'>Femenino</option>";
+    }
 
     echo "</select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label><br>
@@ -83,49 +86,67 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=info&cliente=$id'
     <label for='estado'>Estado:</label><br>
     <input value='$estado' type='text' id='estado' name='estado' maxlength='50' required><br>
     <label for='codigo_postal'>Código Postal:</label><br>
-    <input value='$zip' type='text' id='codigo_postal' name='codigo_postal' maxlength='10'><br>
+    <input value='$zip' type='number' id='codigo_postal' name='codigo_postal' maxlength='10'><br>
     <label for='telefono'>Teléfono:</label><br>
     <input value='$telefono' type='text' id='telefono' name='telefono' maxlength='20'><br>
     <label for='email'>Email:</label><br>
     <input value='$email' type='email' id='email' name='email' maxlength='50'><br>
     <label for='empresa'>Empresa:</label><br>";
-$opciones = array (
-array("Ambetter", "<option value='Ambetter' selected>Ambetter</option>", "<option value='Ambetter'>Ambetter</option>"),
-array("Oscar", "<option value='Oscar' selected>Oscar</option>", "<option value='Oscar'>Oscar</option>"),
-array("Aetna", "<option value='Aetna' selected>Aetna</option>", "<option value='Aetna'>Aetna</option>"),
-);
-echo "<select id='empresa' name='empresa'>";
-foreach($opciones as $opcion){
-    if($empresa == $opcion[0]){
-        echo $opcion[1];
+    $opciones = array(
+    array("Ambetter", "<option value='Ambetter' selected>Ambetter</option>", "<option value='Ambetter'>Ambetter</option>"),
+    array("Oscar", "<option value='Oscar' selected>Oscar</option>", "<option value='Oscar'>Oscar</option>"),
+    array("Aetna", "<option value='Aetna' selected>Aetna</option>", "<option value='Aetna'>Aetna</option>"),
+    );
+    echo "<select id='empresa' name='empresa'>";
+    foreach ($opciones as $opcion) {
+        if ($empresa == $opcion[0]) {
+            echo $opcion[1];
+        }
+        if ($empresa != $opcion[0]) {
+            echo $opcion[2];
+        }
     }
-    if($empresa != $opcion[0]){
-        echo $opcion[2];
-    }
-}
-echo "</select><br>";
+    echo "</select><br>";
     echo "<label for='notas'>Notas:</label><br>
     <textarea value='$notas' id='notas' name='notas' maxlength='200'></textarea><br>
 <label for='fiscal'>¿Hizo una declaración fiscal? </label>
 <select id='fiscal' name='fiscal'>";
-    if ($fiscal == "0"){echo "<option value='0' selected>No</option>"; echo "<option value='1'>Sí</option>";}
-    if ($fiscal == "1"){echo "<option value='1' selected>Sí</option>"; echo "<option value='0'>No</option>";}
-echo "</select><br>
+    if ($fiscal == "0") {
+        echo "<option value='0' selected>No</option>";
+        echo "<option value='1'>Sí</option>";
+    }
+    if ($fiscal == "1") {
+        echo "<option value='1' selected>Sí</option>";
+        echo "<option value='0'>No</option>";
+    }
+    echo "</select><br>
 <label for='actualizado'>¿Tiene estatus migratorio? </label>
 <select id='estatus' name='estatus'>";
-    if ($estatus == "0"){echo "<option value='0' selected>No</option>"; echo "<option value='1'>Sí</option>";}
-    if ($estatus == "1"){echo "<option value='1' selected>Sí</option>"; echo "<option value='0'>No</option>";}
-echo "</select><br>
+    if ($estatus == "0") {
+        echo "<option value='0' selected>No</option>";
+        echo "<option value='1'>Sí</option>";
+    }
+    if ($estatus == "1") {
+        echo "<option value='1' selected>Sí</option>";
+        echo "<option value='0'>No</option>";
+    }
+    echo "</select><br>
 <label for='actualizado'>¿La información está actualizada? </label>
 <select id='actualizado' name='actualizado'>";
-if($actualizado == "0"){ echo "<option value='0' selected>No</option>"; echo "<option value='1'>Sí</option>";}
-if($actualizado == "1"){ echo "<option value='1' selected>Sí</option>"; echo "<option value='0'>No</option>";}
-echo "</select><br>
+    if ($actualizado == "0") {
+        echo "<option value='0' selected>No</option>";
+        echo "<option value='1'>Sí</option>";
+    }
+    if ($actualizado == "1") {
+        echo "<option value='1' selected>Sí</option>";
+        echo "<option value='0'>No</option>";
+    }
+    echo "</select><br>
     <button class='boton' type='submit'>Enviar</button>
 </form>
 </div>";
-}else{
-echo "<div id='contenedor'><a href='?controller=Paneles&action=index'>Cancelar</a>";
+} else {
+    echo "<div id='contenedor'><a href='?controller=Paneles&action=index'>Cancelar</a>";
     echo "
     <div id='datos'>
     <h2>Formulario de Registro de Titulares</h2>
@@ -160,7 +181,7 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=index'>Cancelar</
     <label for='estado'>Estado:</label><br>
     <input type='text' id='estado' name='estado' maxlength='50' required><br>
     <label for='codigo_postal'>Código Postal:</label><br>
-    <input type='text' id='codigo_postal' name='codigo_postal' maxlength='10'><br>
+    <input type='number' id='codigo_postal' name='codigo_postal' maxlength='10'><br>
     <label for='telefono'>Teléfono:</label><br>
     <input type='text' id='telefono' name='telefono' maxlength='20'><br>
     <label for='email'>Email:</label><br>
@@ -203,4 +224,3 @@ echo "<div id='contenedor'><a href='?controller=Paneles&action=index'>Cancelar</
 </div>
 </div>";
 }
-?>

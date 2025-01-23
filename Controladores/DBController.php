@@ -32,11 +32,11 @@ class DBController
                 direccion VARCHAR(100),
                 ciudad VARCHAR(50),
                 estado VARCHAR(50),
-                codigo_postal VARCHAR(10),
+                codigo_postal INT(10),
                 telefono VARCHAR(20),
                 email VARCHAR(50),
                 empresa VARCHAR(50),
-                en_poliza VARCHAR(20),
+                en_poliza VARCHAR(2),
                 estatus_migratorio INT(1),
                 declaracion_fiscal INT(1),
                 actualizado BOOLEAN,
@@ -93,7 +93,7 @@ class DBController
                 id_registro INT PRIMARY KEY AUTO_INCREMENT,
                 id_cliente INT,
                 fecha DATE DEFAULT (CURRENT_DATE),
-                descripcion VARCHAR(50),
+                descripcion VARCHAR(255),
                 FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
             );
         ";
@@ -104,7 +104,7 @@ class DBController
                 id_img INT PRIMARY KEY AUTO_INCREMENT,
                 id_cliente INT,
                 nombre VARCHAR(50),
-                descripcion VARCHAR(255),
+                descripcion VARCHAR(50),
                 imagen VARCHAR(250),
                 FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
             );

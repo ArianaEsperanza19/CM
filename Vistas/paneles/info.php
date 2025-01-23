@@ -19,8 +19,9 @@ foreach ($titular as $dato) {
     <a class='boton' href='?controller=Paneles&action=InfoBanco&cliente=$cliente'>Informacion Bancaria</a>
     <a class='boton' href='?controller=Paneles&action=formularioRegistro&cliente=$cliente'>Registro</a>
     <a class='boton' style='background-color:red;' href='?controller=Paneles&action=advertencia&cliente=$cliente&opcion=eliminarTodos'>Eliminar</a>";
-    $DB = new DatosManager(tabla: 'Img');
-    $imagenes = $DB->Conseguir_Registro("WHERE id_cliente = $id");
+    require_once "Modelos/IMGmanager.php";
+    $imagenes = new ImgManager();
+    $imagenes = $imagenes->ConseguirImg("WHERE id_cliente = $id");
 
     echo "</div>";
     echo "<div id='titular' class='titular'>";
@@ -73,7 +74,6 @@ foreach ($titular as $dato) {
 }
 
 # Conyuge
-// $DB = new DatosManager(tabla: 'Conyuges_Dependientes');
 require_once "Modelos/Grupo.php";
 $DB = new Grupo();
 $conyugue = $DB->Conseguir_Miembro("WHERE id_cliente = $cliente AND relacion = 'Conyuge'");

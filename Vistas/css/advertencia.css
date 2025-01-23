@@ -1,25 +1,34 @@
 #advertencia {
-    width: 20%;
-    margin: auto;
-    padding: 10px;
-    border: 1px solid rgb(43, 46, 226);
-    text-align: center;
+  width: 20%;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid rgb(43, 46, 226);
+  text-align: center;
 }
 
 .boton {
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  padding: 2px;
+}
+
+.botonDB {
+  text-align: center;
+  text-decoration: none;
+  background-color: rgb(43, 46, 226);
+  color: white;
+  padding: 5px;
+  border-radius: 2%;
 }
 
 @media (max-width: 750px) {
-    #advertencia {
-        width: 80%;
-        padding-left: 5%;
-    }
-    .boton {
-        margin-left: auto;
-        margin-right: auto;
-    }
+  #advertencia {
+    width: 80%;
+    padding-left: 5%;
+  }
+  .boton {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
