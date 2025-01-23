@@ -83,6 +83,7 @@ class DBController
                 en_poliza VARCHAR(20),
                 estatus_migratorio BOOLEAN,
                 relacion VARCHAR(20),
+                notas VARCHAR(200),
                 FOREIGN KEY (id_cliente) REFERENCES Titulares(id_cliente) ON DELETE CASCADE
             );
         ";

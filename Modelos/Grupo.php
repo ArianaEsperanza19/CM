@@ -35,7 +35,8 @@ class Grupo
             genero,
             fecha_nacimiento,
             estatus_migratorio,
-            relacion
+            relacion,
+            notas
         ) VALUES (
             :id_cliente,
             :en_poliza,
@@ -47,7 +48,8 @@ class Grupo
             :genero,
             :fecha_nacimiento,
             :estatus_migratorio,
-            :relacion
+            :relacion,
+            :notas
         )";
         $this->DB->beginTransaction();
         $stmt = $this->DB->prepare($sql);
@@ -64,6 +66,7 @@ class Grupo
         $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
         $stmt->bindParam(':estatus_migratorio', $datos['estatus'], PDO::PARAM_BOOL);
         $stmt->bindParam(':relacion', $datos['relacion']);
+        $stmt->bindParam(':notas', $datos['notas']);
         // Ejecutar la sentencia
         if ($stmt->execute()) {
             $this->DB->commit();
@@ -131,7 +134,8 @@ class Grupo
                     genero = :genero,
                     fecha_nacimiento = :fecha_nacimiento,
                     estatus_migratorio = :estatus_migratorio,
-                    relacion = :relacion
+                    relacion = :relacion,
+                    notas = :notas
                 WHERE id_miembro_grupo = $id_cliente";
         $this->DB->beginTransaction();
         $stmt = $this->DB->prepare($sql);
@@ -147,6 +151,7 @@ class Grupo
         $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
         $stmt->bindParam(':estatus_migratorio', $datos['estatus'], PDO::PARAM_BOOL);
         $stmt->bindParam(':relacion', $datos['relacion']);
+        $stmt->bindParam(':notas', $datos['notas']);
 
         // Ejecutar la sentencia
         if ($stmt->execute()) {

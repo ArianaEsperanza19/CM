@@ -1,26 +1,27 @@
 <?php
+
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/conyugueDependiente.css\">";
-    # Centinela que vigila si se ha editado la informacion
-    if(isset($_SESSION['editar']) && isset($_GET['titular'])){
+# Centinela que vigila si se ha editado la informacion
+if (isset($_SESSION['editar']) && isset($_GET['titular'])) {
     unset($_SESSION['editar']);
     header('Location: ?controller=Paneles&action=info&cliente='.$_GET['titular']);
-    }
-if(isset($_GET['id_cliente'])){
+}
+if (isset($_GET['id_cliente'])) {
     # id del titular
     $id = $_GET['id_cliente'];
     echo "<div id='contenedor'>
     <a class='boton' href='?controller=Paneles&action=info&cliente=$id'>Volver</a>";
     # Si tiene dependientes
-    if(isset($_GET['depende']) && $_GET['depende'] == 1){
-    $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=1";
+    if (isset($_GET['depende']) && $_GET['depende'] == 1) {
+        $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=1";
     }
     # No tiene dependientes
-    else{
-    $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=0";
+    else {
+        $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=0";
     }
 }
 # Editar conyugue
-if(isset($conyugue) == 1){
+if (isset($conyugue) == 1) {
     # Editar conyugue
     require_once 'Modelos/DatosManager.php';
     $id = $_GET['cliente'];
@@ -39,6 +40,7 @@ if(isset($conyugue) == 1){
         $fecha_nacimiento = $dato['fecha_nacimiento'];
         $seguro = $dato['en_poliza'];
         $estatus = $dato['estatus_migratorio'];
+        $notas = $dato['notas'];
     }
     # id del conyugue a editar
     $redireccion = "?controller=Cliente&action=Editar&cliente=$id&conyugue=1";
@@ -49,11 +51,11 @@ if(isset($conyugue) == 1){
     <label for='seguro'>¿Solicita la cobertura? </label>
     <select id='seguro' name='seguro'>
     ";
-    if($seguro == 'si'){
+    if ($seguro == 'si') {
         echo "<option value='si' selected>Si</option>";
         echo "<option value='no'>No</option>";
     }
-    if($seguro == 'no'){
+    if ($seguro == 'no') {
         echo "<option value='no' selected>No</option>";
         echo "<option value='no'>No</option>";
     }
@@ -72,12 +74,13 @@ if(isset($conyugue) == 1){
     <label for='genero'>Genero </label>
     <select id='genero' name='genero'>
     ";
-    if($genero == 'F'){
-    echo "
+    if ($genero == 'F') {
+        echo "
         <option value='F' selected>Femenino</option>
         <option value='M'>Masculino</option>
-    ";}else{
-    echo "
+    ";
+    } else {
+        echo "
         <option value='M' selected>Masculino</option>
         <option value='F'>Femenino</option>
     ";
@@ -88,13 +91,22 @@ if(isset($conyugue) == 1){
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label> <br>
     <input value='$fecha_nacimiento' type='date' id='fecha_nacimiento' name='fecha_nacimiento'> <br>";
 
-echo "<label for='actualizado'>¿Tiene estatus migratorio? </label>
+    echo "<label for='actualizado'>¿Tiene estatus migratorio? </label>
 <select id='estatus' name='estatus'>";
-    if ($estatus == "0"){echo "<option value='0' selected>No</option>"; echo "<option value='1'>Sí</option>";}
-    if ($estatus == "1"){echo "<option value='1' selected>Sí</option>"; echo "<option value='0'>No</option>";}
-echo "</select><br><button type='submit' class='boton'>Enviar</button>
-</form></div></div>";
-}else{
+    if ($estatus == "0") {
+        echo "<option value='0' selected>No</option>";
+        echo "<option value='1'>Sí</option>";
+    }
+    if ($estatus == "1") {
+        echo "<option value='1' selected>Sí</option>";
+        echo "<option value='0'>No</option>";
+    }
+    echo "</select><br>
+    <textarea id='notas' name='notas' maxlength='200'>$notas</textarea><br>
+    <button type='submit' class='boton'>Enviar</button>
+    <button type='submit' class='boton'>Enviar</button>
+    </form></div></div>";
+} else {
 
     # Agregar conyugue
     echo "
@@ -129,9 +141,9 @@ echo "</select><br><button type='submit' class='boton'>Enviar</button>
         <option value='0' selected>No</option>
         <option value='1'>Sí</option>
     </select><br>
+    <label for='notas'>Notas:</label><br>
+    <textarea id='notas' name='notas' maxlength='200'></textarea><br>
     <button type='submit' class='boton'>Enviar</button>
 </form></div></div>
 ";
 }
-
-?>

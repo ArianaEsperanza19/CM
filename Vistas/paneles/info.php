@@ -100,6 +100,9 @@ if ($conyugue->rowCount() > 0) {
         } else {
             echo "<p><b>Estatus migratorio: </b> <span>No</span></p>";
         }
+        if ($dato['notas'] != null) {
+            echo "<p><b>Notas:</b> \"$dato[notas]\"</p>";
+        }
     }
 } else {
     // La consulta no ha encontrado nada
@@ -129,9 +132,12 @@ foreach ($dependientes as $dato) {
     <p style='padding-left:10px;'><b>Relacion:</b> $dato[relacion]</p></div>";
 
     if ($dato['estatus_migratorio'] == 1) {
-        echo "<p><b>Estatus migratorio: </b> <span>Si</span></p><hr><br>";
+        echo "<p><b>Estatus migratorio: </b> <span>Si</span></p>";
     } else {
-        echo "<p><b>Estatus migratorio: </b> <span>No</span></p><hr><br>";
+        echo "<p><b>Estatus migratorio: </b> <span>No</span></p>";
+    }
+    if ($dato['notas'] != null) {
+        echo "<p><b>Notas:</b> \"$dato[notas]\"</p><hr><br>";
     }
 }
 echo "<br><a class='boton' style:'margin-left:0px' href='?controller=Paneles&action=formularioDepende"."&id_cliente=$cliente&depende=0'>Agregar +</a><br><br>";
