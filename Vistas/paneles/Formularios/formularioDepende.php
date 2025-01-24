@@ -24,8 +24,9 @@ if (isset($_GET['id_cliente'])) {
 if (isset($depende) == 1) {
     # id del dependiente para editar
     $id = $_GET['cliente'];
-    $DB = new DatosManager(tabla: 'Conyuges_Dependientes');
-    $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND relacion != 'Conyuge'");
+    require_once "Modelos/Grupo.php";
+    $DB = new Grupo();
+    $datos = $DB->Conseguir_Miembro("WHERE id_miembro_grupo = $id AND relacion != 'Conyuge'");
     foreach ($datos as $dato) {
         $nombre = $dato['nombre'];
         $segundo_nombre = $dato['segundo_nombre'];

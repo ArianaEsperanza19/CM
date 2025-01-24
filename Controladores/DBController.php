@@ -187,36 +187,6 @@ class DBController
             die("Error al buscar en base de datos: ".$e->getMessage());
 
         }
-        // if($titulares){
-        //     header("Content-Type: text/csv");
-        //     header("Content-Disposition: attachment; filename=titulares.csv");
-        //     echo "id_cliente,nombre,segundo_nombre,primer_apellido,segundo_apellido,SSN,alien_number,genero,fecha_nacimiento,direccion,ciudad,estado,codigo_postal,telefono,email,empresa,estatus_migratorio,declaracion_fiscal,actualizado,notas,en_poliza\n";
-        //     foreach ($titulares as $titular) {
-        //         echo "$titular[id_cliente],";
-        //         echo "$titular[nombre],";
-        //         echo "$titular[segundo_nombre],";
-        //         echo "$titular[primer_apellido],";
-        //         echo "$titular[segundo_apellido],";
-        //         echo "$titular[SSN],";
-        //         echo "$titular[alien_number],";
-        //         echo "$titular[genero],";
-        //         echo "$titular[fecha_nacimiento],";
-        //         echo "$titular[direccion],";
-        //         echo "$titular[ciudad],";
-        //         echo "$titular[estado],";
-        //         echo "$titular[codigo_postal],";
-        //         echo "$titular[telefono],";
-        //         echo "$titular[email],";
-        //         echo "$titular[empresa],";
-        //         echo "$titular[estatus_migratorio],";
-        //         echo "$titular[declaracion_fiscal],";
-        //         echo "$titular[actualizado],";
-        //         echo "$titular[notas],";
-        //         echo "$titular[en_poliza]\n";
-        //
-        //     }
-        // exit;
-        // }
     }//Fin de exportarCSV
 
     public function exportarGrupoCSV()

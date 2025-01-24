@@ -286,21 +286,30 @@ class Grupo
         }
     }
 
-    public function conseguirRegistro($id)
+    public function conseguirRegistro($id_registro = null, $id_cliente = null)
     {
-        if (isset($id)) {
-            $sql = "SELECT * FROM Registros WHERE id_registro = :id";
+        if (isset($id_cliente)) {
+            $sql = "SELECT * FROM Registros WHERE id_cliente = :id";
             $stmt = $this->DB->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $id_cliente, PDO::PARAM_INT);
             try {
 
                 $stmt->execute();
+                return $stmt;
             } catch (PDOException $e) {
                 die("Error al conseguir registro: ".$e->getMessage());
             }
-            return $stmt;
-        } else {
-            return false;
+        } elseif (isset($id_registro)) {
+            $sql = "SELECT * FROM Registros WHERE id_registro = :id";
+            $stmt = $this->DB->prepare($sql);
+            $stmt->bindParam(':id', $id_registro, PDO::PARAM_INT);
+            try {
+
+                $stmt->execute();
+                return $stmt;
+            } catch (PDOException $e) {
+                die("Error al conseguir registro: ".$e->getMessage());
+            }
         }
     }
 

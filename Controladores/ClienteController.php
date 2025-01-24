@@ -148,7 +148,7 @@ class ClienteController
     {
         if (isset($_POST)) {
             $id = $_GET['cliente'];
-            require_once 'Modelos/Seguros_Cuentas.php';
+            require_once 'Modelos/Seguros.php';
             $registro = new Seguros();
             # Editar
             if (isset($_GET['editar']) && $_GET['editar'] == 1) {

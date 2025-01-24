@@ -1,22 +1,23 @@
 <?php
-ob_clean(); 
+
+ob_clean();
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioBancoSeguro.css\">";
 echo "<a class='boton' id='volverBanco' href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a><div id='contenedorBanco'>";
 
 // Si se acaba de editar algo, redirecciona
-if(isset($_SESSION['editar'])){
+if (isset($_SESSION['editar'])) {
     unset($_SESSION['editar']);
     header('Location: ?controller=Paneles&action=InfoBanco&cliente='.$cliente);
 }
 
 $cliente = isset($_GET['cliente']) ? $_GET['cliente'] : false;
-if(isset($_SESSION['banco_centinela']) && $_SESSION['banco_centinela'] == 1){
+if (isset($_SESSION['banco_centinela']) && $_SESSION['banco_centinela'] == 1) {
     // Editar cuentas de banco
     unset($_SESSION['banco_centinela']);
-    require_once 'Modelos/DatosManager.php';
+    require_once 'Modelos/Cuentas.php';
     $redireccion = "?controller=Cliente&action=registrar_editar_banco&cliente=$cliente&editar=1";
-    $DB = new DatosManager(tabla: 'Cuentas');
-    $sentencia = $DB->Conseguir_Registro("WHERE id_cliente = $cliente");
+    $DB = new Cuentas();
+    $sentencia = $DB->Conseguir_Cuenta("WHERE id_cliente = $cliente");
     foreach ($sentencia as $dato) {
         $numero_cliente = $dato['numero_cuenta'];
         $tipo_cuenta = $dato['tipo_cuenta'];
@@ -47,4 +48,3 @@ if(isset($_SESSION['banco_centinela']) && $_SESSION['banco_centinela'] == 1){
     </form></div></div>
     ";
 }
-?>

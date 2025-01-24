@@ -23,13 +23,13 @@ if (isset($_GET['id_cliente'])) {
 # Editar conyugue
 if (isset($conyugue) == 1) {
     # Editar conyugue
-    require_once 'Modelos/DatosManager.php';
     $id = $_GET['cliente'];
     $titular = isset($_GET['titular']) ? $_GET['titular'] : false;
     echo "<div id='contenedor'>
     <a class='boton' href='?controller=Paneles&action=info&cliente=$titular'>Volver</a>";
-    $DB = new DatosManager(tabla: 'Conyuges_Dependientes');
-    $datos = $DB->Conseguir_Registro("WHERE id_miembro_grupo = $id AND relacion = 'Conyuge'");
+    require_once 'Modelos/Grupo.php';
+    $DB = new Grupo();
+    $datos = $DB->Conseguir_Miembro("WHERE id_miembro_grupo = $id AND relacion = 'Conyuge'");
     foreach ($datos as $dato) {
         $nombre = $dato['nombre'];
         $segundo_nombre = $dato['segundo_nombre'];

@@ -3,7 +3,7 @@
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/DatosSeguroBanco.css\">";
 if (isset($_GET['cliente'])) {
     $cliente = $_GET['cliente'];
-    require_once "Modelos/Seguros_Cuentas.php";
+    require_once "Modelos/Seguros.php";
     $db = new Seguros();
     $seguros = $db->obtener("where id_cliente = $cliente");
     if ($seguros->rowCount() > 0) {

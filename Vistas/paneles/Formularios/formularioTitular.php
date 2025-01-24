@@ -9,8 +9,9 @@ if (isset($editar_titular)) {
         unset($_SESSION['editar']);
         header('Location: ?controller=Paneles&action=info&cliente='.$id);
     }
-    $DB = new DatosManager(tabla: 'Titulares');
-    $datos = $DB->Conseguir_Registro("WHERE id_cliente = $id;");
+    require_once 'Modelos/Titulares.php';
+    $DB = new Titulares();
+    $datos = $DB->Conseguir_Registro("WHERE id_cliente = $id");
     foreach ($datos as $dato) {
         $nombre = $dato["nombre"];
         $segundo_nombre = $dato["segundo_nombre"];

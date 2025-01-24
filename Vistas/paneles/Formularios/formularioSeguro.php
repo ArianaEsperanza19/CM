@@ -13,7 +13,7 @@ if (isset($_SESSION['seguro_centinela']) && $_SESSION['seguro_centinela'] == 1) 
     unset($_SESSION['seguro_centinela']);
     $id_titular = $_GET['cliente'];
     $redirect = "?controller=Cliente&action=registrar_editar_seguro&cliente=$id_titular&editar=1";
-    require_once 'Modelos/Seguros_Cuentas.php';
+    require_once 'Modelos/Seguros.php';
     $DB = new Seguros();
     $sentencia = $DB->obtener("WHERE id_cliente = $id_titular");
     foreach ($sentencia as $dato) {
