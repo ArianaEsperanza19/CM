@@ -1,5 +1,6 @@
 <?php
 
+ob_clean();
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioBancoSeguro.css\">";
 echo "<div id='contenedorSeguro' class='contenedor'><a class='boton' id='volverSeguro' href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
 // Si se acaba de editar algo, redirecciona

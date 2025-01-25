@@ -14,7 +14,7 @@ class Cuentas
         }
     }
 
-    public function Conseguir_Cuenta($condicion)
+    public function Conseguir_Cuenta(string $condicion): PDOStatement
     {
         /**
          * Consigue un registro de una tabla dada.
@@ -36,7 +36,13 @@ class Cuentas
         }
         return $sentencia;
     }
-    public function registrar($datos, $id)
+    /**
+     * @param array<string,string> $datos
+     * @param int $id
+     * @return PDOStatement
+     * @throws Exception
+     */
+    public function registrar(array $datos, int $id): PDOStatement
     {
         if (empty($datos) || empty($id)) {
             throw new Exception('Parámetros inválidos');
@@ -44,19 +50,25 @@ class Cuentas
 
         $sql = "INSERT INTO Cuentas (id_cliente, numero_cuenta, tipo_cuenta) VALUES (:id_cliente,:numero_cuenta, :tipo_cuenta)";
         $stmt = $this->DB->prepare($sql);
-        $stmt->bindParam(':id_cliente', $id);
-        $stmt->bindParam(':numero_cuenta', $datos['numero_cuenta']);
-        $stmt->bindParam(':tipo_cuenta', $datos['tipo_cuenta']);
+        $stmt->bindParam(':id_cliente', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':numero_cuenta', $datos['numero_cuenta'], PDO::PARAM_STR);
+        $stmt->bindParam(':tipo_cuenta', $datos['tipo_cuenta'], PDO::PARAM_STR);
 
         try {
             $stmt->execute();
             return $stmt;
         } catch (PDOException $e) {
-            return $e->getMessage();
+            throw new Exception($e->getMessage());
         }
     }
 
-    public function actualizar($datos, $id)
+    /**
+     * @param array<string, string> $datos
+     * @param int $id
+     * @return bool|string Returns true if update is successful, false if no rows affected, or error message string on failure.
+     * @throws Exception
+     */
+    public function actualizar(array $datos, int $id): bool|string
     {
         if (empty($datos) || empty($id)) {
             throw new Exception('Parámetros inválidos');
@@ -69,34 +81,35 @@ class Cuentas
             tipo_cuenta = :tipo_cuenta
             WHERE id_cliente = :id_cliente";
         $stmt = $this->DB->prepare($sql);
-        $stmt->bindParam(':id_cliente', $id);
-        $stmt->bindParam(':numero_cuenta', $datos['numero_cuenta']);
-        $stmt->bindParam(':tipo_cuenta', $datos['tipo_cuenta']);
+        $stmt->bindParam(':id_cliente', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':numero_cuenta', $datos['numero_cuenta'], PDO::PARAM_STR);
+        $stmt->bindParam(':tipo_cuenta', $datos['tipo_cuenta'], PDO::PARAM_STR);
 
         try {
             $stmt->execute();
-            if ($stmt->rowCount() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             return $e->getMessage();
         }
     }
-    public function eliminar($id)
+    /**
+     * @param int $id
+     * @return PDOStatement
+     * @throws Exception
+     */
+    public function eliminar(int $id): PDOStatement
     {
         if (empty($id)) {
             throw new Exception('Parámetros inválidos');
         }
         $sql = "DELETE FROM Cuentas WHERE id_cliente = :id_cliente";
         $stmt = $this->DB->prepare($sql);
-        $stmt->bindParam(':id_cliente', $id);
+        $stmt->bindParam(':id_cliente', $id, PDO::PARAM_INT);
         try {
             $stmt->execute();
             return $stmt;
         } catch (PDOException $e) {
-            return $e->getMessage();
+            throw new Exception($e->getMessage());
         }
     }
 }

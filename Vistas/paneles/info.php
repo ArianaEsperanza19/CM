@@ -1,5 +1,6 @@
 <?php
 
+ob_clean();
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/info.css\">";
 
 $cliente = $_GET['cliente'];
