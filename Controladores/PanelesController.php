@@ -1,6 +1,5 @@
 <?php
 
-#session_start();
 class PanelesController
 {
     public function index()
@@ -28,6 +27,14 @@ class PanelesController
         require_once 'Vistas/paneles/Formularios/formularioRegistro.php';
 
     }
+    /**
+     * Muestra la informacion del cliente en la base de datos.
+     *
+     * - Verifica si se ha enviado un cliente en la peticion.
+     * - Si se ha proporcionado el par;metro 'cliente', muestra la informacion del cliente en la base de datos.
+     *
+     * @return void
+     */
     public function info()
     {
         if (isset($_GET['cliente'])) {
@@ -58,6 +65,13 @@ class PanelesController
             require_once 'Vistas/paneles/Formularios/formularioTitular.php';
         }
     }
+    /**
+     * Mostrar una advertencia al usuario antes de eliminar un conyugue o un dependiente
+     *
+     * Si se ha enviado un cliente en la peticion se mostrara una advertencia al usuario
+     * para confirmar que desea eliminar el conyugue o el dependiente.
+     * Si no se ha enviado un cliente se mostrara un mensaje de error.
+     */
     public function advertencia()
     {
         if (isset($_GET['cliente'])) {
@@ -75,6 +89,15 @@ class PanelesController
             echo "No se ha enviado un cliente";
         }
     }
+    /**
+     * Muestra la informacion del seguro de un cliente en la base de datos.
+     *
+     * - Verifica si se ha enviado un cliente en la peticion.
+     * - Si se ha proporcionado el par;metro 'seguro' y su valor es 1, edita la informacion del seguro.
+     * - De lo contrario, muestra la informacion del seguro en la base de datos.
+     *
+     * @return void
+     */
     public function InfoSeguros()
     {
         if (isset($_GET['cliente'])) {
@@ -92,6 +115,15 @@ class PanelesController
             echo "No se ha enviado un cliente";
         }
     }
+    /**
+     * Muestra la informacion del banco de un cliente en la base de datos.
+     *
+     * - Verifica si se ha enviado un cliente en la peticion.
+     * - Si se ha proporcionado el par;metro 'banco' y su valor es 1, edita la informacion del banco.
+     * - De lo contrario, muestra la informacion del banco en la base de datos.
+     *
+     * @return void
+     */
     public function InfoBanco()
     {
         if (isset($_GET['cliente'])) {
@@ -110,6 +142,15 @@ class PanelesController
         }
     }
 
+    /**
+     * Muestra la informacion de las imagenes de un cliente en la base de datos.
+     *
+     * - Verifica si se ha enviado un cliente en la peticion.
+     * - Si se ha proporcionado el par;metro 'add' y su valor es 1 o 2, edita o agrega una imagen.
+     * - De lo contrario, muestra la informacion de las imagenes en la base de datos.
+     *
+     * @return void
+     */
     public function pagina_img()
     {
         if (isset($_GET['cliente'])) {
