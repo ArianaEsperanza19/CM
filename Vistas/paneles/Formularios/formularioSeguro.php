@@ -3,8 +3,8 @@
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioBancoSeguro.css\">";
 echo "<div id='contenedorSeguro' class='contenedor'><a class='boton' id='volverSeguro' href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
 // Si se acaba de editar algo, redirecciona
-if (isset($_SESSION['editar'])) {
-    unset($_SESSION['editar']);
+if (isset($_SESSION['editarSeguro'])) {
+    unset($_SESSION['editarSeguro']);
     header('Location: ?controller=Paneles&action=InfoSeguros&cliente='.$cliente);
 }
 

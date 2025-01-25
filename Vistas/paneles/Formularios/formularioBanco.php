@@ -5,8 +5,8 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"Vistas/css/formularioBan
 echo "<a class='boton' id='volverBanco' href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a><div id='contenedorBanco'>";
 
 // Si se acaba de editar algo, redirecciona
-if (isset($_SESSION['editar'])) {
-    unset($_SESSION['editar']);
+if (isset($_SESSION['editarBanco'])) {
+    unset($_SESSION['editarBanco']);
     header('Location: ?controller=Paneles&action=InfoBanco&cliente='.$cliente);
 }
 

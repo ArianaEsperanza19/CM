@@ -46,7 +46,7 @@ class ClienteController
                 $id_cliente = $_GET['id_cliente'];
             }
             require_once 'Modelos/Grupo.php';
-            $registro = new Grupo($DB);
+            $registro = new Grupo();
             $registro->registrar($_POST, $id_cliente);
             if ($_GET['depende'] == 1) {
 
@@ -155,7 +155,7 @@ class ClienteController
                 $sentencia = $registro->actualizar($_POST, $id);
                 if ($sentencia) {
                     # Centinela que vigila si se ha editado la informacion
-                    $_SESSION['editar'] = true;
+                    $_SESSION['editarSeguro'] = true;
                     header('Location: ?controller=Paneles&action=InfoSeguros&cliente='.$id);
                 } else {
                     echo "Error al actualizar";
@@ -182,7 +182,7 @@ class ClienteController
                 $sentencia = $registro->actualizar($_POST, $id);
                 if ($sentencia) {
                     # Centinela que vigila si se ha editado la informacion
-                    $_SESSION['editar'] = true;
+                    $_SESSION['editarBanco'] = true;
                     header('Location: ?controller=Paneles&action=InfoBanco&cliente='.$id);
                 } else {
                     echo "Error al actualizar";
@@ -337,9 +337,11 @@ class ClienteController
     public function eliminarRegistro()
     {
         if (isset($_GET)) {
+            $r = isset($_GET['registro']) ? $_GET['registro'] : false;
+            $c = isset($_GET['cliente']) ? $_GET['cliente'] : false;
             require_once 'Modelos/Grupo.php';
             $registro = new Grupo();
-            $sentencia = $registro->eliminarRegistro($_GET['cliente']);
+            $sentencia = $registro->eliminarRegistro($r, $c);
             if ($sentencia) {
                 header('Location: ?controller=Paneles&action=info&cliente='.$_GET['cliente']);
             }
