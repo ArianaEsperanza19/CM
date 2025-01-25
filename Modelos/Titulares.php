@@ -22,27 +22,25 @@ class Titulares
          */
         $this->DB = null;
     }
-    public function Conseguir_Todos()
+    public function Conseguir_Todos(): array
     {
-        /*
+        /**
          * Consigue todos los registros de una tabla dada.
          *
-         * @param string $tabla El nombre de la tabla en la que se buscan los registros.
-         * @return array -> Un array con todos los registros de la tabla.
+         * @return array Un array con todos los registros de la tabla.
          */
         $tabla = "Titulares";
         $datos = $this->DB->prepare("SELECT * FROM $tabla");
         $datos->execute();
         $datos = $datos->fetchAll();
         return $datos;
-
     }
-    public function Conseguir_Registro($condicion)
+    public function Conseguir_Registro(string $condicion): PDOStatement
     {
         /**
          * Consigue un registro de una tabla dada.
          *
-         * @param string $condicion La condicion de busqueda para el registro.
+         * @param string $condicion La condición de búsqueda para el registro.
          * @return PDOStatement La sentencia de selección ejecutada.
          * @throws Exception Si la tabla no existe.
          */
@@ -59,14 +57,17 @@ class Titulares
         }
         return $sentencia;
     }
-    public function Ultimo_Registro()
+    /**
+     * @return array<string, mixed>
+     */
+    public function Ultimo_Registro(): array
     {
         $sql = "SELECT * FROM Titulares ORDER BY id_cliente DESC LIMIT 1";
         $sentencia = $this->DB->prepare($sql);
         $sentencia->execute();
-        return $sentencia->fetch();
+        return $sentencia->fetch(PDO::FETCH_ASSOC);
     }
-    public function Registrar($datos)
+    public function Registrar(array $datos): PDOStatement|false
     {
         /**
          * Registra un nuevo titular en la base de datos.
@@ -74,7 +75,7 @@ class Titulares
          * y, si es así, registra un nuevo titular en la base de datos.
          * Devuelve la sentencia preparada ejecutada.
          *
-         * @param array $datos Arreglo con los datos a registrar.
+         * @param array<string, string|int|bool> $datos Arreglo con los datos a registrar.
          * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de error.
          */
 
@@ -88,26 +89,26 @@ class Titulares
         $stmt = $this->DB->prepare($sql);
 
         // Vincular los parámetros con los datos
-        $stmt->bindParam(':nombre', $datos['nombre']);
-        $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
-        $stmt->bindParam(':primer_apellido', $datos['primer_apellido']);
-        $stmt->bindParam(':segundo_apellido', $datos['segundo_apellido']);
-        $stmt->bindParam(':SSN', $datos['ssn']);
-        $stmt->bindParam(':alien_number', $datos['alien_number']);
-        $stmt->bindParam(':genero', $datos['genero']);
-        $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
-        $stmt->bindParam(':direccion', $datos['direccion']);
-        $stmt->bindParam(':ciudad', $datos['ciudad']);
-        $stmt->bindParam(':estado', $datos['estado']);
-        $stmt->bindParam(':codigo_postal', $datos['codigo_postal']);
-        $stmt->bindParam(':telefono', $datos['telefono']);
-        $stmt->bindParam(':email', $datos['email']);
-        $stmt->bindParam(':empresa', $datos['empresa']);
-        $stmt->bindParam(':estatus_migratorio', $datos['estatus']);
-        $stmt->bindParam(':declaracion_fiscal', $datos['fiscal']);
-        $stmt->bindParam(':notas', $datos['notas']);
-        $stmt->bindParam(':actualizado', $datos['actualizado']);
-        $stmt->bindParam(':en_poliza', $datos['seguro']);
+        $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
+        $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre'], PDO::PARAM_STR);
+        $stmt->bindParam(':primer_apellido', $datos['primer_apellido'], PDO::PARAM_STR);
+        $stmt->bindParam(':segundo_apellido', $datos['segundo_apellido'], PDO::PARAM_STR);
+        $stmt->bindParam(':SSN', $datos['ssn'], PDO::PARAM_INT);
+        $stmt->bindParam(':alien_number', $datos['alien_number'], PDO::PARAM_STR);
+        $stmt->bindParam(':genero', $datos['genero'], PDO::PARAM_STR);
+        $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento'], PDO::PARAM_STR);
+        $stmt->bindParam(':direccion', $datos['direccion'], PDO::PARAM_STR);
+        $stmt->bindParam(':ciudad', $datos['ciudad'], PDO::PARAM_STR);
+        $stmt->bindParam(':estado', $datos['estado'], PDO::PARAM_STR);
+        $stmt->bindParam(':codigo_postal', $datos['codigo_postal'], PDO::PARAM_INT);
+        $stmt->bindParam(':telefono', $datos['telefono'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $datos['email'], PDO::PARAM_STR);
+        $stmt->bindParam(':empresa', $datos['empresa'], PDO::PARAM_STR);
+        $stmt->bindParam(':estatus_migratorio', $datos['estatus'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':declaracion_fiscal', $datos['fiscal'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':notas', $datos['notas'], PDO::PARAM_STR);
+        $stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':en_poliza', $datos['seguro'], PDO::PARAM_BOOL);
 
         // Ejecutar la sentencia
         if ($stmt->execute()) {
@@ -119,35 +120,32 @@ class Titulares
         }
     }
 
-    public function Eliminar($id)
+    /**
+     * Edita un titular en la base de datos con los datos proporcionados.
+     *
+     * @param array<string, string|int|bool> $datos Arreglo asociativo que contiene los datos del titular a actualizar.
+     * @param int $id El ID del titular que se desea actualizar.
+     * @return PDOStatement|false La sentencia preparada ejecutada o false en caso de fallo.
+     * @throws Exception Si los parámetros proporcionados son inválidos.
+     */
+    public function Editar(array $datos, int $id): PDOStatement|false
     {
-        /**
-         * Elimina un registro de la base de datos.
-         * Este método elimina un registro de la base de datos con base en el ID.
-         * Si el registro se elimino correctamente, devuelve la sentencia preparada ejecutada.
-         * @return PDOStatement La sentencia preparada ejecutada.
-         */
-
-        $stmt = $this->DB->prepare("DELETE FROM Titulares WHERE id_img = :id");
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        return $stmt;
-    }
-    public function Editar($datos, $id)
-    {
+        // Verificar si los datos o el ID proporcionados están vacíos
         if (empty($datos) || empty($id)) {
             throw new Exception('Parámetros inválidos');
         }
-
+        
+        // Definir el nombre de la tabla
         $tabla = "Titulares";
+        
+        // Establecer la conexión con la base de datos
         $this->DB = DB::Connect();
 
-        // Construir la sentencia SQL
+        // Construir la sentencia SQL para actualizar el registro del titular
         $sql = "UPDATE $tabla SET
             nombre = :nombre,
             segundo_nombre = :segundo_nombre,
             primer_apellido = :primer_apellido,
-            segundo_nombre = :segundo_nombre,
             segundo_apellido = :segundo_apellido,
             SSN = :SSN,
             alien_number = :alien_number,
@@ -164,35 +162,37 @@ class Titulares
             notas = :notas,
             actualizado = :actualizado
             WHERE id_cliente = :id_cliente";
-
+        
+        // Preparar la sentencia SQL
         $stmt = $this->DB->prepare($sql);
 
-        // Vincular los parámetros con los datos
-        $stmt->bindParam(':id_cliente', $id);
-        $stmt->bindParam(':nombre', $datos['nombre']);
-        $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
-        $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre']);
-        $stmt->bindParam(':primer_apellido', $datos['primer_apellido']);
-        $stmt->bindParam(':segundo_apellido', $datos['segundo_apellido']);
-        $stmt->bindParam(':SSN', $datos['ssn']);
-        $stmt->bindParam(':alien_number', $datos['alien_number']);
-        $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento']);
-        $stmt->bindParam(':estatus_migratorio', $datos['estatus']);
-        $stmt->bindParam(':declaracion_fiscal', $datos['fiscal']);
-        $stmt->bindParam(':direccion', $datos['direccion']);
-        $stmt->bindParam(':ciudad', $datos['ciudad']);
-        $stmt->bindParam(':estado', $datos['estado']);
-        $stmt->bindParam(':codigo_postal', $datos['codigo_postal']);
-        $stmt->bindParam(':telefono', $datos['telefono']);
-        $stmt->bindParam(':email', $datos['email']);
-        $stmt->bindParam(':empresa', $datos['empresa']);
-        $stmt->bindParam(':notas', $datos['notas']);
-        $stmt->bindParam(':actualizado', $datos['actualizado']);
+        // Vincular los parámetros de la sentencia SQL con los datos proporcionados
+        $stmt->bindParam(':id_cliente', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
+        $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre'], PDO::PARAM_STR);
+        $stmt->bindParam(':primer_apellido', $datos['primer_apellido'], PDO::PARAM_STR);
+        $stmt->bindParam(':segundo_apellido', $datos['segundo_apellido'], PDO::PARAM_STR);
+        $stmt->bindParam(':SSN', $datos['ssn'], PDO::PARAM_INT);
+        $stmt->bindParam(':alien_number', $datos['alien_number'], PDO::PARAM_STR);
+        $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento'], PDO::PARAM_STR);
+        $stmt->bindParam(':estatus_migratorio', $datos['estatus'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':declaracion_fiscal', $datos['fiscal'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':direccion', $datos['direccion'], PDO::PARAM_STR);
+        $stmt->bindParam(':ciudad', $datos['ciudad'], PDO::PARAM_STR);
+        $stmt->bindParam(':estado', $datos['estado'], PDO::PARAM_STR);
+        $stmt->bindParam(':codigo_postal', $datos['codigo_postal'], PDO::PARAM_INT);
+        $stmt->bindParam(':telefono', $datos['telefono'], PDO::PARAM_STR);
+        $stmt->bindParam(':email', $datos['email'], PDO::PARAM_STR);
+        $stmt->bindParam(':empresa', $datos['empresa'], PDO::PARAM_STR);
+        $stmt->bindParam(':notas', $datos['notas'], PDO::PARAM_STR);
+        $stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
 
-        // Ejecutar la sentencia
+        // Ejecutar la sentencia SQL
         if ($stmt->execute()) {
+            // Devolver la sentencia ejecutada si tuvo éxito
             return $stmt;
         } else {
+            // Devolver false si hubo un fallo en la ejecución
             return false;
         }
     }
