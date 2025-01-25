@@ -54,19 +54,15 @@ class Seguros
         }
     }
 
-    /*
-     * Actualiza los datos de un seguro existente en la base de datos.
-     * - Modifica los datos del seguro en la tabla Datos_Seguro.
-     * - Valida que los parámetros no estén vacíos.
-     *
-     * @param array $datos -> Nuevos datos del seguro (policy_number, member_number, group_number, plan_seguro).
-     * @param int $id -> ID del cliente asociado al seguro.
-     * @return PDOStatement|string -> Objeto de la sentencia ejecutada o mensaje de error en caso de fallo.
+    /**
+     * @param array<string, string> $datos
+     * @param int $id
+     * @return PDOStatement
      */
-    public function actualizar($datos, $id)
+    public function actualizar(array $datos, int $id): PDOStatement
     {
         if (empty($datos) || empty($id)) {
-            throw new Exception('Parámetros inválidos');
+            throw new InvalidArgumentException('Parámetros inválidos');
         }
 
         $sql = "UPDATE Datos_Seguro SET
@@ -76,21 +72,21 @@ class Seguros
                 plan_seguro = :plan_seguro
                 WHERE id_cliente = :id_cliente";
         $stmt = $this->DB->prepare($sql);
-        $stmt->bindParam(':id_cliente', $id);
-        $stmt->bindParam(':policy_number', $datos['policy_number']);
-        $stmt->bindParam(':member_number', $datos['member_number']);
-        $stmt->bindParam(':group_number', $datos['group_number']);
-        $stmt->bindParam(':plan_seguro', $datos['plan_seguro']);
+        $stmt->bindParam(':id_cliente', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':policy_number', $datos['policy_number'], PDO::PARAM_STR);
+        $stmt->bindParam(':member_number', $datos['member_number'], PDO::PARAM_STR);
+        $stmt->bindParam(':group_number', $datos['group_number'], PDO::PARAM_STR);
+        $stmt->bindParam(':plan_seguro', $datos['plan_seguro'], PDO::PARAM_STR);
 
         try {
             $stmt->execute();
             return $stmt;
         } catch (PDOException $e) {
-            return $e->getMessage();
+            throw new RuntimeException($e->getMessage());
         }
     }
 
-    /*
+    /**
      * Elimina un seguro de la base de datos.
      * - Borra el seguro asociado a un cliente en la tabla Datos_Seguro.
      * - Valida que el ID no esté vacío.
@@ -98,7 +94,7 @@ class Seguros
      * @param int $id -> ID del cliente asociado al seguro que se desea eliminar.
      * @return PDOStatement|string -> Objeto de la sentencia ejecutada o mensaje de error en caso de fallo.
      */
-    public function eliminar($id)
+    public function eliminar(int $id): PDOStatement|string
     {
         if (empty($id)) {
             throw new Exception('Parámetros inválidos');
@@ -106,7 +102,7 @@ class Seguros
 
         $sql = "DELETE FROM Datos_Seguro WHERE id_cliente = :id_cliente";
         $stmt = $this->DB->prepare($sql);
-        $stmt->bindParam(':id_cliente', $id);
+        $stmt->bindParam(':id_cliente', $id, PDO::PARAM_INT);
 
         try {
             $stmt->execute();
@@ -116,21 +112,22 @@ class Seguros
         }
     }
 
-    /*
+    /**
      * Obtiene datos de la tabla Datos_Seguro según una condición.
      * - Realiza una consulta a la tabla Datos_Seguro.
      * - Verifica si la tabla existe antes de realizar la consulta.
      * - Lanza una excepción si la tabla no existe.
      *
-     * @param string $condicion -> Condición SQL para filtrar los resultados (por ejemplo, "WHERE id_cliente = 1").
-     * @return PDOStatement -> Objeto de la sentencia ejecutada con los resultados de la consulta.
+     * @param string $condicion Condición SQL para filtrar los resultados (por ejemplo, "WHERE id_cliente = 1").
+     * @return PDOStatement Objeto de la sentencia ejecutada con los resultados de la consulta.
+     * @throws Exception Si la tabla no existe.
      */
-    public function obtener($condicion)
+    public function obtener(string $condicion): PDOStatement
     {
         $tabla = "Datos_Seguro";
-        $sql = "SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '$tabla'";
+        $sql = "SELECT COUNT(*) FROM information_schema.tables WHERE table_name = :tabla";
         $sentencia = $this->DB->prepare($sql);
-        $sentencia->execute();
+        $sentencia->execute([':tabla' => $tabla]);
 
         if ($sentencia->fetchColumn() == 0) {
             throw new Exception("La tabla $tabla no existe");

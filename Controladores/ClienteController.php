@@ -200,7 +200,7 @@ class ClienteController
     {
         if (isset($_GET)) {
             $id = $_GET['cliente'];
-            require_once 'Modelos/Seguros_Cuentas.php';
+            require_once 'Modelos/Seguros.php';
             $registro = new Seguros();
             $sentencia = $registro->eliminar($id);
             if ($sentencia) {
