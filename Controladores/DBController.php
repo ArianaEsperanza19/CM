@@ -9,6 +9,16 @@ class DBController
     {
         $this->DB = DB::Connect();
     }
+    /**
+     * Crea la base de datos y todas las tablas necesarias.
+     *
+     * Crea la base de datos y todas las tablas necesarias.
+     * Si ya existe la base de datos, no hace nada.
+     * Si ya existen las tablas, no hace nada.
+     * Redirige a la pantalla de inicio.
+     *
+     * @return void
+     */
     public static function crear()
     {
         $conexion = new PDO("mysql:host=localhost", $_SESSION['DB_user'], $_SESSION['DB_pass']);
@@ -115,6 +125,14 @@ class DBController
         header("Location: ?controller=Paneles&action=index");
         exit;
     }
+    /**
+     * Exporta todos los titulares en formato CSV.
+     *
+     * Genera un archivo CSV con todos los titulares, incluyendo sus conyuges y dependientes.
+     * El archivo se llama "titulares.csv"
+     *
+     * @return void
+     */
     public function exportarCSV()
     {
         try {
@@ -189,6 +207,13 @@ class DBController
         }
     }//Fin de exportarCSV
 
+    /**
+     * Exporta un grupo de personas a un archivo CSV.
+     * 
+     * Se utilizan las tablas Titulares, Datos_Seguro, Cuentas y Conyuges_Dependientes.
+     * 
+     * @return void
+     */
     public function exportarGrupoCSV()
     {
         if (isset($_GET['id'])) {
