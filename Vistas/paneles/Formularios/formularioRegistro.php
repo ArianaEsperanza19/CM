@@ -12,7 +12,7 @@ if (isset($_GET['add']) == 1 || $datos->rowcount() == 0) {
     echo "<form method='post' action='?controller=Cliente&action=agregarRegistro' enctype='multipart/form-data'>
     <input type='hidden' name='id_cliente' value='$cliente'>
     <label for='descripcion'>Descripcion</label>
-    <textarea type='text' name='descripcion' id='descripcion'></textarea>
+    <textarea type='text' minlength='1' maxlength='255' name='descripcion' id='descripcion'></textarea>
     <input type='submit' value='Registrar' class='boton'>
 </form>";
 

@@ -1,0 +1,45 @@
+.volver {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(43, 46, 226);
+  align-items: left;
+  margin-top: 10px;
+  border-radius: 5%;
+  padding: 5px;
+}
+.contenedor {
+  margin-top: 30px;
+  width: 100%;
+  text-align: left;
+  position: relative; /* Para posicionamiento relativo */
+  padding: 20px; /* Espacio interno para que el contenido no quede pegado a los bordes */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  overflow: hidden; /* Limpia el float interno */
+  border: 1px solid rgb(43, 46, 226);
+  background-color: rgb(146, 148, 255);
+}
+
+.registro {
+  position: relative; /* Cambiado de absolute a relative */
+  top: 0; /* Ajustado para que no se desplace */
+  left: 0; /* Ajustado para que no se desplace */
+  width: 99%;
+  border: 1px solid rgb(43, 46, 226);
+  padding: 5px;
+  margin: 0 auto; /* Centrado horizontalmente */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  background-color: white;
+  word-wrap: break-word; /* Asegura que el texto largo no desborde */
+}
+
+#fecha {
+  float: right;
+  margin-right: 10px;
+  color: white;
+}
+
+span {
+  color: rgb(43, 46, 226);
+}
