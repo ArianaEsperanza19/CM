@@ -9,12 +9,14 @@ if (isset($_GET['add']) == 1 || $datos->rowcount() == 0) {
     $datos = $datos->fetchAll();
     echo "<div class='menu'><a class='boton' href='?controller=Paneles&action=info&cliente=$cliente'>Volver</a>";
     echo "</div>";
+    echo "<div class='formulario'>";
     echo "<form method='post' action='?controller=Cliente&action=agregarRegistro' enctype='multipart/form-data'>
     <input type='hidden' name='id_cliente' value='$cliente'>
-    <label for='descripcion'>Descripcion</label>
-    <textarea type='text' minlength='1' maxlength='255' name='descripcion' id='descripcion'></textarea>
+    <label for='descripcion'>Descripcion</label><br>
+    <textarea placeholder='Introduce una descripcion...' type='text' minlength='1' maxlength='255' name='descripcion' id='descripcion'></textarea><br>
     <input type='submit' value='Registrar' class='boton'>
-</form>";
+</form>
+</div>";
 
 }// if agregar o editar
 else {
