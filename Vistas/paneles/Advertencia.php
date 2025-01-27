@@ -19,7 +19,8 @@ if (isset($_SESSION['advertencia'])) {
                 break;
             case "eliminarDependiente":
                 $texto = "¿Realmente desea <b style='color: red;'>eliminar</b> al dependiente del titular?";
-                $redireccion = "?controller=Cliente&action=Eliminar&cliente=$miembro&depende=1&titular=$cliente";
+                // $redireccion = "?controller=Cliente&action=Eliminar&cliente=$miembro&depende=1&titular=$cliente";
+                $redireccion = "?controller=Depende&action=Eliminar&miembro=$miembro&titular=$cliente";
                 break;
             default:
                 echo "error, opcion no valida: $_GET[opcion]";

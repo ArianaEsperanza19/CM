@@ -19,7 +19,8 @@ if (isset($_GET['id_cliente'])) {
     $id_titular = $_GET['id_cliente'];
     echo "<div id='contenedor'>
     <a class='boton' href='?controller=Paneles&action=info&cliente=$id_titular'>Volver</a>";
-    $redirect = "?controller=Cliente&action=Agregar_Depende&id_cliente=$id_titular";
+    // $redirect = "?controller=Cliente&action=Agregar_Depende&id_cliente=$id_titular";
+    $redirect = "?controller=Depende&action=Agregar&titular=$id_titular";
 }
 if (isset($depende) == 1) {
     # id del dependiente para editar
@@ -41,7 +42,8 @@ if (isset($depende) == 1) {
         $notas = $dato['notas'];
     }
 
-    $redirect = "?controller=Cliente&action=Editar&cliente=$id&depende=1";
+    // $redirect = "?controller=Cliente&action=Editar&cliente=$id&depende=1";
+    $redirect = "?controller=Depende&action=Editar&miembro=$id";
     echo "<div id='datos'>";
     echo "<h2>Formulario de Dependientes</h2>
     <form action='$redirect' method='POST'>
