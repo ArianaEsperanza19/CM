@@ -44,140 +44,44 @@ class ClienteController
             }
         }
     }
+
     /**
-     * Metodo que se encarga de registrar un nuevo conyugue y redirigir segun sea necesario
-     * para registrar dependientes.
+     * Metodo que se encarga de editar un cliente existente.
      *
      * @return void
      */
-    public function Agregar_Conyuge()
-    {
-        if (isset($_POST)) {
-            if ($_GET['id_cliente']) {
-                $id_cliente = $_GET['id_cliente'];
-            }
-            require_once 'Modelos/Grupo.php';
-            $registro = new Grupo();
-            $registro->registrar($_POST, $id_cliente);
-            if ($_GET['depende'] == 1) {
-
-                header('Location: ?controller=Paneles&action=formularioDepende'."&id_cliente=$id_cliente");
-            }
-            if ($_GET['depende'] == 0) {
-                header("Location: ?controller=Paneles&action=info&cliente=$id_cliente");
-            }
-
-        }
-    }
-
-    /**
-     * Método que se encarga de registrar un nuevo dependiente para un cliente específico
-     * y redirige al formulario de dependientes.
-     *
-     * - Verifica si hay datos POST para procesar.
-     * - Obtiene el ID del cliente de la consulta GET.
-     * - Registra los datos del dependiente en la base de datos.
-     * - Redirige al usuario al formulario de dependientes para el cliente dado.
-     *
-     * @return void
-     */
-
-    public function Agregar_Depende()
-    {
-        if (isset($_POST)) {
-            {
-                if ($_GET['id_cliente']) {
-                    $id_cliente = $_GET['id_cliente'];
-                }
-                require_once 'Modelos/Grupo.php';
-                $registro = new Grupo();
-                $registro->registrar($_POST, $id_cliente);
-                header('Location: ?controller=Paneles&action=formularioDepende'."&id_cliente=$id_cliente");
-            }
-        }
-    }
-    /**
-     * Método para editar información de un cliente, ya sea conyugue, dependiente o titular.
-     *
-     * - Verifica si hay datos POST para procesar.
-     * - Obtiene el ID del cliente de la consulta GET.
-     * - Si el cliente es un conyugue o dependiente, actualiza su información en la base de datos.
-     * - Si es un titular, actualiza la información correspondiente.
-     * - Redirige al usuario a la página de información del cliente con un token para evitar volver al formulario.
-     *
-     * @return void
-     */
-
     public function Editar()
     {
         if (isset($_POST)) {
             if (isset($_GET['cliente'])) {
                 $id = $_GET['cliente'];
-                if (isset($_GET['conyugue']) == 1 || isset($_GET['depende']) == 1) {
-                    # Editar conyugue o dependiente
-                    require_once 'Modelos/Grupo.php';
-                    $registro = new Grupo();
-                    $sentencia = $registro->editar($_POST, $id);
-                    $titular = $registro->info_titular($id);
-                    if ($sentencia && $titular) {
-                        # El token es necesario para impedir que el usuario pueda retroceder al formulario
-                        $token = md5(uniqid());
-                        header("Location: ?controller=Paneles&action=info&cliente=$titular&token=$token");
-                    }
-
+                # Editar titular
+                $DB = new Titulares();
+                $sentencia = $DB->Editar($_POST, $id);
+                $token = md5(uniqid());
+                if ($sentencia) {
+                    header("Location: ?controller=Paneles&action=info&cliente=$id&token=$token");
                 } else {
-                    # Editar titular
-                    $DB = new Titulares();
-                    $sentencia = $DB->Editar($_POST, $id);
-                    $token = md5(uniqid());
-                    if ($sentencia) {
-                        header("Location: ?controller=Paneles&action=info&cliente=$id&token=$token");
-                    } else {
-                        # ERROR
-                        echo "Error al editar";
-                    }
+                    # ERROR
+                    echo "Error al editar";
                 }
             }
         }
     }
     /**
-     * Elimina un cliente o un miembro del grupo en la base de datos.
-     * 
-     * - Verifica si se ha proporcionado el ID del cliente en la consulta GET.
-     * - Si el cliente es un conyugue o dependiente, elimina su información en la base de datos.
-     * - Si es un titular, elimina la información correspondiente.
-     * - Redirige al usuario a la página de información del cliente o a la página de inicio si se ha eliminado un titular.
-     * 
+     * Elimina todos los registros de un cliente en la base de datos.
+     *
+     * - Verifica si se ha proporcionado el par;metro 'cliente' en la consulta GET.
+     * - Si se ha proporcionado, crea un objeto de la clase Grupo y llama a su m;todo eliminar_todos, pas;ndole como par;metro el ID del cliente.
+     * - Si la eliminaci;n es exitosa, crea una sesi;n con el nombre 'advertencia' y redirige al usuario a la p;gina principal.
+     * - De lo contrario, muestra un mensaje de error.
+     *
      * @return void
      */
     public function Eliminar()
     {
         if (isset($_GET['cliente'])) {
-            $titular = isset($_GET['titular']) ? $_GET['titular'] : false;
-            $id = $_GET['cliente'];
             require_once 'Modelos/Grupo.php';
-            if (isset($_GET['depende']) == 1) {
-                $grupo = new Grupo();
-                $sentecia = $grupo->eliminar_uno($id);
-                if ($sentecia) {
-                    $_SESSION['advertencia'] = true;
-                    header('Location: ?controller=Paneles&action=info&cliente='.$titular);
-                } else {
-                    die("Error al eliminar");
-                }
-                exit;
-            }
-            if (isset($_GET['conyugue']) == 1) {
-                $grupo = new Grupo();
-                $sentecia = $grupo->eliminar_uno($id);
-                if ($sentecia) {
-                    $_SESSION['advertencia'] = true;
-                    header('Location: ?controller=Paneles&action=info&cliente='.$titular);
-                } else {
-                    die("Error al eliminar");
-                }
-                exit;
-            }
             $registro = new Grupo();
             $sentencia = $registro->eliminar_todos($_GET['cliente']);
             if ($sentencia) {
@@ -396,18 +300,18 @@ class ClienteController
         }
     }
 
-/**
- * Edita la información de una imagen asociada a un cliente.
- *
- * - Verifica si hay datos POST y archivos subidos.
- * - Si no se ha subido una nueva imagen, redirige al usuario y muestra un mensaje de advertencia.
- * - Si se ha subido una nueva imagen, elimina la imagen anterior del servidor y sube la nueva.
- * - Actualiza la información de la imagen en la base de datos.
- * - Redirige al usuario a la página de imágenes del cliente si la edición es exitosa.
- * - Muestra un mensaje de error si ocurre una falla.
- *
- * @return void
- */
+    /**
+     * Edita la información de una imagen asociada a un cliente.
+     *
+     * - Verifica si hay datos POST y archivos subidos.
+     * - Si no se ha subido una nueva imagen, redirige al usuario y muestra un mensaje de advertencia.
+     * - Si se ha subido una nueva imagen, elimina la imagen anterior del servidor y sube la nueva.
+     * - Actualiza la información de la imagen en la base de datos.
+     * - Redirige al usuario a la página de imágenes del cliente si la edición es exitosa.
+     * - Muestra un mensaje de error si ocurre una falla.
+     *
+     * @return void
+     */
 
     public function editarImg()
     {
