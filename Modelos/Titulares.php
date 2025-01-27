@@ -30,7 +30,7 @@ class Titulares
          * @return array Un array con todos los registros de la tabla.
          */
         $tabla = "Titulares";
-        $datos = $this->DB->prepare("SELECT * FROM $tabla");
+        $datos = $this->DB->prepare("SELECT id_cliente FROM $tabla");
         $datos->execute();
         $datos = $datos->fetchAll();
         return $datos;
@@ -134,10 +134,10 @@ class Titulares
         if (empty($datos) || empty($id)) {
             throw new Exception('Parámetros inválidos');
         }
-        
+
         // Definir el nombre de la tabla
         $tabla = "Titulares";
-        
+
         // Establecer la conexión con la base de datos
         $this->DB = DB::Connect();
 
@@ -162,7 +162,7 @@ class Titulares
             notas = :notas,
             actualizado = :actualizado
             WHERE id_cliente = :id_cliente";
-        
+
         // Preparar la sentencia SQL
         $stmt = $this->DB->prepare($sql);
 

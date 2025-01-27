@@ -59,14 +59,26 @@ header a {
   color: red;
   text-decoration: overline;
 }
+.paginacion {
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+  color: rgb(43, 46, 226);
+}
+.paginacion a {
+  text-decoration: none;
+  margin-left: 3px;
+  color: rgb(43, 46, 226);
+}
 footer {
   width: 100%;
-  background-color: black;
-  color: white;
+  color: rgb(43, 46, 226);
   text-align: center;
   padding: 10px;
   margin-top: 10px;
   margin-left: 0px;
+  border-top: 1px solid rgb(43, 46, 226);
 }
 
 @media (max-width: 750px) {

@@ -174,7 +174,7 @@ if (isset($editar_titular)) {
         <option value='M'>Masculino</option>
     </select><br>
     <label for='fecha_nacimiento'>Fecha de Nacimiento:</label><br>
-    <input type='date' id='fecha_nacimiento' name='fecha_nacimiento'><br>
+    <input type='date' id='fecha_nacimiento' name='fecha_nacimiento' required><br>
     <label for='direccion'>Dirección:</label><br>
     <input type='text' id='direccion' name='direccion' maxlength='100'><br>
     <label for='ciudad'>Ciudad:</label><br>

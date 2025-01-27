@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="Vistas/css/index.css">
 </head>
 <body>
-<header> Panel de Control
+<header>
+CM: Customers' Manager
 <a href="?controller=DB&action=exportarCSV">Exportar CSV</a>
 </header>
