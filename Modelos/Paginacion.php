@@ -7,7 +7,7 @@ class Paginacion
 {
     private $db;
     private $titulares;
-    private $paginado = 1;
+    private $paginado = 10;
     private $num_paginas;
 
     /**

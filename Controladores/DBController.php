@@ -141,7 +141,7 @@ class DBController
             $titulares = $titulares->fetchAll();
 
             header("Content-Type: text/csv");
-            header("Content-Disposition: attachment; filename=titulares.csv");
+            header("Content-Disposition: attachment; filename=Titulares.csv");
             foreach ($titulares as $titular) {
                 echo "id_cliente,nombre,segundo_nombre,primer_apellido,segundo_apellido,SSN,alien_number,genero,fecha_nacimiento,direccion,ciudad,estado,codigo_postal,telefono,email,empresa,estatus_migratorio,declaracion_fiscal,actualizado,notas,en_poliza\n";
                 echo "$titular[id_cliente],";
@@ -209,9 +209,9 @@ class DBController
 
     /**
      * Exporta un grupo de personas a un archivo CSV.
-     * 
+     *
      * Se utilizan las tablas Titulares, Datos_Seguro, Cuentas y Conyuges_Dependientes.
-     * 
+     *
      * @return void
      */
     public function exportarGrupoCSV()
