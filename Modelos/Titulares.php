@@ -108,7 +108,7 @@ class Titulares
         $stmt->bindParam(':declaracion_fiscal', $datos['fiscal'], PDO::PARAM_BOOL);
         $stmt->bindParam(':notas', $datos['notas'], PDO::PARAM_STR);
         $stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
-        $stmt->bindParam(':en_poliza', $datos['seguro'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':en_poliza', $datos['seguro'], PDO::PARAM_STR);
 
         // Ejecutar la sentencia
         if ($stmt->execute()) {
@@ -160,7 +160,8 @@ class Titulares
             email = :email,
             empresa = :empresa,
             notas = :notas,
-            actualizado = :actualizado
+            actualizado = :actualizado,
+            en_poliza = :en_poliza
             WHERE id_cliente = :id_cliente";
 
         // Preparar la sentencia SQL
@@ -186,6 +187,7 @@ class Titulares
         $stmt->bindParam(':empresa', $datos['empresa'], PDO::PARAM_STR);
         $stmt->bindParam(':notas', $datos['notas'], PDO::PARAM_STR);
         $stmt->bindParam(':actualizado', $datos['actualizado'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':en_poliza', $datos['seguro'], PDO::PARAM_STR);
 
         // Ejecutar la sentencia SQL
         if ($stmt->execute()) {

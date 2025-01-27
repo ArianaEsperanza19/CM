@@ -15,7 +15,8 @@ if (isset($_SESSION['advertencia'])) {
                 break;
             case "eliminarConyuge":
                 $texto = "¿Realmente desea <b style='color: red;'>eliminar</b> al conyuge del titular?";
-                $redireccion = "?controller=Cliente&action=Eliminar&cliente=$miembro&conyugue=1&titular=$cliente";
+                // $redireccion = "?controller=Cliente&action=Eliminar&cliente=$miembro&conyugue=1&titular=$cliente";
+                $redireccion = "?controller=Conyuge&action=Eliminar&miembro=$miembro&titular=$cliente";
                 break;
             case "eliminarDependiente":
                 $texto = "¿Realmente desea <b style='color: red;'>eliminar</b> al dependiente del titular?";

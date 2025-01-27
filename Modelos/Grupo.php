@@ -55,7 +55,7 @@ class Grupo
 
         // Vincular los parámetros con los datos
         $stmt->bindParam(':id_cliente', $id_cliente, PDO::PARAM_INT);
-        $stmt->bindParam(':en_poliza', $datos['en_poliza'], PDO::PARAM_STR);
+        $stmt->bindParam(':en_poliza', $datos['seguro'], PDO::PARAM_STR);
         $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
         $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre'], PDO::PARAM_STR);
         $stmt->bindParam(':apellido', $datos['apellidos'], PDO::PARAM_STR);
@@ -169,7 +169,7 @@ class Grupo
         $stmt = $this->DB->prepare($sql);
 
         // Vincular los parámetros con los datos proporcionados
-        $stmt->bindParam(':en_poliza', $datos['seguro'], PDO::PARAM_BOOL);
+        $stmt->bindParam(':en_poliza', $datos['seguro'], PDO::PARAM_STR);
         $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
         $stmt->bindParam(':segundo_nombre', $datos['segundo_nombre'], PDO::PARAM_STR);
         $stmt->bindParam(':apellido', $datos['apellidos'], PDO::PARAM_STR);

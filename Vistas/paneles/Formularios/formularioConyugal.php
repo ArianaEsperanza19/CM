@@ -13,11 +13,13 @@ if (isset($_GET['id_cliente'])) {
     <a class='boton' href='?controller=Paneles&action=info&cliente=$id'>Volver</a>";
     # Si tiene dependientes
     if (isset($_GET['depende']) && $_GET['depende'] == 1) {
-        $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=1";
+        // $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=1";
+        $redireccion = "?controller=Conyuge&action=Agregar&miembro=$id&depende=1";
     }
     # No tiene dependientes
     else {
-        $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=0";
+        // $redireccion = "?controller=Cliente&action=Agregar_Conyuge&id_cliente=$id&depende=0";
+        $redireccion = "?controller=Conyuge&action=Agregar&miembro=$id&depende=0";
     }
 }
 # Editar conyugue
@@ -43,7 +45,8 @@ if (isset($conyugue) == 1) {
         $notas = $dato['notas'];
     }
     # id del conyugue a editar
-    $redireccion = "?controller=Cliente&action=Editar&cliente=$id&conyugue=1";
+    // $redireccion = "?controller=Cliente&action=Editar&cliente=$id&conyugue=1";
+    $redireccion = "?controller=Conyuge&action=Editar&miembro=$id";
     echo "
     <div id='datos'>
     <h2>Formulario del Conyuge</h2>
@@ -103,7 +106,6 @@ if (isset($conyugue) == 1) {
     }
     echo "</select><br>
     <textarea id='notas' name='notas' maxlength='200'>$notas</textarea><br>
-    <button type='submit' class='boton'>Enviar</button>
     <button type='submit' class='boton'>Enviar</button>
     </form></div></div>";
 } else {
