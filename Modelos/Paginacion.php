@@ -1,7 +1,7 @@
 <?php
 
 $rootDir = dirname(dirname(__DIR__));
-require_once $rootDir . '/CustomersManager/Config/DB.php';
+require_once $rootDir . '/CM/Config/DB.php';
 
 class Paginacion
 {
